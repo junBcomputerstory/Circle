@@ -6,6 +6,7 @@ import '../css/makecircle.css';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/esm/Button';
+import { Interests } from '../component/Interests';
 
 const TitleText = styled.text`
   font-family: 'IBM-Regular';
@@ -79,18 +80,18 @@ function MakeCircle(props) {
             <br />
             <TitleText>만들고자 하는 써클의 분야를 선택해주세요</TitleText>
             <InterestDiv>
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
-              <img style={{ margin: '3px 3px' }} src="img/circle.png" width="100" height="100" />
+              <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.game} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.music} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.coding} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.car} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.cooking} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.coding} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.volunteer} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.trip} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.study} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.pet} style={{ margin: '5px 5px' }} width={100} height={100} />
+              <img src={Interests.fashion} style={{ margin: '5px 5px' }} width={100} height={100} />
             </InterestDiv>
             <TitleText>써클 이름을 정해주세요</TitleText>
             <br />

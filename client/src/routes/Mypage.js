@@ -7,6 +7,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import { HiOutlinePencil } from 'react-icons/hi';
 import MpCarousel from '../component/MpCarousel';
 import Footer from '../component/Footer';
+import { Interests } from '../component/Interests';
 
 const InfoBox = styled.div`
   display: flex;
@@ -72,9 +73,9 @@ function Mypage(props) {
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 관심사</text>
           <MypageInterestBox>
-            <img style={{ margin: '0 5px' }} src="/img/circle.png" width="60" height="60" alt="interest" />
-            <img style={{ margin: '0 5px' }} src="/img/circle.png" width="60" height="60" alt="interest" />
-            <img style={{ margin: '0 5px' }} src="/img/circle.png" width="60" height="60" alt="interest" />
+            <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />
+            <img src={Interests.game} style={{ margin: '5px 5px' }} width={100} height={100} />
+            <img src={Interests.music} style={{ margin: '5px 5px' }} width={100} height={100} />
           </MypageInterestBox>
         </Box>
         <Box>
@@ -86,9 +87,9 @@ function Mypage(props) {
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 뱃지</text>
           <MypageInterestBox>
-            <img style={{ margin: '0 5px' }} src="/img/attendence_king.png" width="80" height="80" alt="attendence_king" />
-            <img style={{ margin: '0 5px' }} src="/img/activity_king.png" width="80" height="80" alt="activity_king" />
-            <img style={{ margin: '0 5px' }} src="/img/october_attendence.png" width="80" height="80" alt="october_attendence" />
+            <img style={{ margin: '0 5px' }} src="/img/attendence_king.png" width="100" height="100" alt="attendence_king" />
+            <img style={{ margin: '0 5px' }} src="/img/activity_king.png" width="100" height="100" alt="activity_king" />
+            <img style={{ margin: '0 5px' }} src="/img/october_attendence.png" width="100" height="100" alt="october_attendence" />
           </MypageInterestBox>
         </Box>
         <Footer />

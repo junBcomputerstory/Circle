@@ -38,68 +38,68 @@ function SelectInterest(props) {
       <Container fluid style={{ marginTop: 50, marginBottom: 50 }}>
         <Row style={{ marginBottom: 30 }}>
           <Col>
-            {Interests.workout}
+            <img src={Interests.workout} width={100} height={100} />
             <br />
             <InterestText>운동</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.study} width={100} height={100} />
             <br />
             <InterestText>스터디</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.trip} width={100} height={100} />
             <br />
             <InterestText>여행</InterestText>
           </Col>
         </Row>
         <Row style={{ marginBottom: 30 }}>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.cooking} width={100} height={100} />
             <br />
             <InterestText>쿠킹</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.coding} width={100} height={100} />
             <br />
             <InterestText>IT</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.volunteer} width={100} height={100} />
             <br />
             <InterestText>봉사</InterestText>
           </Col>
         </Row>
         <Row style={{ marginBottom: 30 }}>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.pet} width={100} height={100} />
             <br />
             <InterestText>반려동물</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.car} width={100} height={100} />
             <br />
             <InterestText>차량</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.music} width={100} height={100} />
             <br />
             <InterestText>음악</InterestText>
           </Col>
         </Row>
         <Row>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.culture} width={100} height={100} />
             <br />
             <InterestText>문화</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.game} width={100} height={100} />
             <br />
             <InterestText>게임</InterestText>
           </Col>
           <Col>
-            <img src="/img/circle.png" width={100} height={100} alt="interest" />
+            <img src={Interests.fashion} width={100} height={100} />
             <br />
             <InterestText>패션</InterestText>
           </Col>
