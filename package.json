@@ -14,30 +14,18 @@
     "@babel/core": "^7.19.3",
     "@babel/node": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
-    "@trendyol-js/react-carousel": "^3.0.0",
     "compression": "^1.7.4",
     "concurrently": "^7.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-flippy": "^1.1.0",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"
   },
-  "type": "module",
-  "devDependencies": {
-    "@babel/preset-react": "^7.18.6",
-    "eslint": "^8.24.0",
-    "eslint-plugin-react": "^7.31.8"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ]
-  }
+  "type": "module"
 }
