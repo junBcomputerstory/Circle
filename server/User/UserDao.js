@@ -1,5 +1,5 @@
 //유저 정보 조회
-async function selectUser(connection,ID){
+exports.selectUser=async function(connection,ID){
     const selectUserinfoQuery=`
                     SELECT *
                     FROM UserInfo
@@ -9,7 +9,7 @@ async function selectUser(connection,ID){
     return userRows;
 }
 //ID로 확인,조회
-async function selectUserID(connection,ID){
+exports.selectUserID=async function(connection,ID){
     const selectUserIDQuery=`
                 SELECT *
                 FROM UserInfo
@@ -18,7 +18,7 @@ async function selectUserID(connection,ID){
     return IDRows;
 }
 //유저 생성
-async function insertUserInfo(connection, insertUserParam) {
+exports.insertUserInfo=async function (connection, insertUserParam) {
     const insertUserInfoQuery = `
           INSERT INTO UserInfo(ID, PW , nickname,interest)
           VALUES (?, ?, ?, ?);
@@ -31,7 +31,7 @@ async function insertUserInfo(connection, insertUserParam) {
     return insertUserInfoRow;
   }
   //비밀번호 확인
-  async function selectUserPassword(connection,ID) {
+exports.selectUserPassword=async function(connection,ID) {
     const selectUserPasswordQuery = `
           SELECT ID,PW,nickname
           FROM UserInfo 
@@ -44,7 +44,7 @@ async function insertUserInfo(connection, insertUserParam) {
     return selectUserPasswordRow;
   }
   //유저정보 업데이트
-  async function updateUserInfo(connection,ID,newnickname){
+  exports.updateUserInfo=async function (connection,ID,newnickname){
     const updateUserInfoQuery=`
         UPDATE UserInfo
         SET nickname=?
@@ -57,11 +57,4 @@ async function insertUserInfo(connection, insertUserParam) {
     );
   }
 
-export default{
-  selectUser,
-  selectUserID,
-  selectUserPassword,
-  insertUserInfo,
-  updateUserInfo,
-};
 

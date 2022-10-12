@@ -2,6 +2,7 @@ import express from 'express';
 import cookieParser from'cookie-parser';
 import dotenv from 'dotenv';
 import session from'express-session';
+import routing from'./User/Userroute.js';
 dotenv.config();
 
 class App{
