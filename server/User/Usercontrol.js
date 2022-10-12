@@ -1,7 +1,5 @@
-import Usercheck from'./Usercheck.js';
 import Update from'./Userupdate.js';
 import Check from'./Usercheck.js';
-import { checkDuplicateIncludeExcludes } from '@babel/preset-env/lib/normalize-options.js';
 
 class control{
     process={
@@ -10,7 +8,7 @@ class control{
             const {ID,PW}=req.body;
             const userInfo={ID:ID,PW:PW};
             const UserLogin = await update.Postlogin(userInfo);
-            if(UserLogin.isSUCCESS==true){
+            if(UserLogin.isSuccess==true){
                 req.session.ID=userInfo.ID;
             }
             return res.send(UserLogin);

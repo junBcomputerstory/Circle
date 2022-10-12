@@ -1,5 +1,4 @@
-import mysql from('mysql2/promise');
-import {logger} from('./winston');
+import mysql from'mysql2/promise';
 
 // TODO: 본인의 DB 계정 입력
 const pool = mysql.createPool({
@@ -10,6 +9,4 @@ const pool = mysql.createPool({
     database: 'Circle'
 });
 
-module.exports = {
-    pool: pool
-};
+export {pool};

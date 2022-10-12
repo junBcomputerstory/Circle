@@ -1,41 +1,29 @@
 //유저 정보 조회
-exports.selectUser=async function(connection,ID){
-    const selectUserinfoQuery=`
-                    SELECT *
-                    FROM UserInfo
-                    WHERE ID=?;
-                    `;
+class userDao{
+  async selectUser(connection,ID){
+    const selectUserinfoQuery="SELECT * FROM User WHERE ID=?;";
     const [userRows]= await connection.query(selectUserinfoQuery,ID);
     return userRows;
 }
 //ID로 확인,조회
-exports.selectUserID=async function(connection,ID){
-    const selectUserIDQuery=`
-                SELECT *
-                FROM UserInfo
-                WHERE ID=?;`;
+async selectUserID(connection,ID){
+    const selectUserIDQuery="SELECT * FROM User WHERE ?;";
     const [IDRows]=await connection.query(selectUserIDQuery,ID);
     return IDRows;
 }
 //유저 생성
-exports.insertUserInfo=async function (connection, insertUserParam) {
-    const insertUserInfoQuery = `
-          INSERT INTO UserInfo(ID, PW , nickname,interest)
-          VALUES (?, ?, ?, ?);
-      `;
+async insertUserInfo (connection,ID,PW,nickname,interest) {
+    const insertUserInfoQuery = "INSERT INTO User(ID,PW,nickname,interest) VALUES (?, ?, ?, ?);";
     const insertUserInfoRow = await connection.query(
-      insertUserInfoQuery,
-      insertUserParam
+      insertUserInfoQuery,ID,PW,nickname,interest
+
     );
   
     return insertUserInfoRow;
   }
   //비밀번호 확인
-exports.selectUserPassword=async function(connection,ID) {
-    const selectUserPasswordQuery = `
-          SELECT ID,PW,nickname
-          FROM UserInfo 
-          WHERE ID = ? ;`;
+async selectUserPassword(connection,ID) {
+    const selectUserPasswordQuery = "SELECT (ID,PW,nickname) FROM User WHERE ID = ? ;";
     const selectUserPasswordRow = await connection.query(
         selectUserPasswordQuery,
         ID
@@ -44,9 +32,9 @@ exports.selectUserPassword=async function(connection,ID) {
     return selectUserPasswordRow;
   }
   //유저정보 업데이트
-  exports.updateUserInfo=async function (connection,ID,newnickname){
+  async updateUserInfo (connection,ID,newnickname){
     const updateUserInfoQuery=`
-        UPDATE UserInfo
+        UPDATE User
         SET nickname=?
         WHERE ID=?; 
     `;
@@ -56,5 +44,7 @@ exports.selectUserPassword=async function(connection,ID) {
       ID
     );
   }
+}
+export default userDao;
 
 

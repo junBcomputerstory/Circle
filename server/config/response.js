@@ -7,7 +7,7 @@ const response = ({isSuccess, code, message}, result) => {
     }
    };
  
-   const errResponse = ({isSuccess, code, message}) => {
+const errResponse = ({isSuccess, code, message}) => {
      return {
          isSuccess: isSuccess,
          code: code,
@@ -15,4 +15,4 @@ const response = ({isSuccess, code, message}, result) => {
        }
    };
    
-   module.exports = { response, errResponse };
+export { response, errResponse };

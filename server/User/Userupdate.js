@@ -1,34 +1,33 @@
-import {logger} from ("../config/winston.js");
-import {pool} from("../config/mysql.js");
-import Usercheck from("./Usercheck");
-import userDao from("./userDao");
-import baseResponse from("../config/baseResponse");
-import crypto from("crypto");
-import connect from("http2");
-import {response} from("../../../config/response");
-import {errResponse} from("../../../config/response");
+import {pool} from '../config/mysql.js';
+import Usercheck from './Usercheck.js';
+import userDao from './userDao.js';
+import * as baseResponse from'../config/baseResponse.js';
+import crypto from 'crypto';
+import connect from 'http2';
+import {errResponse,response} from '../config/response.js';
 //회원 생성
 class Update{
     async createUser(ID,PW,nickname,interest){
         try{
-            const IDrow= await Usercheck.IDcheck(ID);
+            const User=new Usercheck();
+            const Dao=new userDao();
+            const IDrow= await User.IDcheck(ID);
             if(IDrow.length>0)
-                return errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL)
-            const hashedPW=await crypto
+                return errResponse(baseResponse.SIGNUP_REDUNDANT_ID)
+            const hashedPW=crypto
                 .createHash("sha512")
                 .update(PW)
                 .digest("hex")
         
-            const insertUserparam=[ID,hashedPW,nickname,interest];
             const connection=await pool.getConnection(async (conn)=>conn);
 
-            const userIDresult=await userDao.insertUserInfo(connection, insertUserparam);
+            const userIDresult=await Dao.insertUserInfo(connection,ID,PW,nickname,interest);
             console.log(`추가된 회원:${userIDresult[0].ID}`);
             connection.release();
             return response(baseResponse.SUCCESS);
         }
         catch(err){
-            logger.error(`App-createUser Service error\n:${err.message}`);
+            console.log(err);
             return errResponse(baseResponse.DB_ERROR);
         }
     };
@@ -38,7 +37,7 @@ class Update{
             if(IDrow<1)
                 return errResponse(baseResponse.USER_STATUS_EMPTY);
             const selectedID=IDrow[0].ID;
-            const hashedPW= await crypto
+            const hashedPW= crypto
                 .createHash("sha512")
                 .update(UserInfo.PW)
                 .digest("hex");
@@ -52,7 +51,6 @@ class Update{
 
         }
         catch(err){
-            logger.error(`APP-postlogin service error: \n ${err.message}`);
             return errResponse(baseResponse.DB_ERROR);
         }
     };
@@ -70,7 +68,6 @@ class Update{
             return response(baseResponse.SUCCESS);
         }
         catch(err){
-            logger.error(`APP- EditUser service error:\n ${err.message}`);
             return errResponse(baseResponse.DB_ERROR);
         }
     }
