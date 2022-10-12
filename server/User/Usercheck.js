@@ -4,6 +4,7 @@ import userDao from './UserDao.js';
 class Usercheck{
     async IDcheck(ID){
         const Dao=new userDao;
+        console.log(ID);
         const connection= await pool.getConnection(async(conn)=>conn);
         const result= await Dao.selectUserID(connection,ID);
         connection.release();

@@ -15,8 +15,8 @@ class control{
         },
         Signin: async(req,res)=>{
             const update=new Update();
-            const {ID,PW,nickname,interest}=req.body;
-            const userInfo={ID:ID,PW:PW,nickname:nickname,interest:interest};
+            const userInfo=req.body;
+            console.log(userInfo);
             const User=await update.createUser(userInfo);
 
             return res.send(User);

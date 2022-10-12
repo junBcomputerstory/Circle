@@ -7,22 +7,21 @@ import connect from 'http2';
 import {errResponse,response} from '../config/response.js';
 //회원 생성
 class Update{
-    async createUser(ID,PW,nickname,interest){
+    async createUser(userInfo){
         try{
             const User=new Usercheck();
             const Dao=new userDao();
-            const IDrow= await User.IDcheck(ID);
+            const IDrow= await User.IDcheck(userInfo.ID);
             if(IDrow.length>0)
                 return errResponse(baseResponse.SIGNUP_REDUNDANT_ID)
             const hashedPW=crypto
                 .createHash("sha512")
-                .update(PW)
+                .update(userInfo.PW)
                 .digest("hex")
         
             const connection=await pool.getConnection(async (conn)=>conn);
-
-            const userIDresult=await Dao.insertUserInfo(connection,ID,PW,nickname,interest);
-            console.log(`추가된 회원:${userIDresult[0].ID}`);
+            const re=await Dao.insertUserInfo(connection,userInfo);
+            if(re==1){console.log('가입완료');}
             connection.release();
             return response(baseResponse.SUCCESS);
         }
