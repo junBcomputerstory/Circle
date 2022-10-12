@@ -6,6 +6,7 @@ import { IoMdMail } from 'react-icons/io';
 import Button from 'react-bootstrap/Button';
 import SelectInterest from '../component/SelectInterest';
 import { Link } from 'react-scroll';
+import Footer from '../component/Footer';
 
 const Title = styled.text`
   font-size: 60px;
@@ -88,16 +89,15 @@ function Signin(props) {
             </InputIcon>
             <input style={InputStyle} name="nickname" placeholder="닉네임" onChange={onChange} value={nickname} />
           </div>
-          <Link to="1" smooth={false}>
-            <Button style={{ width: 440 }} variant="warning">
-              가입하기
-            </Button>
-          </Link>
         </div>
       </Container>
       <Container style={{ marginTop: 30, width: 600, justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
         <SelectInterest />
+        <Button size="lg" style={{ width: 480, marginTop: 50 }} variant="warning" onClick={() => console.log(userInfo)}>
+          가입하기
+        </Button>
       </Container>
+      <div style={{ height: '20px' }} />
     </Container>
   );
 }

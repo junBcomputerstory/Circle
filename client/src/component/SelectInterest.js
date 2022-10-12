@@ -104,9 +104,6 @@ function SelectInterest(props) {
             <InterestText>패션</InterestText>
           </Col>
         </Row>
-        <Button size="lg" style={{ width: 480, marginTop: 50 }} variant="warning">
-          가입하기
-        </Button>
       </Container>
     </div>
   );
