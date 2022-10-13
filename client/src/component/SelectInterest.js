@@ -25,6 +25,11 @@ const InterestText = styled.text`
 
 function SelectInterest(props) {
   const [interest, setInterest] = useState([]);
+  const getInterest = () => {
+    const set = new Set(interest);
+    const interests = [...set];
+    console.log(interests);
+  };
   return (
     <div id="1">
       <Title>
@@ -114,7 +119,7 @@ function SelectInterest(props) {
             <InterestText>패션</InterestText>
           </Col>
         </Row>
-        <div onClick={() => console.log(interest)}>
+        <div onClick={getInterest}>
           <text>여길눌러</text>
         </div>
       </Container>

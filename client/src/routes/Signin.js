@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import SelectInterest from '../component/SelectInterest';
 import { Link } from 'react-scroll';
 import Footer from '../component/Footer';
+import axios from 'axios';
 
 const Title = styled.text`
   font-size: 60px;
@@ -59,6 +60,17 @@ function Signin(props) {
     border-right: none;
   `;
 
+  const Signin = () => {
+    console.log(userInfo);
+    axios
+      .post('http://localhost:3000/Signin', {
+        ID: userInfo.ID,
+        PW: userInfo.PW,
+        nickname: userInfo.nickname,
+      })
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error));
+  };
   return (
     <Container>
       <Container style={{ marginTop: 30, width: 600, justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
@@ -93,7 +105,7 @@ function Signin(props) {
       </Container>
       <Container style={{ marginTop: 30, width: 600, justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
         <SelectInterest />
-        <Button size="lg" style={{ width: 480, marginTop: 50 }} variant="warning" onClick={() => console.log(userInfo)}>
+        <Button size="lg" style={{ width: 480, marginTop: 50 }} variant="warning" onClick={Signin}>
           가입하기
         </Button>
       </Container>

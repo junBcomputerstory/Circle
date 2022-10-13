@@ -14,10 +14,10 @@ function LoginSigninHeader(props) {
     <Text>이승현님, 환영합니다!</Text>
   ) : (
     <div>
-      <Link style={{ textDecoration: 'none' }} to="/login">
+      <Link style={{ textDecoration: 'none' }} to="/Login">
         <Text>로그인</Text>
       </Link>
-      <Link style={{ textDecoration: 'none' }} to="/signin">
+      <Link style={{ textDecoration: 'none' }} to="/Signin">
         <Text>회원가입</Text>
       </Link>
     </div>

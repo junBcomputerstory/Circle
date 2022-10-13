@@ -38,17 +38,17 @@ function Header(props) {
         <Navbar.Collapse style={NavStyle} id="basic-navbar-nav">
           <Nav>
             <Nav.Link style={FontStyle}>
-              <Link style={{ textDecoration: 'none' }} to="/searchcircle">
+              <Link style={{ textDecoration: 'none' }} to="/Searchcircle">
                 써클 찾기
               </Link>
             </Nav.Link>
             <Nav.Link style={FontStyle}>
-              <Link style={{ textDecoration: 'none' }} to="/makecircle">
+              <Link style={{ textDecoration: 'none' }} to="/Makecircle">
                 써클 만들기
               </Link>
             </Nav.Link>
             <Nav.Link style={FontStyle}>
-              <Link style={{ textDecoration: 'none' }} to="/mypage">
+              <Link style={{ textDecoration: 'none' }} to="/Mypage">
                 마이페이지
               </Link>
             </Nav.Link>

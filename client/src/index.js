@@ -14,12 +14,12 @@ render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="signin" element={<Signin />} />
-      <Route path="login" element={<Login />} />
-      <Route path="circles" element={<CirclePage />} />
-      <Route path="mypage" element={<Mypage />} />
-      <Route path="makecircle" element={<MakeCircle />} />
-      <Route path="searchcircle" element={<SearchCircle />} />
+      <Route path="Signin" element={<Signin />} />
+      <Route path="Login" element={<Login />} />
+      <Route path="Circles" element={<CirclePage />} />
+      <Route path="Mypage" element={<Mypage />} />
+      <Route path="Makecircle" element={<MakeCircle />} />
+      <Route path="Searchcircle" element={<SearchCircle />} />
     </Routes>
   </BrowserRouter>,
   rootElement,
