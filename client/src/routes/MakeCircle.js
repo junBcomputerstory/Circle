@@ -145,14 +145,7 @@ function MakeCircle(props) {
           <Alert style={{ width: 730, margin: '0 auto' }} key="warning" variant="warning">
             프라임 써클이란 ? 달마다 일정 가격을 지불하면 써클즈와 제휴된 업체에서 할인을 받을 수 있는 서비스입니다.
           </Alert>
-          <Button
-            size="lg"
-            style={{ marginTop: 20, width: 700 }}
-            variant="dark"
-            onClick={() => {
-              showInfo;
-            }}
-          >
+          <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={showInfo()}>
             써클 만들기
           </Button>
         </div>

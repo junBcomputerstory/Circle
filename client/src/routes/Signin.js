@@ -23,12 +23,12 @@ const SubTitle = styled.text`
 function Signin(props) {
   const [userInfo, setUserInfo] = useState({
     nickname: '',
-    userId: '',
-    userPw: '',
-    confirmUserPw: '',
+    ID: '',
+    PW: '',
+    confirmPW: '',
   });
 
-  const { nickname, userId, userPw, confirmUserPw } = userInfo;
+  const { nickname, ID, PW, confirmPW } = userInfo;
   const onChange = e => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
     setUserInfo({
@@ -69,19 +69,19 @@ function Signin(props) {
             <InputIcon>
               <IoMdMail size="25" />
             </InputIcon>
-            <input style={InputStyle} name="userId" placeholder="아이디" onChange={onChange} value={userId} />
+            <input style={InputStyle} name="ID" placeholder="아이디" onChange={onChange} value={ID} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>
               <FaLock size="20" />
             </InputIcon>
-            <input style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
+            <input style={InputStyle} name="PW" placeholder="비밀번호" onChange={onChange} value={PW} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>
               <FaLock size="20" />
             </InputIcon>
-            <input style={InputStyle} name="confirmUserPw" placeholder="비밀번호 확인" onChange={onChange} value={confirmUserPw} />
+            <input style={InputStyle} name="confirmPW" placeholder="비밀번호 확인" onChange={onChange} value={confirmPW} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>

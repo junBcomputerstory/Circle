@@ -20,7 +20,7 @@ class Update{
                 .digest("hex")
         
             const connection=await pool.getConnection(async (conn)=>conn);
-            const re=await Dao.insertUserInfo(connection,userInfo);
+            const re=await Dao.insertUserInfo(connection,userInfo,hashedPW);
             if(re==1){console.log('가입완료');}
             connection.release();
             return response(baseResponse.SUCCESS);
@@ -35,7 +35,7 @@ class Update{
             const IDrow=await Usercheck.IDcheck(UserInfo.ID);
             if(IDrow<1)
                 return errResponse(baseResponse.USER_STATUS_EMPTY);
-            const selectedID=IDrow[0].ID;
+            const selectedID=IDrow.ID;
             const hashedPW= crypto
                 .createHash("sha512")
                 .update(UserInfo.PW)

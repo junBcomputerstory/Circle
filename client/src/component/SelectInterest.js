@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
@@ -24,6 +24,7 @@ const InterestText = styled.text`
 `;
 
 function SelectInterest(props) {
+  const [interest, setInterest] = useState([]);
   return (
     <div id="1">
       <Title>
@@ -38,12 +39,21 @@ function SelectInterest(props) {
       <Container fluid style={{ marginTop: 50, marginBottom: 50 }}>
         <Row style={{ marginBottom: 30 }}>
           <Col>
-            <img src={Interests.workout} width={100} height={100} />
+            <img
+              src={Interests.workout}
+              width={100}
+              height={100}
+              name="workout"
+              clicked="false"
+              onClick={e => {
+                interest.push(e.target.name);
+              }}
+            />
             <br />
             <InterestText>운동</InterestText>
           </Col>
           <Col>
-            <img src={Interests.study} width={100} height={100} />
+            <img src={Interests.study} width={100} height={100} name="study" onClick={e => interest.push(e.target.name)} />
             <br />
             <InterestText>스터디</InterestText>
           </Col>
@@ -104,6 +114,9 @@ function SelectInterest(props) {
             <InterestText>패션</InterestText>
           </Col>
         </Row>
+        <div onClick={() => console.log(interest)}>
+          <text>여길눌러</text>
+        </div>
       </Container>
     </div>
   );

@@ -10,6 +10,7 @@ import SignUpGithub from '../component/SignUpGithub';
 import SignUpGoogle from '../component/SignUpGoogle';
 import SignUpKakao from '../component/SignUpKakao';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const InputIcon = styled.div`
   width: 40px;
@@ -49,6 +50,7 @@ function Login(props) {
       [name]: value, // name 키를 가진 값을 value 로 설정
     });
   };
+
   return (
     <div style={{ flexDirection: 'row' }}>
       <Row>
