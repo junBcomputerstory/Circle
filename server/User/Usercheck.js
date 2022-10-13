@@ -21,19 +21,10 @@ class Usercheck{
         return passwordCheckResult[0];
     };
 
-    async retrieveUserInfo(ID){
-        const Dao=new userDao;
-        const connection= await pool.getConnection(async (conn)=>conn);
-        const UserInfoResult = await Dao.selectUserID(ID);
-        connection.release();
-
-        return UserInfoResult;
-    }
-
     async retrieveUserpage(ID){
         const Dao=new userDao;
         const connection= await pool.getConnection(async(conn)=>conn);
-        const Userpageresult= await Dao.selectUser(connection,ID);
+        const Userpageresult= await Dao.selectUserID(connection,ID);
         connection.release();
 
         return Userpageresult

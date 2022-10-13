@@ -1,10 +1,6 @@
 //유저 정보 조회
 class userDao{
-  async selectUser(connection,ID){
-    const selectUserinfoQuery="SELECT * FROM User WHERE ID=?;";
-    const [userRows]= await connection.query(selectUserinfoQuery,ID);
-    return userRows;
-}
+  
 //ID로 확인,조회
 async selectUserID(connection,ID){
     const selectUserIDQuery='SELECT * FROM User WHERE ID=?;';
@@ -12,10 +8,10 @@ async selectUserID(connection,ID){
     return IDRows;
 }
 //유저 생성
-async insertUserInfo (connection,userInfo) {
+async insertUserInfo (connection,userInfo,hashedPW) {
   try{
     console.log(userInfo)
-    const value=[userInfo.ID,userInfo.PW,userInfo.nickname,userInfo.interest];
+    const value=[userInfo.ID,hashedPW,userInfo.nickname,userInfo.interest];
       const insertUserInfoQuery = 'INSERT INTO User (ID , PW , nickname , interest) VALUES (?,?,?,?);';
       connection.query(
         insertUserInfoQuery,
