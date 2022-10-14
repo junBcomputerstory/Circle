@@ -34,20 +34,68 @@ function SelectInterest(setSelectedInterest) {
     console.log(clickCount.workout);
   };
 
-  const [clickCount, setClickCount] = useState({
-    workout: 0,
-    study: 0,
-    trip: 0,
-    cooking: 0,
-    coding: 0,
-    volunteer: 0,
-    pet: 0,
-    car: 0,
-    music: 0,
-    culture: 0,
-    game: 0,
-    fashion: 0,
-  });
+  const [clickCount, setClickCount] = useState([
+    {
+      id: 1,
+      name: 'workout',
+      clickcount: 0,
+    },
+    {
+      id: 2,
+      name: 'study',
+      clickcount: 0,
+    },
+    {
+      id: 3,
+      name: 'trip',
+      clickcount: 0,
+    },
+    {
+      id: 4,
+      name: 'cooking',
+      clickcount: 0,
+    },
+    {
+      id: 5,
+      name: 'coding',
+      clickcount: 0,
+    },
+    {
+      id: 6,
+      name: 'volunteer',
+      clickcount: 0,
+    },
+    {
+      id: 7,
+      name: 'pet',
+      clickcount: 0,
+    },
+    {
+      id: 8,
+      name: 'car',
+      clickcount: 0,
+    },
+    {
+      id: 9,
+      name: 'music',
+      clickcount: 0,
+    },
+    {
+      id: 10,
+      name: 'culture',
+      clickcount: 0,
+    },
+    {
+      id: 11,
+      name: 'game',
+      clickcount: 0,
+    },
+    {
+      id: 12,
+      name: 'fashion',
+      clickcount: 0,
+    },
+  ]);
 
   return (
     <div id="1">
@@ -63,14 +111,7 @@ function SelectInterest(setSelectedInterest) {
       <Container fluid style={{ marginTop: 50, marginBottom: 50 }}>
         <Row style={{ marginBottom: 30 }}>
           <Col>
-            <img
-              src={Interests.workout}
-              width={100}
-              height={100}
-              name="workout"
-              clicked="false"
-              onClick={() => setClickCount(parseInt(clickCount.workout) + 1)}
-            />
+            <img src={Interests.workout} width={100} height={100} name="workout" onClick={e => interest.push(e.target.name)} />
             <br />
             <InterestText>운동</InterestText>
           </Col>
@@ -81,6 +122,7 @@ function SelectInterest(setSelectedInterest) {
               width={100}
               height={100}
               name="study"
+              clicked="false"
               onClick={e => interest.push(e.target.name)}
             />
             <br />

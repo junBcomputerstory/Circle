@@ -90,7 +90,7 @@ function Signin(props) {
             <InputIcon>
               <IoMdMail size="25" />
             </InputIcon>
-            <input style={InputStyle} name="ID" placeholder="아이디" onChange={onChange} value={ID} />
+            <input type="e-mail" style={InputStyle} name="ID" placeholder="xxxxx@naver.com" onChange={onChange} value={ID} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>
