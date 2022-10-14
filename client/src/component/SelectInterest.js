@@ -23,12 +23,15 @@ const InterestText = styled.text`
   font-size: 20px;
 `;
 
-function SelectInterest(props) {
+function SelectInterest(setSelectedInterest) {
   const [interest, setInterest] = useState([]);
-  const getInterest = () => {
+  const getInterest = e => {
     const set = new Set(interest);
     const interests = [...set];
     console.log(interests);
+  };
+  const submitText = () => {
+    console.log(interest);
   };
   return (
     <div id="1">
@@ -121,6 +124,9 @@ function SelectInterest(props) {
         </Row>
         <div onClick={getInterest}>
           <text>여길눌러</text>
+        </div>
+        <div onClick={submitText}>
+          <text>여길눌러2</text>
         </div>
       </Container>
     </div>

@@ -22,6 +22,7 @@ const SubTitle = styled.text`
 `;
 
 function Signin(props) {
+  const [selectedInterest, setSelectedInterest] = useState([]);
   const [userInfo, setUserInfo] = useState({
     nickname: '',
     ID: '',
@@ -71,6 +72,10 @@ function Signin(props) {
       .then(response => console.log(response.data))
       .catch(error => console.log(error));
   };
+
+  const catchInterest = interest => {
+    console.log(interest);
+  };
   return (
     <Container>
       <Container style={{ marginTop: 30, width: 600, justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
@@ -104,7 +109,7 @@ function Signin(props) {
         </div>
       </Container>
       <Container style={{ marginTop: 30, width: 600, justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
-        <SelectInterest />
+        <SelectInterest setSelectedInterest={setSelectedInterest} />
         <Button size="lg" style={{ width: 480, marginTop: 50 }} variant="warning" onClick={Signin}>
           가입하기
         </Button>
