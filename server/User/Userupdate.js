@@ -50,6 +50,7 @@ class Update{
 
         }
         catch(err){
+            console.log(err);
             return errResponse(baseResponse.DB_ERROR);
         }
     };

@@ -13,15 +13,16 @@ class control{
             }
             return res.send(UserLogin);
         },
-        Signin: async(req,res)=>{
+        signin: async(req,res)=>{
             const update=new Update();
-            const userInfo=req.body;
+            const userInfo=[req.body.email,req.body.password];
+            const userinterest=req.body.interest;
             console.log(userInfo);
-            const User=await update.createUser(userInfo);
+            const User=await update.createUser(userInfo,userinterest);
 
             return res.send(User);
         },
-        Mypage: async(req,res)=>{
+        mypage: async(req,res)=>{
             const Usercheck=new Check();
             const session=req.session.user;
             if(!req.session.ID){

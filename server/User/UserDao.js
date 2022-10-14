@@ -8,16 +8,14 @@ async selectUserID(connection,ID){
     return IDRows;
 }
 //유저 생성
-async insertUserInfo (connection,userInfo,hashedPW) {
+async insertUserInfo (connection,ID,hashedPW) {
   try{
     console.log(userInfo)
-    const value=[userInfo.ID,hashedPW,userInfo.nickname,userInfo.interest];
-      const insertUserInfoQuery = 'INSERT INTO User (ID , PW , nickname , interest) VALUES (?,?,?,?);';
+      const insertUserInfoQuery = 'INSERT INTO User (email , password) VALUES (ID,hashedPW);';
       connection.query(
-        insertUserInfoQuery,
-        value
+        insertUserInfoQuery
       );
-      return (1);
+      return (ID);
     }
   catch(err){
     console.log(err);
@@ -52,6 +50,22 @@ async selectUserPassword(connection,ID) {
     catch(err){
       console.log(err);
       return(0);
+    }
+  }
+  async user_id(connection,email){
+    try{
+      const useridquery=`
+          SELECT id
+          FROM User
+          WHERE email=?;`;
+      const user_id=await connection.query(
+        useridquery,
+        email
+      );
+      return user_id;
+    }
+    catch(err){
+      console.log(err);
     }
   }
 }

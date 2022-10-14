@@ -10,9 +10,9 @@ class Router{
         this.app.use(cors);
     }
     setRouter(){
-        this.router.post('/Login',Usercontrol.process.login);
-        this.router.post('/Signin',cors(),(req,res)=>{res.writeHead(200, { 'Access-Control-Allow-Origin': '*' })},Usercontrol.process.Signin);
-        this.router.get('/Mypage',Usercontrol.process.Mypage);
+        this.router.post('/login',Usercontrol.process.login);
+        this.router.post('/signin',cors(),Usercontrol.process.signin);
+        this.router.get('/mypage',Usercontrol.process.mypage);
     };
     }
 

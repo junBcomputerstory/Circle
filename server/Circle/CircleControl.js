@@ -7,11 +7,32 @@ class Control{
         FindCircle: async(req,res)=>{
             const Circlecheck=new Check;
             const CircleInfo=req.body;
-            const CheckedCircle=Check.find(CircleInfo);
+            if(CircleInfo.ID==null){
+                if(CircleInfo.category==null){
+                    if(CircleInfo.location==null){
+                        return errResponse(baseResponse.CIRCLE_REDUNDANT); 
+                    }
+                    else{
+
+                    }
+                }
+                else{
+                    if(CircleInfo.category==null){
+                        if(CircleInfo.location==null){
+    
+                        }
+                        else{
+    
+                        }
+                }
+            }
+            else{
+
+            }
             if(CheckedCircle<1){
                 return errResponse(baseResponse.CIRCLE_REDUNDANT);
             }
-            return res.send(UserLogin);
+            return res.send(CheckedCirle);
         },
 
         MakeCircle: async(req,res)=>{

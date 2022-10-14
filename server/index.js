@@ -27,25 +27,18 @@ class App{
     }
     setRouting(){
         this.app.use('/',routing);
-        const whitelist="http://localhost:3000";
-        
- 
+        /*
         const corsOptions = {
-            origin: function (origin, callback) { 
-            if (whitelist.indexOf(origin) !== -1) { // 만일 whitelist 배열에 origin인자가 있을 경우
-            callback(null, true); // cors 허용
-            } else {
-                 callback(new Error("Not Allowed Origin!")); // cors 비허용
-            }
+            origin: "http://localhost:3000/"
         }
+        this.app.use(cors(corsOptions)); 
+        */
     };
-        this.app.use(cors(corsOptions));
-    }
     listen(){
         this.app.listen(process.env.SERVER_PORT,()=>{
             console.log(`Server is running on ${process.env.SERVER_PORT}`)
-        });
+        })
     }
-}
+    }
 
 export default new App().app;
