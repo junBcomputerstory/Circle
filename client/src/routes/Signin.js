@@ -65,11 +65,12 @@ function Signin(props) {
     console.log(userInfo);
     axios
       .post(
-        'http://localhost:4000/Signin',
+        '/Signin',
         {
           ID: userInfo.ID,
           PW: userInfo.PW,
           nickname: userInfo.nickname,
+          interest: 'workout',
         },
         { withCredentials: true },
       )
