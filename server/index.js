@@ -27,9 +27,10 @@ class App{
     }
     setRouting(){
         this.app.use('/',routing);
+        const whitelist="http://localhost:3000";
         this.app.use(cors({
-            origin: '*', 
-            credential: 'http://localhost:3000', 
+            origin:true,
+            credential: true,
         }));
     }
     listen(){

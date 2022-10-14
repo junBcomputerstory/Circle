@@ -13,8 +13,8 @@ class Router{
         this.router.post('/Signin',Usercontrol.process.Signin);
         this.router.get('/Mypage',Usercontrol.process.Mypage);
         this.app.use(cors({
-            origin: '*', 
-            credential: 'http://localhost:3000',
+            origin: true,
+            credential: true,
         }));
     }
 }
