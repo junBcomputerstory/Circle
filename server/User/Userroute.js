@@ -14,7 +14,7 @@ class Router{
         this.router.get('/Mypage',Usercontrol.process.Mypage);
         this.app.use(cors({
             origin: '*', 
-            credential: 'true' 
+            credential: 'http://localhost:3000',
         }));
     }
 }

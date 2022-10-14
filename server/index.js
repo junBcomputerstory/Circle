@@ -29,7 +29,7 @@ class App{
         this.app.use('/',routing);
         this.app.use(cors({
             origin: '*', 
-            credential: 'true' 
+            credential: 'http://localhost:3000', 
         }));
     }
     listen(){
