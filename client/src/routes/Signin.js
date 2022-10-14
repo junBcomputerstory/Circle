@@ -64,11 +64,16 @@ function Signin(props) {
   const Signin = () => {
     console.log(userInfo);
     axios
-      .post('http://localhost:3000/Signin', {
-        ID: userInfo.ID,
-        PW: userInfo.PW,
-        nickname: userInfo.nickname,
-      })
+      .post(
+        'http://localhost:4000/Signin',
+        {
+          ID: userInfo.ID,
+          PW: userInfo.PW,
+          nickname: userInfo.nickname,
+          interest: 'workout',
+        },
+        { withCredentials: true },
+      )
       .then(response => console.log(response.data))
       .catch(error => console.log(error));
   };

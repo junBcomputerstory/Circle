@@ -31,8 +31,24 @@ function SelectInterest(setSelectedInterest) {
     console.log(interests);
   };
   const submitText = () => {
-    console.log(interest);
+    console.log(clickCount.workout);
   };
+
+  const [clickCount, setClickCount] = useState({
+    workout: 0,
+    study: 0,
+    trip: 0,
+    cooking: 0,
+    coding: 0,
+    volunteer: 0,
+    pet: 0,
+    car: 0,
+    music: 0,
+    culture: 0,
+    game: 0,
+    fashion: 0,
+  });
+
   return (
     <div id="1">
       <Title>
@@ -53,15 +69,20 @@ function SelectInterest(setSelectedInterest) {
               height={100}
               name="workout"
               clicked="false"
-              onClick={e => {
-                interest.push(e.target.name);
-              }}
+              onClick={() => setClickCount(parseInt(clickCount.workout) + 1)}
             />
             <br />
             <InterestText>운동</InterestText>
           </Col>
           <Col>
-            <img src={Interests.study} width={100} height={100} name="study" onClick={e => interest.push(e.target.name)} />
+            <img
+              style={{ border: '3px solid black', borderRadius: '50%' }}
+              src={Interests.study}
+              width={100}
+              height={100}
+              name="study"
+              onClick={e => interest.push(e.target.name)}
+            />
             <br />
             <InterestText>스터디</InterestText>
           </Col>
