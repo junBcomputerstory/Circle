@@ -12,10 +12,17 @@ class Router{
         this.router.post('/Login',Usercontrol.process.login);
         this.router.post('/Signin',Usercontrol.process.Signin);
         this.router.get('/Mypage',Usercontrol.process.Mypage);
-        this.app.use(cors({
-            origin: true,
-            credential: true,
-        }));
+        const whitelist="http://localhost:3000";
+        const corsOptions = {
+            origin: function (origin, callback) { 
+            if (whitelist.indexOf(origin) !== -1) { // 만일 whitelist 배열에 origin인자가 있을 경우
+            callback(null, true); // cors 허용
+            } else {
+                 callback(new Error("Not Allowed Origin!")); // cors 비허용
+            }
+        }
+    };
+        this.app.use(cors(corsOptions));
     }
 }
 
