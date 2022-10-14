@@ -70,7 +70,6 @@ function Signin(props) {
           ID: userInfo.ID,
           PW: userInfo.PW,
           nickname: userInfo.nickname,
-          interest: 'workout',
         },
         { withCredentials: true },
       )
