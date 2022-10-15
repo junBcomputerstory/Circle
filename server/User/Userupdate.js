@@ -7,26 +7,37 @@ import connect from 'http2';
 import {errResponse,response} from '../config/response.js';
 //회원 생성
 class Update{
-    async createUser(userInfo){
+    async createUser(userInfo,userInt){
         try{
             const User=new Usercheck();
             const Dao=new userDao();
-            const IDrow= await User.IDcheck(userInfo.ID);
+            const IDrow= await User.IDcheck(userInfo.email);
             if(IDrow.length>0)
                 return errResponse(baseResponse.SIGNUP_REDUNDANT_ID)
             const hashedPW=crypto
                 .createHash("sha512")
-                .update(userInfo.PW)
+                .update(userInfo.password)
                 .digest("hex")
         
             const connection=await pool.getConnection(async (conn)=>conn);
-            const re=await Dao.insertUserInfo(connection,userInfo,hashedPW);
-            if(re==1){console.log('가입완료');}
+            const re=await Dao.insertUserInfo(connection,userInfo.email,hashedPW);
+            const i=0;
+            if(re==userInfo.email){
+                console.log('email,pw는 가입완료');
+                const id=Dao.user_id(re);
+                for(i;i<userInt.length;i++){
+                    Dao.insertinterest(connection,id,userInt[i]);
+                }
+            }
+            else{
+                return errResponse(baseResponse.SERVER_ERROR);
+            }
             connection.release();
             return response(baseResponse.SUCCESS);
         }
         catch(err){
             console.log(err);
+            conection.release();
             return errResponse(baseResponse.DB_ERROR);
         }
     };
@@ -45,6 +56,7 @@ class Update{
 
             if(PWRows.PW!==hashedPW){
                 return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
+                
             }
             return response(baseResponse.SUCCESS);
 

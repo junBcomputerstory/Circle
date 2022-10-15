@@ -11,9 +11,11 @@ async selectUserID(connection,ID){
 async insertUserInfo (connection,ID,hashedPW) {
   try{
     console.log(userInfo)
-      const insertUserInfoQuery = 'INSERT INTO User (email , password) VALUES (ID,hashedPW);';
+      const insertUserInfoQuery = 'INSERT INTO User (email , password) VALUES (?,?);';
       connection.query(
-        insertUserInfoQuery
+        insertUserInfoQuery,
+        ID,
+        hashedPW
       );
       return (ID);
     }
@@ -63,6 +65,22 @@ async selectUserPassword(connection,ID) {
         email
       );
       return user_id;
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+  async insertinterest(connection,id,interest){
+    try{
+      const insertquery=`
+      INSERT 
+      INTO Interest(user_id,interest_id)
+      VALUES(?,?);`;
+      await connection.query(
+        insertquery,
+        id,
+        interest
+      );
     }
     catch(err){
       console.log(err);
