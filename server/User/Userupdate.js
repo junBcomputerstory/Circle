@@ -20,7 +20,7 @@ class Update{
                 .digest("hex")
         
             const connection=await pool.getConnection(async (conn)=>conn);
-            const re=await Dao.insertUserInfo(connection,userInfo.email,hashedPW);
+            const re=await Dao.insertUserInfo(connection,userInfo.email,hashedPW,userInfo.nickname);
             const i=0;
             if(re==userInfo.email){
                 console.log('email,pw는 가입완료');

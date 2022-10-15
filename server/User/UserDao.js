@@ -8,14 +8,15 @@ async selectUserID(connection,ID){
     return IDRows;
 }
 //유저 생성
-async insertUserInfo (connection,ID,hashedPW) {
+async insertUserInfo (connection,ID,hashedPW,usernickname) {
   try{
     console.log(userInfo)
-      const insertUserInfoQuery = 'INSERT INTO User (email , password) VALUES (?,?);';
+      const insertUserInfoQuery = 'INSERT INTO User (email , password,interest) VALUES (?,?,?);';
       connection.query(
         insertUserInfoQuery,
         ID,
-        hashedPW
+        hashedPW,
+        usernickname
       );
       return (ID);
     }
