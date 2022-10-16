@@ -7,8 +7,8 @@ class Router{
         this.setrouter();
     }
     setrouter(){
-        this.router.get('/FindCircle',CircleControl.process.Find);
-        this.router.get('/MakeCircle',CircleControl.process.Make);
+        this.router.get('/circle',CircleControl.process.find);
+        this.router.post('/circle',CircleControl.process.make);
 
     }
 }

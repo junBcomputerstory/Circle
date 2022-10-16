@@ -3,28 +3,25 @@ import userDao from './UserDao.js';
 
 class Usercheck{
     async IDcheck(ID){
-        const Dao=new userDao;
         console.log(ID);
+        const Dao=new userDao;
         const connection= await pool.getConnection(async(conn)=>conn);
         const result= await Dao.selectUserID(connection,ID);
         connection.release();
-        return result;
+        return result[0];
     };
-    async PWcheck(ID) {
+    async PWcheck(ID,hashedPW) {
         const Dao=new userDao;
         const connection = await pool.getConnection(async (conn) => conn);
-        const passwordCheckResult = await Dao.selectUserPassword(
-            connection,
-            ID
-        );
+        const passwordCheckResult = await Dao.selectUserPassword(connection,ID,hashedPW);
         connection.release();
-        return passwordCheckResult[0];
+        return passwordCheckResult;
     };
 
     async retrieveUserpage(ID){
         const Dao=new userDao;
         const connection= await pool.getConnection(async(conn)=>conn);
-        const Userpageresult= await Dao.selectUserID(connection,ID);
+        const Userpageresult= await Dao.selectUserpage(connection,ID);
         connection.release();
 
         return Userpageresult
