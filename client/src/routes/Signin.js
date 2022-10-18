@@ -25,17 +25,17 @@ function Signin(props) {
   const [selectedInterest, setSelectedInterest] = useState([]);
   const [userInfo, setUserInfo] = useState({
     nickname: '',
-    ID: '',
-    PW: '',
+    email: '',
+    password: '',
     confirmPW: '',
   });
 
-  const { nickname, ID, PW, confirmPW } = userInfo;
+  const { nickname, email, password, confirmPW } = userInfo;
   const onChange = e => {
-    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+    const { value, name } = e.target;
     setUserInfo({
-      ...userInfo, // 기존의 input 객체를 복사한 뒤
-      [name]: value, // name 키를 가진 값을 value 로 설정
+      ...userInfo,
+      [name]: value,
     });
   };
 
@@ -67,8 +67,8 @@ function Signin(props) {
       .post(
         '/Signin',
         {
-          ID: userInfo.ID,
-          PW: userInfo.PW,
+          email: userInfo.email,
+          password: userInfo.password,
           nickname: userInfo.nickname,
           interest: 'workout',
         },
@@ -91,13 +91,13 @@ function Signin(props) {
             <InputIcon>
               <IoMdMail size="25" />
             </InputIcon>
-            <input type="e-mail" style={InputStyle} name="ID" placeholder="xxxxx@naver.com" onChange={onChange} value={ID} />
+            <input type="e-mail" style={InputStyle} name="email" placeholder="xxxxx@naver.com" onChange={onChange} value={email} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>
               <FaLock size="20" />
             </InputIcon>
-            <input style={InputStyle} name="PW" placeholder="비밀번호" onChange={onChange} value={PW} />
+            <input style={InputStyle} name="password" placeholder="비밀번호" onChange={onChange} value={password} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>
