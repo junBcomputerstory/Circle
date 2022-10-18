@@ -1,29 +1,28 @@
 import Update from './Circleupate.js';
-import Check from './Circlecheck.js';
+import CircleCheck from './Circlecheck.js';
 import * as baseResponse from'../config/baseResponse.js';
 import {errResponse,response} from '../config/response.js';
 class Control{
     process={
-        FindCircle: async(req,res)=>{
-            const Circlecheck=new Check;
+        find: async(req,res)=>{
+            const Check=new CircleCheck;
             const CircleInfo=req.body;
-            if(CircleInfo.ID==null){
-                if(CircleInfo.category==null){
-                    if(CircleInfo.location==null){
-                        return errResponse(baseResponse.CIRCLE_REDUNDANT); 
+            if(CircleInfo.name==null){
+                if(CircleInfo.interest_id==null){
+                    if(CircleInfo.area_id==null){
+                         const circles=Check.findall;
                     }
                     else{
-
+                        const circles= await Check.findbylocation(CircleInfo.location);
                     }
                 }
                 else{
-                    if(CircleInfo.category==null){
-                        if(CircleInfo.location==null){
-    
-                        }
-                        else{
-    
-                        }
+                    if(CircleInfo.location==null){
+                        const circles=Check.findbytype(CircleInfo.interest_id);
+                    }
+                    else{
+                        const circles= await Check.findbylocation(CircleInfo.area_id);
+                    }
                 }
             }
             else{
@@ -35,7 +34,7 @@ class Control{
             return res.send(CheckedCirle);
         },
 
-        MakeCircle: async(req,res)=>{
+        make: async(req,res)=>{
 
         }
 

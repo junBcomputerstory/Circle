@@ -9,22 +9,23 @@ import {errResponse,response} from '../config/response.js';
 class Update{
     async createUser(userInfo,userInt){
         try{
+            console.log(userInfo);
             const User=new Usercheck();
             const Dao=new userDao();
-            const IDrow= await User.IDcheck(userInfo.email);
+            const IDrow= await User.IDcheck(userInfo[0]);
             if(IDrow.length>0)
                 return errResponse(baseResponse.SIGNUP_REDUNDANT_ID)
             const hashedPW=crypto
                 .createHash("sha512")
-                .update(userInfo.password)
+                .update(userInfo[1])
                 .digest("hex")
-        
             const connection=await pool.getConnection(async (conn)=>conn);
-            const re=await Dao.insertUserInfo(connection,userInfo.email,hashedPW);
+            const re=await Dao.insertUserInfo(connection,userInfo[0],hashedPW,userInfo[2]);
             const i=0;
-            if(re==userInfo.email){
+            if(re===userInfo[0]){
                 console.log('email,pw는 가입완료');
-                const id=Dao.user_id(re);
+                const id=Dao.user_id(connection,re);
+                console.log(id)
                 for(i;i<userInt.length;i++){
                     Dao.insertinterest(connection,id,userInt[i]);
                 }
@@ -37,24 +38,21 @@ class Update{
         }
         catch(err){
             console.log(err);
-            conection.release();
             return errResponse(baseResponse.DB_ERROR);
         }
     };
     async Postlogin(UserInfo){
         try{
-            const IDrow=await Usercheck.IDcheck(UserInfo.ID);
+            const User=new Usercheck();
+            const IDrow=await User.IDcheck(UserInfo.email);
             if(IDrow<1)
                 return errResponse(baseResponse.USER_STATUS_EMPTY);
-            const selectedID=IDrow.ID;
             const hashedPW= crypto
                 .createHash("sha512")
-                .update(UserInfo.PW)
+                .update(UserInfo.password)
                 .digest("hex");
-        
-            const PWRows=await Usercheck.PWcheck(selectedID);
-
-            if(PWRows.PW!==hashedPW){
+            const re=await User.PWcheck(UserInfo.email,hashedPW);
+            if(re<1){
                 return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
                 
             }
@@ -69,17 +67,20 @@ class Update{
 //회원 정보변경
     async editUser(ID,newnickname){
         try{
+            const User=new Usercheck();
+            const Dao=new userDao;
             console.log(ID);
-            const IDrow=await Usercheck.IDcheck(UserInfo.ID);
+            const IDrow=await User.IDcheck(ID);
             if(IDrow<1)
                 return errResponse(baseResponse.USER_STATUS_EMPTY);
             const connection= await pool.getConnection(async (conn)=>conn);
-            await userDao.updateUserInfo(connection,ID,newnickname);
+            await Dao.updateUserInfo(connection,ID,newnickname);
             connection.release();
 
             return response(baseResponse.SUCCESS);
         }
         catch(err){
+            console.log(err);
             return errResponse(baseResponse.DB_ERROR);
         }
     }

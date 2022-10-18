@@ -1,21 +1,28 @@
 //유저 정보 조회
 class userDao{
+  //아이디를통한 유저정보 조회
+  async selectUserpage(connection,ID){
+    console.log(ID);
+      const selectUserIDQuery=`SELECT * FROM User WHERE email = ?;`;
+      const infoRows=await connection.query(selectUserIDQuery,ID);
+      return infoRows;
+  }
   
-//ID로 확인,조회
+//ID로 비밀번호확인
 async selectUserID(connection,ID){
-    const selectUserIDQuery='SELECT * FROM User WHERE ID=?;';
+  console.log(ID);
+    const selectUserIDQuery=`SELECT email,password FROM User WHERE email = ?;`;
     const [IDRows]=await connection.query(selectUserIDQuery,ID);
     return IDRows;
 }
 //유저 생성
-async insertUserInfo (connection,ID,hashedPW) {
+async insertUserInfo (connection,ID,hashedPW,usernickname) {
   try{
-    console.log(userInfo)
-      const insertUserInfoQuery = 'INSERT INTO User (email , password) VALUES (?,?);';
+      const insertUserInfoQuery = 'INSERT INTO User (email , password, nickname) VALUES (?,?,?);';
+      const value=[ID,hashedPW,usernickname]
       connection.query(
         insertUserInfoQuery,
-        ID,
-        hashedPW
+        value
       );
       return (ID);
     }
@@ -25,14 +32,14 @@ async insertUserInfo (connection,ID,hashedPW) {
     }
   }
   //비밀번호 확인
-async selectUserPassword(connection,ID) {
-    const selectUserPasswordQuery = 'SELECT (ID,PW,nickname) FROM User WHERE ID = ? ;';
-    const selectUserPasswordRow = await connection.query(
+async selectUserPassword(connection,ID,PW) {
+    const selectUserPasswordQuery = 'SELECT password FROM User WHERE email = ? and password =?;';
+    const selectUserPassword = await connection.query(
         selectUserPasswordQuery,
-        ID
+        [ID,PW]
     );
   
-    return selectUserPasswordRow;
+    return selectUserPassword;
   }
   //유저정보 업데이트
   async updateUserInfo (connection,ID,newnickname){
@@ -44,8 +51,7 @@ async selectUserPassword(connection,ID) {
       `;
       await connection.query(
         updateUserInfoQuery,
-        newnickname,
-        ID
+        [newnickname, ID]
       );
       return(1);
     }
@@ -72,10 +78,7 @@ async selectUserPassword(connection,ID) {
   }
   async insertinterest(connection,id,interest){
     try{
-      const insertquery=`
-      INSERT 
-      INTO Interest(user_id,interest_id)
-      VALUES(?,?);`;
+      const insertquery=`INSERT INTO Interest(user_id,interest_id) VALUES(?,?);`;
       await connection.query(
         insertquery,
         id,
