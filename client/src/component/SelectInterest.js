@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/esm/Button';
 import { Interests } from './Interests';
+import { findConfigUpwards } from '@babel/core/lib/config/files';
 
 const Title = styled.text`
   font-size: 50px;
@@ -25,77 +26,75 @@ const InterestText = styled.text`
 
 function SelectInterest(setSelectedInterest) {
   const [interest, setInterest] = useState([]);
-  const getInterest = e => {
-    const set = new Set(interest);
-    const interests = [...set];
-    console.log(interests);
-  };
-  const submitText = () => {
-    console.log(clickCount.workout);
-  };
 
-  const [clickCount, setClickCount] = useState([
+  const arr = [
     {
       id: 1,
-      name: 'workout',
-      clickcount: 0,
+      name: '운동',
+      src: '../img/interests/workout.png',
     },
     {
       id: 2,
-      name: 'study',
-      clickcount: 0,
+      name: '공부',
+      src: '../img/interests/study.png',
     },
     {
       id: 3,
-      name: 'trip',
-      clickcount: 0,
+      name: '여행',
+      src: '../img/interests/trip.png',
     },
     {
       id: 4,
-      name: 'cooking',
-      clickcount: 0,
+      name: '요리',
+      src: '../img/interests/cooking.png',
     },
     {
       id: 5,
-      name: 'coding',
-      clickcount: 0,
+      name: 'IT',
+      src: '../img/interests/coding.png',
     },
-    {
-      id: 6,
-      name: 'volunteer',
-      clickcount: 0,
-    },
+    { id: 6, name: '봉사', src: '../img/interests/volunteer.png' },
     {
       id: 7,
-      name: 'pet',
-      clickcount: 0,
+      name: '반려동물',
+      src: '../img/interests/pet.png',
     },
     {
       id: 8,
-      name: 'car',
-      clickcount: 0,
+      name: '자동차',
+      src: '../img/interests/car.png',
     },
     {
       id: 9,
-      name: 'music',
-      clickcount: 0,
+      name: '음악',
+      src: '../img/interests/music.png',
     },
-    {
-      id: 10,
-      name: 'culture',
-      clickcount: 0,
-    },
+    { id: 10, name: '문화', src: '../img/interests/culture.png' },
     {
       id: 11,
-      name: 'game',
-      clickcount: 0,
+      name: '게임',
+      src: '../img/interests/game.png',
     },
     {
       id: 12,
-      name: 'fashion',
-      clickcount: 0,
+      name: '패션',
+      src: '../img/interests/fashion.png',
     },
-  ]);
+  ];
+
+  const pushInterest = id => {
+    let newInterest = [...interest];
+    newInterest.push(id);
+    setInterest(newInterest);
+  };
+
+  const _onclick = id => {
+    interest.includes(id) == false ? pushInterest(id) : setInterest(interest.filter(int => int != id));
+  };
+
+  const sendInt = () => {
+    console.log(interest);
+  };
 
   return (
     <div id="1">
@@ -108,90 +107,34 @@ function SelectInterest(setSelectedInterest) {
         <br />
         회원님을 위한 써클 추천을 위해 사용됩니다.
       </SubTitle>
-      <Container fluid style={{ marginTop: 50, marginBottom: 50 }}>
-        <Row style={{ marginBottom: 30 }}>
-          <Col>
-            <img src={Interests.workout} width={100} height={100} name="workout" onClick={e => interest.push(e.target.name)} />
-            <br />
-            <InterestText>운동</InterestText>
-          </Col>
-          <Col>
-            <img
-              style={{ border: '3px solid black', borderRadius: '50%' }}
-              src={Interests.study}
-              width={100}
-              height={100}
-              name="study"
-              clicked="false"
-              onClick={e => interest.push(e.target.name)}
-            />
-            <br />
-            <InterestText>스터디</InterestText>
-          </Col>
-          <Col>
-            <img src={Interests.trip} width={100} height={100} />
-            <br />
-            <InterestText>여행</InterestText>
-          </Col>
-        </Row>
-        <Row style={{ marginBottom: 30 }}>
-          <Col>
-            <img src={Interests.cooking} width={100} height={100} />
-            <br />
-            <InterestText>쿠킹</InterestText>
-          </Col>
-          <Col>
-            <img src={Interests.coding} width={100} height={100} />
-            <br />
-            <InterestText>IT</InterestText>
-          </Col>
-          <Col>
-            <img src={Interests.volunteer} width={100} height={100} />
-            <br />
-            <InterestText>봉사</InterestText>
-          </Col>
-        </Row>
-        <Row style={{ marginBottom: 30 }}>
-          <Col>
-            <img src={Interests.pet} width={100} height={100} />
-            <br />
-            <InterestText>반려동물</InterestText>
-          </Col>
-          <Col>
-            <img src={Interests.car} width={100} height={100} />
-            <br />
-            <InterestText>차량</InterestText>
-          </Col>
-          <Col>
-            <img src={Interests.music} width={100} height={100} />
-            <br />
-            <InterestText>음악</InterestText>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <img src={Interests.culture} width={100} height={100} />
-            <br />
-            <InterestText>문화</InterestText>
-          </Col>
-          <Col>
-            <img src={Interests.game} width={100} height={100} />
-            <br />
-            <InterestText>게임</InterestText>
-          </Col>
-          <Col>
-            <img src={Interests.fashion} width={100} height={100} />
-            <br />
-            <InterestText>패션</InterestText>
-          </Col>
-        </Row>
-        <div onClick={getInterest}>
-          <text>여길눌러</text>
-        </div>
-        <div onClick={submitText}>
-          <text>여길눌러2</text>
-        </div>
+      <Container style={{ width: 500, marginTop: 50, marginBottom: 50 }}>
+        {arr.map(value =>
+          interest.includes(value.id) ? (
+            <div style={{ display: 'inline-block', margin: '20px 20px' }} key={value.id} onClick={() => _onclick(value.id)}>
+              <img
+                style={{ border: '4px solid black', borderRadius: '50%' }}
+                key={value.id}
+                src={value.src}
+                id={value.id}
+                name={value.name}
+                width={100}
+                height={100}
+              />
+              <br />
+              <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
+            </div>
+          ) : (
+            <div style={{ display: 'inline-block', margin: '20px 20px' }} key={value.id} onClick={() => _onclick(value.id)}>
+              <img key={value.id} src={value.src} id={value.id} name={value.name} width={100} height={100} />
+              <br />
+              <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
+            </div>
+          ),
+        )}
       </Container>
+      <div onClick={sendInt}>
+        <text>여길눌러</text>
+      </div>
     </div>
   );
 }
