@@ -22,7 +22,8 @@ const SubTitle = styled.text`
 `;
 
 function Signin(props) {
-  const [selectedInterest, setSelectedInterest] = useState([]);
+  const [interest, setInterest] = useState([]);
+
   const [userInfo, setUserInfo] = useState({
     nickname: '',
     email: '',
@@ -62,7 +63,10 @@ function Signin(props) {
   `;
 
   const Signin = () => {
-    console.log(userInfo);
+    if (userInfo.password != userInfo.confirmPW) {
+      alert('비밀번호를 확인해주세요.');
+      return;
+    }
     axios
       .post(
         '/Signin',
@@ -70,7 +74,7 @@ function Signin(props) {
           email: userInfo.email,
           password: userInfo.password,
           nickname: userInfo.nickname,
-          interest: 'workout',
+          interest: interest,
         },
         { withCredentials: true },
       )
@@ -78,9 +82,6 @@ function Signin(props) {
       .catch(error => console.log(error));
   };
 
-  const catchInterest = interest => {
-    console.log(interest);
-  };
   return (
     <Container>
       <Container style={{ marginTop: 30, width: 600, justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
@@ -97,13 +98,13 @@ function Signin(props) {
             <InputIcon>
               <FaLock size="20" />
             </InputIcon>
-            <input style={InputStyle} name="password" placeholder="비밀번호" onChange={onChange} value={password} />
+            <input style={InputStyle} type="password" name="password" placeholder="비밀번호" onChange={onChange} value={password} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>
               <FaLock size="20" />
             </InputIcon>
-            <input style={InputStyle} name="confirmPW" placeholder="비밀번호 확인" onChange={onChange} value={confirmPW} />
+            <input style={InputStyle} type="password" name="confirmPW" placeholder="비밀번호 확인" onChange={onChange} value={confirmPW} />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <InputIcon>
@@ -114,7 +115,7 @@ function Signin(props) {
         </div>
       </Container>
       <Container style={{ marginTop: 30, width: 600, justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
-        <SelectInterest setSelectedInterest={setSelectedInterest} />
+        <SelectInterest setInterest={setInterest} />
         <Button size="lg" style={{ width: 480, marginTop: 50 }} variant="warning" onClick={Signin}>
           가입하기
         </Button>

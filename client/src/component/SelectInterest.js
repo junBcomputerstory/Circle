@@ -24,7 +24,7 @@ const InterestText = styled.text`
   font-size: 20px;
 `;
 
-function SelectInterest(setSelectedInterest) {
+function SelectInterest(props) {
   const [interest, setInterest] = useState([]);
 
   const arr = [
@@ -86,6 +86,7 @@ function SelectInterest(setSelectedInterest) {
     let newInterest = [...interest];
     newInterest.push(id);
     setInterest(newInterest);
+    props.setInterest(newInterest);
   };
 
   const _onclick = id => {
@@ -132,9 +133,6 @@ function SelectInterest(setSelectedInterest) {
           ),
         )}
       </Container>
-      <div onClick={sendInt}>
-        <text>여길눌러</text>
-      </div>
     </div>
   );
 }
