@@ -5,7 +5,7 @@ class Circlecheck{
     async findall(){
         const Dao=new CircleDao;
         const connection=await pool.getConnection(async(conn)=>conn);
-        const circlerow=await Dao.search(connection,CircleName);
+        const circlerow=await Dao.search(connection);
         connection.release();
 
         return circlerow;
@@ -34,7 +34,7 @@ class Circlecheck{
 
         return circlerow;
     }
-    async findbynameandlocation(CircleName,Circlelocation){
+    async findbynamelocation(CircleName,Circlelocation){
         const Dao=new CircleDao;
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=await Dao.namelocationsearch(connection,CircleName,Circlelocation);
@@ -42,7 +42,7 @@ class Circlecheck{
 
         return circlerow;
     }
-    async findbynameandtype(CircleName,Circletype){
+    async findbynametype(CircleName,Circletype){
         const Dao=new CircleDao;
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=await Dao.nametypesearch(connection,CircleName,Circletype);
@@ -54,6 +54,14 @@ class Circlecheck{
         const Dao=new CircleDao;
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=await Dao.locationtypesearch(connection,Circlelocation,Circletype);
+        connection.release();
+
+        return circlerow;
+    }
+    async findbyall(CircleName,Circlelocation,Circletype){
+        const Dao=new CircleDao;
+        const connection= await pool.getConnection(async(conn)=>conn);
+        const circlerow=await Dao.allsearch(connection,CircleName,Circlelocation,Circletype);
         connection.release();
 
         return circlerow;

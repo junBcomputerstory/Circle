@@ -13,7 +13,7 @@ class Control{
                          const circles=Check.findall;
                     }
                     else{
-                        const circles= await Check.findbylocation(CircleInfo.location);
+                        const circles= await Check.findbylocation(CircleInfo.area_id);
                     }
                 }
                 else{
@@ -21,14 +21,30 @@ class Control{
                         const circles=Check.findbytype(CircleInfo.interest_id);
                     }
                     else{
-                        const circles= await Check.findbylocation(CircleInfo.area_id);
+                        const circles= await Check.findbylocationtype(CircleInfo.area_id,CircleInfo.interest_id);
                     }
                 }
             }
             else{
+                if(CircleInfo.interest_id==null){
+                    if(CircleInfo.area_id==null){
+                        const circles= await Check.findbyname(CircleInfo.name);
+                    }
+                    else{
+                        const circles=await Check.findbynamelocation(CircleInfo.name,CircleInfo.area_id);
+                    }
+                }
+                else{
+                    if(CircleInfo.area_id==null){
+                        const circles=await Check.findbynametype(CircleInfo.name,CircleInfo.interest_id);
+                    }
+                    else{
+                        const circles=await Check.findbyall()
+                    }
+                }
 
             }
-            if(CheckedCircle<1){
+            if(circles<1){
                 return errResponse(baseResponse.CIRCLE_REDUNDANT);
             }
             return res.send(CheckedCirle);
