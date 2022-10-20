@@ -65,12 +65,66 @@ const StyledP = styled.p`
 `;
 
 function MakeCircle(props) {
+  const arr = [
+    {
+      id: 1,
+      name: '운동',
+      src: '../img/interests/workout.png',
+    },
+    {
+      id: 2,
+      name: '공부',
+      src: '../img/interests/study.png',
+    },
+    {
+      id: 3,
+      name: '여행',
+      src: '../img/interests/trip.png',
+    },
+    {
+      id: 4,
+      name: '요리',
+      src: '../img/interests/cooking.png',
+    },
+    {
+      id: 5,
+      name: 'IT',
+      src: '../img/interests/coding.png',
+    },
+    { id: 6, name: '봉사', src: '../img/interests/volunteer.png' },
+    {
+      id: 7,
+      name: '반려동물',
+      src: '../img/interests/pet.png',
+    },
+    {
+      id: 8,
+      name: '자동차',
+      src: '../img/interests/car.png',
+    },
+    {
+      id: 9,
+      name: '음악',
+      src: '../img/interests/music.png',
+    },
+    { id: 10, name: '문화', src: '../img/interests/culture.png' },
+    {
+      id: 11,
+      name: '게임',
+      src: '../img/interests/game.png',
+    },
+    {
+      id: 12,
+      name: '패션',
+      src: '../img/interests/fashion.png',
+    },
+  ];
   const [fileImage, setFileImage] = useState('');
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
   const [circleLocation, setCircleLocation] = useState('');
   const [circleInfo, setCircleInfo] = useState('');
-  const [interest, setInterest] = useState([]);
+  const [interest, setInterest] = useState(0);
   const saveFileImage = e => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
   };
@@ -83,6 +137,15 @@ function MakeCircle(props) {
     console.log(circleInfo);
     console.log(interest);
   };
+  const pushInterest = id => {
+    setInterest(id);
+  };
+
+  const _onclick = id => {
+    interest == id ? setInterest(0) : pushInterest(id);
+    console.log(interest);
+  };
+
   return (
     <div style={{ textAlign: 'center' }}>
       <Header />
@@ -93,18 +156,29 @@ function MakeCircle(props) {
             <br />
             <TitleText>만들고자 하는 써클의 분야를 선택해주세요</TitleText>
             <InterestDiv>
-              <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} onClick={e => interest.push(e.target)} />
-              <img src={Interests.game} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.music} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.coding} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.car} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.cooking} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.coding} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.volunteer} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.trip} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.study} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.pet} style={{ margin: '5px 5px' }} width={100} height={100} />
-              <img src={Interests.fashion} style={{ margin: '5px 5px' }} width={100} height={100} />
+              {arr.map(value =>
+                interest == value.id ? (
+                  <div style={{ display: 'inline-block', margin: '5px 5px' }} key={value.id} onClick={() => _onclick(value.id)}>
+                    <img
+                      style={{ border: '4px solid black', borderRadius: '50%' }}
+                      key={value.id}
+                      src={value.src}
+                      id={value.id}
+                      name={value.name}
+                      width={100}
+                      height={100}
+                    />
+                    <br />
+                    <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
+                  </div>
+                ) : (
+                  <div style={{ display: 'inline-block', margin: '5px 5px' }} key={value.id} onClick={() => _onclick(value.id)}>
+                    <img key={value.id} src={value.src} id={value.id} name={value.name} width={100} height={100} />
+                    <br />
+                    <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
+                  </div>
+                ),
+              )}
             </InterestDiv>
             <TitleText>써클 이름을 정해주세요</TitleText>
             <br />
@@ -145,7 +219,7 @@ function MakeCircle(props) {
           <Alert style={{ width: 730, margin: '0 auto' }} key="warning" variant="warning">
             프라임 써클이란 ? 달마다 일정 가격을 지불하면 써클즈와 제휴된 업체에서 할인을 받을 수 있는 서비스입니다.
           </Alert>
-          <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={showInfo()}>
+          <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={showInfo}>
             써클 만들기
           </Button>
         </div>
