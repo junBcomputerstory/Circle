@@ -10,6 +10,8 @@ class Update{
     async createUser(userInfo,userInt){
         try{
             console.log(userInfo);
+            console.log(userInt);
+            console.log(userInt.length);
             const User=new Usercheck();
             const Dao=new userDao();
             const IDrow= await User.IDcheck(userInfo[0]);
@@ -21,11 +23,11 @@ class Update{
                 .digest("hex")
             const connection=await pool.getConnection(async (conn)=>conn);
             const re=await Dao.insertUserInfo(connection,userInfo[0],hashedPW,userInfo[2]);
-            const i=0;
-            if(re===userInfo[0]){
+            let i=0;
+            if(re==userInfo[0]){
                 console.log('email,pw는 가입완료');
                 const id=Dao.user_id(connection,re);
-                console.log(id)
+                console.log(id);
                 for(i;i<userInt.length;i++){
                     Dao.insertinterest(connection,id,userInt[i]);
                 }
