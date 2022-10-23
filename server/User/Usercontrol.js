@@ -24,18 +24,18 @@ class control {
       const Usercheck = new Check();
       if (!req.session.email) {
         console.log(`로그인을 먼저해주세요`);
-        res.redirect(`/Login`);
+        return res.redirect(`/Login`);
       } else {
         console.log(req.session.email);
         const User = await Usercheck.retrieveUserpage(req.session.email);
         return res.send(User);
       }
     },
-    edituser: async (req,res){
-      const Userupdate=new Update();
-      
+    edituser: async (req, res)=> {
+      const Userupdate = new Update();
+      const User = await Userupdate.editUser(req.body,req.session.email);
       return res.send(User);
-    }
+    },
   };
 }
 export default new control();

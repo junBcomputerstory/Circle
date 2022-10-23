@@ -42,16 +42,16 @@ async selectUserPassword(connection,ID,PW) {
     return selectUserPassword;
   }
   //유저정보 업데이트
-  async updateUserInfo (connection,ID,newnickname){
+  async updateUserInfo (connection,ver){
     try{
       const updateUserInfoQuery=`
           UPDATE User
-          SET nickname=?
-          WHERE ID=?; 
+          SET nickname=IF(?,?,nickname) and image_url=IF(?,?,image_url)
+          WHERE email=?; 
       `;
       await connection.query(
         updateUserInfoQuery,
-        [newnickname, ID]
+        ver
       );
       return(1);
     }
