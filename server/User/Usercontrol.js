@@ -31,6 +31,11 @@ class control {
         return res.send(User);
       }
     },
+    edituser: async (req,res){
+      const Userupdate=new Update();
+      
+      return res.send(User);
+    }
   };
 }
 export default new control();
