@@ -122,6 +122,7 @@ function MakeCircle(props) {
   const [fileImage, setFileImage] = useState('');
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
+  const [circleLimitPeople, setCircleLimitPeople] = useState('');
   const [circleLocation, setCircleLocation] = useState('');
   const [circleInfo, setCircleInfo] = useState('');
   const [interest, setInterest] = useState(0);
@@ -135,6 +136,7 @@ function MakeCircle(props) {
     console.log(circleLimit);
     console.log(circleLocation);
     console.log(circleInfo);
+    console.log(circleLimitPeople);
     console.log(interest);
   };
   const pushInterest = id => {
@@ -183,8 +185,13 @@ function MakeCircle(props) {
             <TitleText>써클 이름을 정해주세요</TitleText>
             <br />
             <input className="textinput" type="text" placeholder="써클 이름을 적어주세요" onChange={e => setCircleName(e.target.value)} />
+            <div>
+              <TitleText>제한인원을 설정해주세요</TitleText>
+              <input className="textinput" type="number" placeholder="제한 인원(명)" onChange={e => setCircleLimitPeople(e.target.value)} />
+            </div>
             <TitleText>제한조건을 설정해주세요</TitleText>
             <br />
+
             <textarea className="textinput" placeholder="제한조건을 적어주세요" onChange={e => setCircleLimit(e.target.value)} />
             <TitleText>활동 장소를 설정해주세요</TitleText>
             <br />
