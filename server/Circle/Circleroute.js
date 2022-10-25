@@ -1,5 +1,5 @@
 import express from'express';
-import CircleControl from 'CircleControl.js';
+import Control from './CircleControl.js';
 
 class Router{
     constructor(){
@@ -7,8 +7,8 @@ class Router{
         this.setrouter();
     }
     setrouter(){
-        this.router.get('/circle',CircleControl.process.find);
-        this.router.post('/circle',CircleControl.process.make);
+        this.router.get('/circle',Control.process.find);
+        this.router.post('/circle',Control.process.make);
 
     }
 }
