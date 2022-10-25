@@ -21,4 +21,4 @@ export const SIGNIN_EMAIL_WRONG = { "isSuccess": false, "code": 3003, "message":
 export const SIGNIN_PASSWORD_WRONG = { "isSuccess": false, "code": 3004, "message": "비밀번호가 잘못 되었습니다." };
 export const DB_ERROR = { "isSuccess": false, "code": 4000, "message": "데이터 베이스 에러" };
 export const SERVER_ERROR = { "isSuccess": false, "code": 4001, "message": "서버 에러" };
-export const CIRCLE_REDUNDANT ={ "isSuccess": false, "code": 5001, "message": "해당 서클이 존재하지 않습니다."};
+export const CIRCLE_NOTFOUND ={ "isSuccess": false, "code": 5001, "message": "서클이 존재하지 않습니다."};

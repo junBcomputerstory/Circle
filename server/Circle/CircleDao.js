@@ -1,10 +1,18 @@
 class CircleDao{
-    async search(connection){
-        const searchquery=`SELECT (c.name,i.interest_name,)  
-                        FROM Circle c left join interest_type i on (c.interest_id=i.interest_id)
-                                      left join Area a on (c.area_id=a.area_id);`
+    async checkCircle(connection,info){
+        const searchquery=`SELECT * 
+                           FROM Circle
+                           WHERE IF( ? IS NOT NULL,name=?,name=name) AND IF (? IS NOT NULL,interest_id=?,interest_id=interest_id) AND IF(? IS NOT NULL,area_id=?,area_id=area_id);`;
+        const searchrow=await connection.query(
+            searchquery,
+            info
+        );
+        return searchrow;
+    }
+    async inserCircle(connection,info){
+        
     }
 
 }
 
-export default CircleDao;
+export default new CircleDao();

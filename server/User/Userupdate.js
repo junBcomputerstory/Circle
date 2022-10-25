@@ -8,10 +8,9 @@ import {errResponse,response} from '../config/response.js';
 //회원 생성
 class Update{
     async createUser(userInfo,userInt){
+        const connection=await pool.getConnection(async (conn)=>conn);
         try{
-            console.log(userInfo);
-            console.log(userInt);
-            console.log(userInt.length);
+            
             const User=new Usercheck();
             const Dao=new userDao();
             const IDrow= await User.IDcheck(userInfo[0]);
@@ -21,16 +20,12 @@ class Update{
                 .createHash("sha512")
                 .update(userInfo[1])
                 .digest("hex")
-            const connection=await pool.getConnection(async (conn)=>conn);
-            const re=await Dao.insertUserInfo(connection,userInfo[0],hashedPW,userInfo[2]);
-            let i=0;
+            await connection.beginTransaction();
+            const interest=userInt.toString();
+            const result=await Dao.insertUserInfo(connection,userInfo[0],hashedPW,userInfo[2],interest);
             if(re==userInfo[0]){
                 console.log('email,pw는 가입완료');
-                const id=Dao.user_id(connection,re);
-                console.log(id);
-                for(i;i<userInt.length;i++){
-                    Dao.insertinterest(connection,id,userInt[i]);
-                }
+                await connection.commit();
             }
             else{
                 return errResponse(baseResponse.SERVER_ERROR);
@@ -67,16 +62,12 @@ class Update{
         }
     };
 //회원 정보변경
-    async editUser(ID,newnickname){
+    async editUser(userinfo,email){
         try{
-            const User=new Usercheck();
             const Dao=new userDao;
-            console.log(ID);
-            const IDrow=await User.IDcheck(ID);
-            if(IDrow<1)
-                return errResponse(baseResponse.USER_STATUS_EMPTY);
+            const ver=[userinfo.nickname,userinfo.image,email];
             const connection= await pool.getConnection(async (conn)=>conn);
-            await Dao.updateUserInfo(connection,ID,newnickname);
+            await Dao.updateUserInfo(connection,ver);
             connection.release();
 
             return response(baseResponse.SUCCESS);

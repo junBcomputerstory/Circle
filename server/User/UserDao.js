@@ -11,15 +11,15 @@ class userDao{
 //ID로 비밀번호확인
 async selectUserID(connection,ID){
   console.log(ID);
-    const selectUserIDQuery=`SELECT email,password FROM User WHERE email = ?;`;
+    const selectUserIDQuery=`SELECT email FROM User WHERE email = ?;`;
     const [IDRows]=await connection.query(selectUserIDQuery,ID);
     return IDRows;
 }
 //유저 생성
-async insertUserInfo (connection,ID,hashedPW,usernickname) {
+async insertUserInfo (connection,ID,hashedPW,usernickname,inte) {
   try{
-      const insertUserInfoQuery = 'INSERT INTO User (email , password, nickname) VALUES (?,?,?);';
-      const value=[ID,hashedPW,usernickname]
+      const insertUserInfoQuery = 'INSERT INTO User (email , password, nickname,interest) VALUES (?,?,?,?);';
+      const value=[ID,hashedPW,usernickname,inte]
       connection.query(
         insertUserInfoQuery,
         value
@@ -46,7 +46,7 @@ async selectUserPassword(connection,ID,PW) {
     try{
       const updateUserInfoQuery=`
           UPDATE User
-          SET nickname=IF(?,?,nickname) and image_url=IF(?,?,image_url)
+          SET IF(?,nickname=?,nickname=nickname) and IF(?,image_url=?,image_url=image_url)
           WHERE email=?; 
       `;
       await connection.query(
