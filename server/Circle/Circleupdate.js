@@ -12,7 +12,7 @@ class CircleUpdate{
             if(crow>1){
                 return errResponse(baseResponse.CIRCLE_NAME_ERROR);
             }
-            const vec=[req.name,req.interest_id,req.sex,req.restirct,req.area_id,req.intro,req.Circlepic];
+            const vec=[req.name,req.interest_id,req.sex,req.restirct,req.area_id,req.intro,req.Circlepic,req.max_num];
             const re=CircleDao.inserCircle(connection,vec);
             connection.release();
             return re
