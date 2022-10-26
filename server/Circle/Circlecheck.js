@@ -9,8 +9,13 @@ class Circlecheck{
         const circlerow=CircleDao.CheckCircle(connection,vec);
 
         return circlerow;
+    }
+    async namecheck(name){
+        const connection= await pool.getConnection(async(conn)=>conn);
+        const circlerow=CircleDao.findname(connection,name);
 
+        return circlerow;
     }
 }
 
-export default Circlecheck;
+export default new Circlecheck();
