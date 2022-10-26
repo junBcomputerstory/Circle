@@ -26,7 +26,7 @@ function Header(props) {
     marginRight: 10,
   };
   return (
-    <Navbar sticky="top" style={{ backgroundColor: 'white' }} expand="lg">
+    <Navbar sticky="top" style={{ backgroundColor: `${props.bgcolor}` }} expand="lg">
       <Container>
         <Navbar.Brand style={LogoFont}>
           <Link style={{ textDecoration: 'none' }} to="/">

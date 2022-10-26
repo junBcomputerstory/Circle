@@ -55,13 +55,13 @@ function Login(props) {
     <div style={{ flexDirection: 'row' }}>
       <Row>
         <Col style={{ paddingRight: 0 }}>
-          <div style={{ display: 'flex', width: '60vw', height: '100%', backgroundColor: 'orange' }}>
-            <iframe
+          <div style={{ display: 'flex', width: '60vw', height: '100%', backgroundColor: '#b5d1ff' }}>
+            {/* <iframe
               src="https://player.vimeo.com/video/747505231?h=e73e0f208c&badge=0&background=1&autoplay=1&loop=1&title=0&byline=0&portrait=0&muted=1&quality=1080p"
               title="video"
               width="100%"
               height="100%"
-            />
+            /> */}
           </div>
         </Col>
         <Col style={{ marginLeft: 0, marginRight: 0, paddingLeft: 0 }}>
@@ -86,7 +86,7 @@ function Login(props) {
                   <input style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
                 </div>
               </div>
-              <Button style={{ width: 440 }} variant="warning">
+              <Button style={{ width: 440 }} variant="primary">
                 로그인하기
               </Button>
               <br />

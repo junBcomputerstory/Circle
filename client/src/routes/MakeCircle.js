@@ -150,8 +150,8 @@ function MakeCircle(props) {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <Header />
-      <Container fluid style={{ backgroundColor: 'orange' }}>
+      <Header bgcolor="#f5f8fc" />
+      <Container fluid style={{ backgroundColor: '#b5d1ff' }}>
         <div className="form-box">
           <div className="field1">
             <text style={{ fontFamily: 'IBM-Bold', fontSize: 45, margin: '0 auto' }}>새로운 써클을 만들어보세요 !</text>
@@ -223,7 +223,7 @@ function MakeCircle(props) {
               <StyledP>{text}</StyledP>
             </StyledLabel>
           </div>
-          <Alert style={{ width: 730, margin: '0 auto' }} key="warning" variant="warning">
+          <Alert style={{ width: 730, margin: '0 auto' }} key="primary" variant="primary">
             프라임 써클이란 ? 달마다 일정 가격을 지불하면 써클즈와 제휴된 업체에서 할인을 받을 수 있는 서비스입니다.
           </Alert>
           <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={showInfo}>

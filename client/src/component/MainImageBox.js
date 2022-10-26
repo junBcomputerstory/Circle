@@ -5,14 +5,14 @@ import ReactiveButton from 'reactive-button';
 const MainDiv = styled.div`
   width: 100%;
   height: 93vh;
-  background-color: orange;
+  background-color: #b5d1ff;
 `;
 
 const MainText = styled.div`
   width: 70%;
   height: 300px;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 150px;
   font-size: 60px;
   font-family: 'IBM-Bold';
   color: white;
@@ -21,6 +21,7 @@ const MainText = styled.div`
 
 const BtnDiv = styled.div`
   justify-content: center;
+  margin-top: 200px;
 `;
 
 function MainImageBox(props) {

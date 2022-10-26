@@ -49,7 +49,7 @@ const BorderBox = styled.div`
 function Mypage(props) {
   return (
     <div>
-      <Header />
+      <Header bgcolor="#f5f8fc" />
       <Container style={{ marginTop: '5%' }}>
         <InfoBox>
           <img

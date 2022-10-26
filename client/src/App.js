@@ -42,7 +42,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <Header className="content" />
+        <Header bgcolor="#f5f8fc" className="content" />
         <MainImageBox className="content" />
         <BestCircle className="content" />
         <Footer />
