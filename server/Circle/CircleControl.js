@@ -18,9 +18,11 @@ class Control{
             const CircleInfo=req.body;
             const res=CircleUpdate.insertcircle(CircleInfo);
 
-        }
+        },
 
-    }
-
+        page: async(req,res)=>{
+            const Circleid=req.param.circle_id;
+        },
+    } 
 }
 export default new Control();

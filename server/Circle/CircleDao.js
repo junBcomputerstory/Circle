@@ -10,6 +10,7 @@ class CircleDao{
         return searchrow;
     }
     async inserCircle(connection,info){
+        const insertquery=``;
         
     }
     async findname(connection,name){

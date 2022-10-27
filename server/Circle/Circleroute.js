@@ -9,6 +9,7 @@ class Router{
     setrouter(){
         this.router.get('/circle',Control.process.find);
         this.router.post('/circle',Control.process.make);
+        this.router.get('/circle/:circle_id',Control.process.page);
 
     }
 }
