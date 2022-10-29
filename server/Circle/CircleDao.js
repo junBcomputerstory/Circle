@@ -23,7 +23,16 @@ class CircleDao{
         );
         return re;
     }
-
+    async findname(connection,id){
+        const searchquery=` SELECT *
+                            FROM Circle
+                            WHERE ciecle_id=?;`;
+        const re=await connection.query(
+            searchquery,
+            id
+        );
+        return re;
+    }
 
 }
 

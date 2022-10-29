@@ -16,6 +16,12 @@ class Circlecheck{
 
         return circlerow;
     }
+    async idcheck(id){
+        const connection= await pool.getConnection(async(conn)=>conn);
+        const circlerow=CircleDao.findid(connection,id);
+
+        return circlerow;
+    }
 }
 
 export default new Circlecheck();

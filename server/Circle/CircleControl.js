@@ -21,7 +21,10 @@ class Control{
         },
 
         page: async(req,res)=>{
-            const Circleid=req.param.circle_id;
+            const Circleid=req.body.circle_id;
+            const circlerow=CircleCheck.idcheck(Circleid);
+
+            return circlerow;
         },
     } 
 }
