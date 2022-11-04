@@ -77,13 +77,13 @@ function Login(props) {
                   <InputIcon>
                     <IoMdMail size="25" />
                   </InputIcon>
-                  <input style={InputStyle} name="userId" placeholder="아이디" onChange={onChange} value={userId} />
+                  <input style={InputStyle} name="userId" placeholder="아이디(이메일)" onChange={onChange} value={userId} />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
                   <InputIcon>
                     <FaLock size="20" />
                   </InputIcon>
-                  <input style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
+                  <input type="password" style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
                 </div>
               </div>
               <Button style={{ width: 440 }} variant="primary">

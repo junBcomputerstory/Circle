@@ -119,13 +119,62 @@ function MakeCircle(props) {
       src: '../img/interests/fashion.png',
     },
   ];
+
+  const LocationOptions = [
+    {
+      id: 1,
+      name: '서울',
+    },
+    {
+      id: 2,
+      name: '부산',
+    },
+    {
+      id: 3,
+      name: '대구',
+    },
+    {
+      id: 4,
+      name: '인천',
+    },
+    {
+      id: 5,
+      name: '광주',
+    },
+    {
+      id: 6,
+      name: '대전',
+    },
+    {
+      id: 7,
+      name: '울산',
+    },
+    {
+      id: 8,
+      name: '세종',
+    },
+    {
+      id: 9,
+      name: '경기도',
+    },
+    {
+      id: 10,
+      name: '강원도',
+    },
+    {
+      id: 11,
+      name: '제주도',
+    },
+  ];
+
   const [fileImage, setFileImage] = useState('');
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
   const [circleLimitPeople, setCircleLimitPeople] = useState('');
-  const [circleLocation, setCircleLocation] = useState('');
+  const [circleLocation, setCircleLocation] = useState('default');
   const [circleInfo, setCircleInfo] = useState('');
   const [interest, setInterest] = useState(0);
+  const [genderLimit, setGenderLimit] = useState('default');
   const saveFileImage = e => {
     setFileImage(URL.createObjectURL(e.target.files[0]));
   };
@@ -191,11 +240,53 @@ function MakeCircle(props) {
             </div>
             <TitleText>제한조건을 설정해주세요</TitleText>
             <br />
-
+            <select
+              style={{
+                display: 'block',
+                width: 200,
+                padding: '0.5rem 0.8rem 0.5rem 0.8rem',
+                margin: '0.9vw auto',
+                border: 0,
+                borderRadius: 5,
+                fontSize: 20,
+              }}
+              defaultValue={circleLocation}
+              name="genderLimit"
+              onChange={e => setGenderLimit(e.target.value)}
+            >
+              <option value="default" disabled={true}>
+                성별 제한
+              </option>
+              <option value="B">남자만 가입 가능</option>
+              <option value="G">여자만 가입 가능</option>
+              <option value="BG">성별 제한 없음</option>
+            </select>
             <textarea className="textinput" placeholder="제한조건을 적어주세요" onChange={e => setCircleLimit(e.target.value)} />
             <TitleText>활동 장소를 설정해주세요</TitleText>
             <br />
-            <input className="textinput" placeholder="활동장소를 적어주세요" onChange={e => setCircleLocation(e.target.value)} />
+            <select
+              style={{
+                display: 'block',
+                width: 700,
+                padding: '0.5rem 0.8rem 0.5rem 0.8rem',
+                margin: '0.9vw auto',
+                border: 0,
+                borderRadius: 5,
+                fontSize: 20,
+              }}
+              defaultValue={circleLocation}
+              name="location"
+              onChange={e => setCircleLocation(e.target.value)}
+            >
+              <option value="default" disabled={true}>
+                지역을 선택해주세요.
+              </option>
+              {LocationOptions.map(value => (
+                <option key={value.id} value={value.name}>
+                  {value.name}
+                </option>
+              ))}
+            </select>
             <TitleText>써클을 소개해주세요</TitleText>
             <textarea className="textinput" placeholder="써클 소개를 적어주세요" onChange={e => setCircleInfo(e.target.value)} />
             <TitleText>써클 대표 사진을 설정해주세요</TitleText>

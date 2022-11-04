@@ -5,6 +5,7 @@ import CircleTitle from '../component/circle/CircleTitle';
 import CircleCalendarDiv from '../component/circle/CircleCalendarDiv';
 import BoardList from '../component/circle/BoardList';
 import Gallery from '../component/circle/Gallery';
+import CodeBoardList from '../component/circle/CodeBoardList';
 
 const Box = styled.div`
   justify-content: center;
@@ -36,6 +37,7 @@ function CirclePage(props) {
       <CircleCalendarDiv />
       <BoardList />
       <Gallery />
+      <CodeBoardList />
       <Footer />
       {/* </div> */}
     </>

@@ -4,6 +4,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Button from 'react-bootstrap/esm/Button';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 
 const GalleryDiv = styled.div`
   width: 70%;

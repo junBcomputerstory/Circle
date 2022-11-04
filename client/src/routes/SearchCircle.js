@@ -94,6 +94,10 @@ const LocationOptions = [
     id: 11,
     name: '제주도',
   },
+  {
+    id: 12,
+    name: '상관 없음',
+  },
 ];
 
 const SearchCategoryDiv = styled.div`
@@ -221,6 +225,7 @@ function SearchCircle(props) {
               취업준비자를 위한 1일1코딩 풀이
             </Card.Text>
             <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
           </Card.Body>
         </Card>
       </SearchList>

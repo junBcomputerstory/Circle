@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { HiOutlinePencil } from 'react-icons/hi';
-import MpCarousel from '../component/MpCarousel';
+import MypageCarousel from '../component/MypageCarousel';
 import Footer from '../component/Footer';
 import { Interests } from '../component/Interests';
 
@@ -74,14 +74,14 @@ function Mypage(props) {
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 관심사</text>
           <MypageInterestBox>
             <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />
-            <img src={Interests.game} style={{ margin: '5px 5px' }} width={100} height={100} />
-            <img src={Interests.music} style={{ margin: '5px 5px' }} width={100} height={100} />
+            <img src={Interests.trip} style={{ margin: '5px 5px' }} width={100} height={100} />
+            <img src={Interests.pet} style={{ margin: '5px 5px' }} width={100} height={100} />
           </MypageInterestBox>
         </Box>
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 서클</text>
           <BorderBox>
-            <MpCarousel />
+            <MypageCarousel />
           </BorderBox>
         </Box>
         <Box>

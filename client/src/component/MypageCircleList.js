@@ -17,6 +17,7 @@ const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0 10px;
 `;
 const CircleList = styled.div`
   display: flex;
@@ -29,16 +30,9 @@ const CircleList = styled.div`
 function MypageCircleList(props) {
   return (
     <ImageTextBox>
-      <img
-        style={{ borderRadius: '10px' }}
-        src="https://dankookcircle.s3.ap-northeast-2.amazonaws.com/badminton.jpeg"
-        width="150"
-        height="100"
-      />
+      <img style={{ borderRadius: '10px', margin: '10px auto' }} src="../img/coding.jpeg" width="100" height="100" />
       <TextBox>
-        <text>서클명</text>
-        <text>최근 출석일</text>
-        <text>최근 활동일</text>
+        <text style={{ fontFamily: 'IBM-Medium' }}>취업 준비자를 위한 1일1코딩 풀이</text>
       </TextBox>
     </ImageTextBox>
   );
