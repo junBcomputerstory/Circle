@@ -12,7 +12,6 @@ class Update{
         try{
             
             const User=new Usercheck();
-            const Dao=new userDao();
             const IDrow= await User.IDcheck(userInfo[0]);
             if(IDrow.length>0)
                 return errResponse(baseResponse.SIGNUP_REDUNDANT_ID)
@@ -22,7 +21,7 @@ class Update{
                 .digest("hex")
             await connection.beginTransaction();
             const interest=userInt.toString();
-            const result=await Dao.insertUserInfo(connection,userInfo[0],hashedPW,userInfo[2],interest);
+            const result=await userDao.insertUserInfo(connection,userInfo[0],hashedPW,userInfo[2],interest);
             if(re==userInfo[0]){
                 console.log('email,pw는 가입완료');
                 await connection.commit();
@@ -64,10 +63,9 @@ class Update{
 //회원 정보변경
     async editUser(userinfo,email){
         try{
-            const Dao=new userDao;
             const ver=[userinfo.nickname,userinfo.image,email];
             const connection= await pool.getConnection(async (conn)=>conn);
-            await Dao.updateUserInfo(connection,ver);
+            await userDao.updateUserInfo(connection,ver);
             connection.release();
 
             return response(baseResponse.SUCCESS);

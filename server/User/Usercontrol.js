@@ -24,7 +24,7 @@ class control {
       const Usercheck = new Check();
       if (!req.session.email) {
         console.log(`로그인을 먼저해주세요`);
-        return res.redirect(`/login`);
+        return res.redirect(`user/login`);
       } else {
         console.log(req.session.email);
         const User = await Usercheck.retrieveUserpage(req.session.email);

@@ -3,7 +3,7 @@ class userDao{
   //아이디를통한 유저정보 조회
   async selectUserpage(connection,ID){
     console.log(ID);
-      const selectUserIDQuery=`SELECT * FROM User WHERE email = ?;`;
+      const selectUserIDQuery=`SELECT (user_id,nickname,circle,image_url,badge_id) FROM User WHERE email = ?;`;
       const infoRows=await connection.query(selectUserIDQuery,ID);
       return infoRows;
   }
@@ -60,6 +60,7 @@ async selectUserPassword(connection,ID,PW) {
       return(0);
     }
   }
+  //유저의 email을 통한 id 추출
   async user_id(connection,email){
     try{
       const useridquery=`
@@ -76,20 +77,26 @@ async selectUserPassword(connection,ID,PW) {
       console.log(err);
     }
   }
-  async insertinterest(connection,id,interest){
+  //유저의 뱃지 추출
+  async selectbadge(connection,badge_id){
     try{
-      const insertquery=`INSERT INTO Interest(user_id,interest_id) VALUES(?,?);`;
-      await connection.query(
-        insertquery,
-        id,
-        interest
+      const badgequery=`
+          SELECT *
+          FROM Badge
+          WHERE badge_id in (?);`;
+      const row=await connection.query(
+        badgequery,
+        badge_id
       );
+
+      return row;  
     }
     catch(err){
       console.log(err);
     }
+   
+    }
   }
-}
-export default userDao;
+export default new userDao;
 
 
