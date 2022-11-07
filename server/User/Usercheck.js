@@ -1,10 +1,10 @@
 import {pool} from '../config/mysql.js';
 import userDao from './UserDao.js';
 import Update from './Userupdate.js';
+import Circlecheck from '../Circle/Circlecheck.js'
 
 class Usercheck{
     async IDcheck(ID){
-        console.log(ID);
         const connection= await pool.getConnection(async(conn)=>conn);
         const result= await userDao.selectUserID(connection,ID);
         connection.release();
@@ -20,17 +20,20 @@ class Usercheck{
     async retrieveUserpage(ID){
         const connection= await pool.getConnection(async(conn)=>conn);
         const Userpageresult= await userDao.selectUserpage(connection,ID);
-        const badgeresult= this.badgecheck(Userpageresult.badge_id);
-        const attendresult=this.attendcheck(Userpageresult[0]);
+        const badgeresult= this.badgecheck(connection,Userpageresult.badge_id);
+        const attendresult=this.attendcheck(connection,ID);
+        const circleresult=Circlecheck.findcircle()
         connection.release();
+        const re=[Userpageresult.nickname,Userpageresult.circle,Userpageresult.image_url,badgeresult,attendresult];
 
-        return Userpageresult
+        return
     }
     async badgecheck(badge_id){
-        const row=badge_id.substring(1,badge_id.length()-1);
         const badge=parseInt(row.split(','));
         const connection=await pool.getConnection(async(conn)=>conn);
         const re=await userDao.selectbadge(connection,badge);
+
+        return re;
     }
     async attendcheck(user_id){
         const connection=await pool.getConnection(async(conn)=>conn);

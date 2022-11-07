@@ -2,10 +2,15 @@ import express from 'express';
 import Userroute from './User/Userroute.js'
 import Circleroute  from './Circle/Circleroute.js'
 
-async function routing(){
-    const app=express();
-    app.use('/user',Userroute);
-    app.use('/circle',Circleroute);
+class routing{
+    constructor(){
+        this.router=express.Router();
+        this.setRouter();
+    }
+    setRouter(){
+        this.router.use('/user',Userroute);
+        this.router.use('/circle',Circleroute);
+    }
 }
 
-export {routing}
+export default new routing().router;

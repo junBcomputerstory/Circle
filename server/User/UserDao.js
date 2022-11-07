@@ -8,7 +8,7 @@ class userDao{
       return infoRows;
   }
   
-//ID로 비밀번호확인
+//ID유무 확인
 async selectUserID(connection,ID){
   console.log(ID);
     const selectUserIDQuery=`SELECT email FROM User WHERE email = ?;`;
@@ -18,7 +18,7 @@ async selectUserID(connection,ID){
 //유저 생성
 async insertUserInfo (connection,ID,hashedPW,usernickname,inte) {
   try{
-      const insertUserInfoQuery = 'INSERT INTO User (email , password, nickname,interest) VALUES (?,?,?,?);';
+      const insertUserInfoQuery = 'INSERT INTO User (email , password, nickname,interest_id) VALUES (?,?,?,?);';
       const value=[ID,hashedPW,usernickname,inte]
       connection.query(
         insertUserInfoQuery,
@@ -81,7 +81,7 @@ async selectUserPassword(connection,ID,PW) {
   async selectbadge(connection,badge_id){
     try{
       const badgequery=`
-          SELECT *
+          SELECT url
           FROM Badge
           WHERE badge_id in (?);`;
       const row=await connection.query(

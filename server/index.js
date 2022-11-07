@@ -3,7 +3,7 @@ import cookieParser from'cookie-parser';
 import dotenv from 'dotenv';
 import cors from'cors';
 import session from'express-session';
-import {routing} from'./route.js';
+import routing from'./route.js';
 dotenv.config();
 
 class App{
