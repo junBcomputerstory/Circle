@@ -5,7 +5,6 @@ import { FaUser, FaLock } from 'react-icons/fa';
 import { IoMdMail } from 'react-icons/io';
 import Button from 'react-bootstrap/Button';
 import SelectInterest from '../component/SelectInterest';
-import { Link } from 'react-scroll';
 import Footer from '../component/Footer';
 import axios from 'axios';
 
@@ -69,7 +68,7 @@ function Signin(props) {
     }
     axios
       .post(
-        '/Signin',
+        '/user/signin',
         {
           email: userInfo.email,
           password: userInfo.password,
