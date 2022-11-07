@@ -1,6 +1,6 @@
-const multer = require('multer');
-const multerS3 = require('multer-s3');
-const aws = require('aws-sdk');
+import multer from 'multer';
+import multerS3 from 'multer-s3';
+import aws from 'aws-sdk';
 const s3=aws.config.loadFromPath('./awsconfig.json');
 
 const upload = multer({

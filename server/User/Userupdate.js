@@ -75,5 +75,8 @@ class Update{
             return errResponse(baseResponse.DB_ERROR);
         }
     }
+    async updateattend(user_id,attenddays){
+        
+    }
 }
-export default Update;
+export default new Update;

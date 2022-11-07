@@ -3,7 +3,7 @@ import Usercontrol from './Usercontrol.js';
 import mutler from '../config/mutler.js';
 
 
-class Router{
+class Userroute{
     constructor(){
         this.app=express();
         this.router=express.Router();
@@ -18,4 +18,4 @@ class Router{
     }
 
 
-export default new Router().router;
+export default new Userroute().router;

@@ -16,7 +16,7 @@ class Control{
 
         make: async(req,res)=>{
             const CircleInfo=req.body;
-            const res=CircleUpdate.insertcircle(CircleInfo);
+            const re=CircleUpdate.insertcircle(CircleInfo);
 
         },
 

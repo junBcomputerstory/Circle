@@ -1,6 +1,5 @@
 import {pool} from '../config/mysql.js';
 import CircleDao from './CircleDao.js';
-import {pool} from '../config/mysql.js';
 
 class Circlecheck{
     async findcircle(circleinfo){
