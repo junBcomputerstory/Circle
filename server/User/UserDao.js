@@ -46,7 +46,7 @@ async selectUserPassword(connection,ID,PW) {
     try{
       const updateUserInfoQuery=`
           UPDATE User
-          SET IF(?,nickname=?,nickname=nickname) and IF(?,image_url=?,image_url=image_url)
+          SET IF(? IS NOT NULL,nickname=?,nickname=nickname) and IF(? IS NOT NULL,image_url=?,image_url=image_url)
           WHERE email=?; 
       `;
       await connection.query(
@@ -95,6 +95,22 @@ async selectUserPassword(connection,ID,PW) {
       console.log(err);
     }
    
+    }
+    async getattendday(connection,user_id){
+      try{
+        const getquery=`SELECT date
+                        FROM Attendence_calender
+                        WHERE user_id=?;`;
+        const re=connection.query(
+          getquery,
+          user_id
+        );
+
+        return re;
+      }
+      catch(err){
+        console.log(err);
+      }
     }
   }
 export default new userDao;
