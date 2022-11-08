@@ -38,8 +38,8 @@ const ImgStyle = {
 
 function Login(props) {
   const [userInfo, setUserInfo] = useState({
-    userId: '',
-    userPw: '',
+    userId: null,
+    userPw: null,
   });
 
   const { userId, userPw } = userInfo;
@@ -61,7 +61,7 @@ function Login(props) {
         },
         { withCredentials: true },
       )
-      .then(response => console.log(response.data))
+      .then(response => console.log(response.data.isSuccess))
       .catch(error => console.log(error));
   };
 
