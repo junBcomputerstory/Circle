@@ -94,11 +94,7 @@ const LocationOptions = [
     id: 11,
     name: '제주도',
   },
-  {
-    id: 12,
-    name: '상관 없음',
-  },
-];
+]; // 초기값 null 설정!!
 
 const SearchCategoryDiv = styled.div`
   display: flex;

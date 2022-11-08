@@ -51,6 +51,22 @@ function Login(props) {
     });
   };
 
+  const sendLogin = () => {
+    axios
+      .post(
+        '/user/login',
+        {
+          email: userInfo.email,
+          password: userInfo.password,
+          nickname: userInfo.nickname,
+          interest: interest,
+        },
+        { withCredentials: true },
+      )
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error));
+  };
+
   return (
     <div style={{ flexDirection: 'row' }}>
       <Row>
