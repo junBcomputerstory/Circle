@@ -1,6 +1,5 @@
 import {pool} from '../config/mysql.js';
 import CircleDao from './CircleDao.js';
-import {pool} from '../config/mysql.js';
 
 class Circlecheck{
     async findcircle(circleinfo){
@@ -19,6 +18,13 @@ class Circlecheck{
     async idcheck(id){
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=CircleDao.findid(connection,id);
+
+        return circlerow;
+    }
+    async userCircle(id){
+        const vec=parseInt(id.split(','));
+        const connection= await pool.getConnection(async(conn)=>conn);
+        const circlerow=CircleDao.userCircle(connection,vec);
 
         return circlerow;
     }

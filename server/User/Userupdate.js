@@ -13,8 +13,8 @@ class Update{
             
             const User=new Usercheck();
             const IDrow= await User.IDcheck(userInfo[0]);
-            if(IDrow.length>0)
-                return errResponse(baseResponse.SIGNUP_REDUNDANT_ID)
+            if(IDrow.length>1)
+                return errResponse(baseResponse.SIGNUP_REDUNDANT_ID);
             const hashedPW=crypto
                 .createHash("sha512")
                 .update(userInfo[1])
@@ -22,19 +22,21 @@ class Update{
             await connection.beginTransaction();
             const interest=userInt.toString();
             const result=await userDao.insertUserInfo(connection,userInfo[0],hashedPW,userInfo[2],interest);
-            if(re==userInfo[0]){
-                console.log('email,pw는 가입완료');
+            if(result==userInfo[0]){
+                console.log('새로운 유저 가입완료');
                 await connection.commit();
             }
             else{
                 return errResponse(baseResponse.SERVER_ERROR);
             }
-            connection.release();
-            return response(baseResponse.SUCCESS);
         }
         catch(err){
             console.log(err);
             return errResponse(baseResponse.DB_ERROR);
+        }
+        finally{
+            connection.release();
+            return response(baseResponse.SUCCESS);
         }
     };
     async Postlogin(UserInfo){
@@ -75,5 +77,8 @@ class Update{
             return errResponse(baseResponse.DB_ERROR);
         }
     }
+    async updateattend(user_id,attenddays){
+        
+    }
 }
-export default Update;
+export default new Update;

@@ -33,6 +33,16 @@ class CircleDao{
         );
         return re;
     }
+    async userCircle(connection,id){
+        const searchquery= `SELECT name,circlepic
+                            FROM Circle
+                            WHERE id IN(?);`;
+        const re=await connection.query(
+            searchquery,
+            id
+        );
+        return re;
+    }
 
 }
 

@@ -1,22 +1,25 @@
+import express from 'express';
 import Update from './Userupdate.js';
 import Check from './Usercheck.js';
 
 class control {
+  constructor(){
+    this.app=express();
+  }
   process = {
     login: async (req, res) => {
-      const update = new Update();
       const userInfo = req.body;
-      const UserLogin = await update.Postlogin(userInfo);
+      console.log(req.body);
+      const UserLogin = await Update.Postlogin(userInfo);
       if (UserLogin.isSuccess == true) {
         req.session.email = userInfo.email;
       }
-      return res.send(UserLogin);
+      return res.send(UserLogin)
     },
     signin: async (req, res) => {
-      const update = new Update();
       const userInfo = [req.body.email, req.body.password, req.body.nickname];
       const userinterest = req.body.interest;
-      const User = await update.createUser(userInfo, userinterest);
+      const User = await Update.createUser(userInfo, userinterest);
 
       return res.send(User);
     },
@@ -32,8 +35,7 @@ class control {
       }
     },
     edituser: async (req, res)=> {
-      const Userupdate = new Update();
-      const User = await Userupdate.editUser(req.body,req.session.email);
+      const User = await Update.editUser(req.body,req.session.email);
       return res.send(User);
     },
   };

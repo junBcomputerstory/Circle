@@ -1,7 +1,7 @@
 import express from'express';
 import Control from './CircleControl.js';
 
-class Router{
+class Circleroute{
     constructor(){
         this.router=express.Router();
         this.setrouter();
@@ -13,3 +13,5 @@ class Router{
 
     }
 }
+
+export default new Circleroute().router;
