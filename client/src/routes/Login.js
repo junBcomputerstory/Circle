@@ -58,8 +58,6 @@ function Login(props) {
         {
           email: userInfo.email,
           password: userInfo.password,
-          nickname: userInfo.nickname,
-          interest: interest,
         },
         { withCredentials: true },
       )
@@ -102,7 +100,7 @@ function Login(props) {
                   <input type="password" style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
                 </div>
               </div>
-              <Button style={{ width: 440 }} variant="primary">
+              <Button style={{ width: 440 }} variant="primary" onClick={sendLogin}>
                 로그인하기
               </Button>
               <br />
