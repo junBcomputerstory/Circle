@@ -56,8 +56,8 @@ function Login(props) {
       .post(
         '/user/login',
         {
-          email: userInfo.email,
-          password: userInfo.password,
+          email: userInfo.userId,
+          password: userInfo.userPw,
         },
         { withCredentials: true },
       )
