@@ -48,7 +48,7 @@ const BorderBox = styled.div`
 `;
 
 function Mypage(props) {
-  axios.get();
+  axios.get('/user/mypage').then(response => console.log(response));
 
   return (
     <div>
