@@ -10,9 +10,9 @@ class userDao{
   
 //ID유무 확인
 async selectUserID(connection,ID){
-  console.log(ID);
+    console.log(ID);
     const selectUserIDQuery=`SELECT email FROM User WHERE email = ?;`;
-    const [IDRows]=await connection.query(selectUserIDQuery,ID);
+    const IDRows=await connection.query(selectUserIDQuery,ID);
     return IDRows;
 }
 //유저 생성

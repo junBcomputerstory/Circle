@@ -1,6 +1,8 @@
 import express from 'express';
 import Update from './Userupdate.js';
 import Check from './Usercheck.js';
+import {errResponse,response} from '../config/response.js';
+import * as baseResponse from '../config/baseResponse.js'
 
 class control {
   constructor(){
@@ -8,8 +10,11 @@ class control {
   }
   process = {
     login: async (req, res) => {
+      if(req.body.password==null)
+            res.send(errResponse(baseResponse.SIGNIN_PW_EMPTY));
+      if(req.body.email==null)
+            res.send(errResponse(baseResponse.SIGNIN_ID_EMPTY));
       const userInfo = req.body;
-      console.log(req.body);
       const UserLogin = await Update.Postlogin(userInfo);
       if (UserLogin.isSuccess == true) {
         req.session.email = userInfo.email;

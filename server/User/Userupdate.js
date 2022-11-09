@@ -13,7 +13,7 @@ class Update{
             
             const User=new Usercheck();
             const IDrow= await User.IDcheck(userInfo[0]);
-            if(IDrow.length>1)
+            if(IDrow.email=userInfo[0])
                 return errResponse(baseResponse.SIGNUP_REDUNDANT_ID);
             const hashedPW=crypto
                 .createHash("sha512")
@@ -43,14 +43,14 @@ class Update{
         try{
             const User=new Usercheck();
             const IDrow=await User.IDcheck(UserInfo.email);
-            if(IDrow<1)
+            if(IDrow.email!=UserInfo.email)
                 return errResponse(baseResponse.USER_STATUS_EMPTY);
             const hashedPW= crypto
                 .createHash("sha512")
                 .update(UserInfo.password)
                 .digest("hex");
             const re=await User.PWcheck(UserInfo.email,hashedPW);
-            if(re<1){
+            if(re.email!=UserInfo.email){
                 return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
                 
             }
