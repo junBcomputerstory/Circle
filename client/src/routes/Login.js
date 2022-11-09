@@ -38,8 +38,8 @@ const ImgStyle = {
 
 function Login(props) {
   const [userInfo, setUserInfo] = useState({
-    userId: null,
-    userPw: null,
+    userId: '',
+    userPw: '',
   });
 
   const { userId, userPw } = userInfo;
