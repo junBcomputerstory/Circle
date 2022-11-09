@@ -42,6 +42,9 @@ function Login(props) {
     userPw: '',
   });
 
+  const [wrongID, setWrongID] = useState(false);
+  const [wrongPW, setWrongPW] = useState(false);
+
   const { userId, userPw } = userInfo;
   const onChange = e => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
@@ -53,13 +56,16 @@ function Login(props) {
 
   const isSuccessed = success => {
     if (success) {
-      document.location.href = '/main';
+      console.log(sessionStorage);
+      // document.location.href = '/main';
     }
   };
 
   const sendLogin = () => {
     console.log('보내지는 ID : ' + userInfo.userId);
     console.log('보내지는 PW : ' + userInfo.userPw);
+    setWrongID(false);
+    setWrongPW(false);
     axios
       .post(
         '/user/login',
@@ -72,6 +78,13 @@ function Login(props) {
       .then(response => {
         console.log(response.data);
         console.log(response);
+
+        if (response.data.code === 2008) {
+          setWrongID(true);
+        }
+        if (response.data.code === 3004) {
+          setWrongPW(true);
+        }
         isSuccessed(response.data.isSuccess);
       })
       .catch(error => console.log(error));
@@ -104,13 +117,18 @@ function Login(props) {
                     <IoMdMail size="25" />
                   </InputIcon>
                   <input style={InputStyle} name="userId" placeholder="아이디(이메일)" onChange={onChange} value={userId} />
-                  {}
+                  <br />
+                  {wrongID && <text style={{ color: 'red' }}>존재하지 않는 아이디입니다.</text>}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-                  <InputIcon>
-                    <FaLock size="20" />
-                  </InputIcon>
-                  <input type="password" style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <InputIcon>
+                      <FaLock size="20" />
+                    </InputIcon>
+                    <input type="password" style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
+                  </div>
+                  <br />
+                  {wrongPW && <text style={{ color: 'red' }}>비밀번호가 틀렸습니다.</text>}
                 </div>
               </div>
               <Button style={{ width: 440 }} variant="primary" onClick={sendLogin}>
