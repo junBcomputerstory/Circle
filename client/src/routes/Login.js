@@ -118,7 +118,7 @@ function Login(props) {
                   </InputIcon>
                   <input style={InputStyle} name="userId" placeholder="아이디(이메일)" onChange={onChange} value={userId} />
                   <br />
-                  {wrongID && <text style={{ color: 'red' }}>존재하지 않는 아이디입니다.</text>}
+                  {wrongID && <text style={{ fontFamily: 'IBM-Medium', color: 'red' }}>존재하지 않는 아이디입니다.</text>}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
                   <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -128,7 +128,7 @@ function Login(props) {
                     <input type="password" style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
                   </div>
                   <br />
-                  {wrongPW && <text style={{ color: 'red' }}>비밀번호가 틀렸습니다.</text>}
+                  {wrongPW && <text style={{ fontFamily: 'IBM-Medium', color: 'red' }}>비밀번호가 틀렸습니다.</text>}
                 </div>
               </div>
               <Button style={{ width: 440 }} variant="primary" onClick={sendLogin}>
