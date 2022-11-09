@@ -8,7 +8,7 @@ class Usercheck{
         const connection= await pool.getConnection(async(conn)=>conn);
         const result= await userDao.selectUserID(connection,ID);
         connection.release();
-        return result;
+        return result[0];
     };
     async PWcheck(ID,hashedPW) {
         const connection = await pool.getConnection(async (conn) => conn);
