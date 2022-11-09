@@ -8,6 +8,7 @@ import { HiOutlinePencil } from 'react-icons/hi';
 import MypageCarousel from '../component/MypageCarousel';
 import Footer from '../component/Footer';
 import { Interests } from '../component/Interests';
+import axios from 'axios';
 
 const InfoBox = styled.div`
   display: flex;
@@ -47,6 +48,8 @@ const BorderBox = styled.div`
 `;
 
 function Mypage(props) {
+  axios.get();
+
   return (
     <div>
       <Header bgcolor="#f5f8fc" />
@@ -67,8 +70,8 @@ function Mypage(props) {
           </Nickname>
         </InfoBox>
         <Box style={{ width: '550px', margin: '20px auto' }} className="lvbox">
-          <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>Lv 50</text>
-          <ProgressBar style={{ width: '150' }} animated variant="warning" now={45} />
+          <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>Lv 1</text>
+          <ProgressBar style={{ width: '150' }} animated variant="warning" now={20} />
         </Box>
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 관심사</text>

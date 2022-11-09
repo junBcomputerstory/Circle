@@ -58,7 +58,7 @@ function Login(props) {
     if (response.data.isSuccess) {
       console.log('good');
       sessionStorage.setItem('nickname', response.data.nickname);
-      document.location.href = '/main';
+      document.location.href = '/';
     }
   };
 
@@ -106,31 +106,33 @@ function Login(props) {
           </div>
         </Col>
         <Col style={{ marginLeft: 0, marginRight: 0, paddingLeft: 0 }}>
-          <div style={{ height: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img style={ImgStyle} src="/img/logo.png" width="50" height="50" alt="logo-img" />
-            <text style={{ fontFamily: 'IBM-Semibold', fontSize: 40 }}>Circles</text>
-          </div>
+          <Link style={{ textDecoration: 'none' }} to="/">
+            <div style={{ height: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img style={ImgStyle} src="/img/logo.png" width="50" height="50" alt="logo-img" />
+              <text style={{ fontFamily: 'IBM-Semibold', fontSize: 40 }}>Circles</text>
+            </div>
+          </Link>
 
           <div>
             <Container style={{ height: '80vh', justifyContent: 'center', textAlign: 'center', backgroundColor: 'white' }}>
               <div>
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-                  <InputIcon>
-                    <IoMdMail size="25" />
-                  </InputIcon>
-                  <input style={InputStyle} name="userId" placeholder="아이디(이메일)" onChange={onChange} value={userId} />
-                  <br />
-                  {wrongID && <text style={{ fontFamily: 'IBM-Medium', color: 'red' }}>존재하지 않는 아이디입니다.</text>}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '10px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <InputIcon>
+                      <IoMdMail size="25" />
+                    </InputIcon>
+                    <input style={InputStyle} name="userId" placeholder="아이디(이메일)" onChange={onChange} value={userId} />
+                  </div>
+                  <div>{wrongID && <text style={{ fontFamily: 'IBM-Medium', color: 'red' }}>존재하지 않는 아이디입니다.</text>}</div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '10px' }}>
                   <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <InputIcon>
                       <FaLock size="20" />
                     </InputIcon>
                     <input type="password" style={InputStyle} name="userPw" placeholder="비밀번호" onChange={onChange} value={userPw} />
                   </div>
-                  <br />
-                  {wrongPW && <text style={{ fontFamily: 'IBM-Medium', color: 'red' }}>비밀번호가 틀렸습니다.</text>}
+                  <div>{wrongPW && <text style={{ fontFamily: 'IBM-Medium', color: 'red' }}>비밀번호가 틀렸습니다.</text>}</div>
                 </div>
               </div>
               <Button style={{ width: 440 }} variant="primary" onClick={sendLogin}>

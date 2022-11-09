@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const Text = styled.text`
   font-family: 'IBM-Light';
@@ -16,8 +17,19 @@ function LoginSigninHeader(props) {
     }
   }, []);
 
+  const Logout = () => {
+    setIsLogin(false);
+    sessionStorage.clear();
+    console.log(sessionStorage);
+  };
+
   return isLogin ? (
-    <Text>{sessionStorage.getItem('nickname')}님, 환영합니다!</Text>
+    <>
+      <Text>{sessionStorage.getItem('nickname')}님, 환영합니다!</Text>
+      <button style={{ border: 'none', borderRadius: 10, backgroundColor: '#F8F5FC' }}>
+        <text style={{ fontFamily: 'iBM-Light' }}>로그아웃</text>
+      </button>
+    </>
   ) : (
     <div>
       <Link style={{ textDecoration: 'none' }} to="/Login">

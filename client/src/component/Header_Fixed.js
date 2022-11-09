@@ -29,7 +29,7 @@ function Header_Fixed(props) {
     <Navbar style={{ backgroundColor: 'transparent' }} expand="lg">
       <Container>
         <Navbar.Brand style={LogoFont}>
-          <Link style={{ textDecoration: 'none' }} to="/main">
+          <Link style={{ textDecoration: 'none' }} to="/">
             <img style={ImgStyle} src="/img/logo.png" width="50" height="50" alt="logo-img" />
             Circles
           </Link>
