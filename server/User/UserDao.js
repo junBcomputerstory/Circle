@@ -80,13 +80,14 @@ async selectUserPassword(connection,ID,PW) {
   //유저의 뱃지 추출
   async selectbadge(connection,badge_id){
     try{
+      
       const badgequery=`
           SELECT url
           FROM Badge
-          WHERE badge_id in (?);`;
+          WHERE id in (?)`;
       const row=await connection.query(
         badgequery,
-        badge_id
+        [badge_id]
       );
 
       return row;  

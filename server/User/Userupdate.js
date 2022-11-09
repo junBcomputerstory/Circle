@@ -40,8 +40,10 @@ class Update{
     };
     async Postlogin(UserInfo){
         try{
+            const badge_id="1,2,3";
+            const badge=Usercheck.badgecheck(badge_id);
+            console.log(badge[0]);
             const IDrow=await Usercheck.IDcheck(UserInfo.email);
-            console.log(IDrow.length);
             if(IDrow.length<1)
                 return errResponse(baseResponse.SIGNIN_ID_WRONG);
             const hashedPW= crypto
