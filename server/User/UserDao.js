@@ -112,6 +112,22 @@ async selectUserPassword(connection,ID,PW) {
         console.log(err);
       }
     }
+    
+    async getnickname(connection,ID){
+      try{
+        const getquery=`SELECT nickname
+                        FROM User
+                        WHERE email=?;`;
+        const re=connection.query(
+          getquery,
+          ID
+        );
+        return re;
+      }
+      catch(e){
+        console.log(e);
+      }
+    }
   }
 export default new userDao;
 

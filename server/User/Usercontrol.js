@@ -17,7 +17,11 @@ class control {
       const userInfo = req.body;
       const UserLogin = await Update.Postlogin(userInfo);
       if (UserLogin.isSuccess == true) {
-        req.session.email = userInfo.email;
+        const usernickname= await Check.nicknamecheck(userInfo.email);
+        req.session.user = {
+            email: userInfo.email,
+            nickname: usernickname.nickname,
+        };
       }
       return res.send(UserLogin)
     },
