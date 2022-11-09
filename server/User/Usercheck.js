@@ -2,6 +2,7 @@ import {pool} from '../config/mysql.js';
 import userDao from './UserDao.js';
 import Update from './Userupdate.js';
 import Circlecheck from '../Circle/Circlecheck.js'
+import UserDao from './UserDao.js';
 
 class Usercheck{
     async IDcheck(ID){
@@ -14,7 +15,7 @@ class Usercheck{
         const connection = await pool.getConnection(async (conn) => conn);
         const passwordCheckResult = await userDao.selectUserPassword(connection,ID,hashedPW);
         connection.release();
-        return passwordCheckResult;
+        return passwordCheckResult[0];
     };
 
     async retrieveUserpage(ID){
@@ -49,6 +50,15 @@ class Usercheck{
 
         return attendstring;
     }
+    
+    async nicknamecheck(ID){
+        const connection=await pool.getConnection(async(conn)=>conn);
+        const usernickname=await userDao.getnickname(connection,ID);
+        console.log(usernickname[0]);
+
+
+        return usernickname[0];
+    }
 }
 
-export default Usercheck;
+export default new Usercheck;

@@ -11,9 +11,8 @@ class Update{
         const connection=await pool.getConnection(async (conn)=>conn);
         try{
             
-            const User=new Usercheck();
-            const IDrow= await User.IDcheck(userInfo[0]);
-            if(IDrow[0].email=userInfo[0])
+            const IDrow= await Usercheck.IDcheck(userInfo[0]);
+            if(IDrow.length<1)
                 return errResponse(baseResponse.SIGNUP_REDUNDANT_ID);
             const hashedPW=crypto
                 .createHash("sha512")
@@ -41,18 +40,17 @@ class Update{
     };
     async Postlogin(UserInfo){
         try{
-            const User=new Usercheck();
-            const IDrow=await User.IDcheck(UserInfo.email);
-            if(IDrow[0].email!=UserInfo.email)
+            const IDrow=await Usercheck.IDcheck(UserInfo.email);
+            console.log(IDrow.length);
+            if(IDrow.length<1)
                 return errResponse(baseResponse.SIGNIN_ID_WRONG);
             const hashedPW= crypto
                 .createHash("sha512")
                 .update(UserInfo.password)
                 .digest("hex");
-            const re=await User.PWcheck(UserInfo.email,hashedPW);
-            if(re.email!=UserInfo.email){
-                return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
-                
+            const re=await Usercheck.PWcheck(UserInfo.email,hashedPW);
+            if(re.length<1){
+                return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);     
             }
             return response(baseResponse.SUCCESS);
 

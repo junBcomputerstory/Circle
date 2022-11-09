@@ -1,5 +1,8 @@
 import AWS from 'aws-sdk';
 import dotenv from 'dotenv';
+import multer from 'mutler';
+import multerS3 from 'multer-s3';
+import path from 'path';
 dotenv.config();
 
 
@@ -10,3 +13,23 @@ AWS.config.update({
 });
 
 const s3=new AWS.S3()
+
+const allowed=['.png','.jpg','.jpeg','.bmp'];
+
+const imageupload=multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'mycircles',
+        key: (req, file, callback)=>{
+            const uploaddir=req.query.directory ??''
+            const extention=path.extname(file.originalname)
+            if(!allowed.includes(extention)){
+                return callback(new Error('wrong format image'));
+            }
+            callback(null, `${uploaddir}/${Date.now()}_${file.originalname}`)
+        },
+        acl: 'public-read-write'
+    }),
+})
+
+export default imageupload
