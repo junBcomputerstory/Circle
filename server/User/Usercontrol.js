@@ -46,7 +46,6 @@ class control {
         return res.redirect(`user/login`);
       } 
       else {
-        console.log(req.session.user.email);
         const User =Check.retrieveUserpage(req.session.user.email);
         return res.send(User);
       }
