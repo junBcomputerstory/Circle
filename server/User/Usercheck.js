@@ -22,7 +22,6 @@ class Usercheck{
         const connection= await pool.getConnection(async(conn)=>conn);
         const Userpageresult= await userDao.selectUserpage(connection,ID);
         const user_id=Userpageresult[0][0].user_id;
-        console.log(user_id);
         connection.release();
         //const attendresult=this.attendcheck(connection,user_id);
         let re={  "nickname":Userpageresult[0][0].nickname,
@@ -30,14 +29,15 @@ class Usercheck{
                 };
         if(Userpageresult[0][0].badge_id!=null){
             let badge_id=Userpageresult[0][0].badge_id.split(',');
-            const badgeresult= this.badgecheck(badge_id);
+            const badgeresult=await this.badgecheck(badge_id);
             re.badge=badgeresult;          
         }
         if(Userpageresult[0][0].circle!=null){
             let circleid=Userpageresult[0][0].circle.split(',');
-            const circleresult=Circlecheck.userCircle(circleid);
+            const circleresult=await Circlecheck.userCircle(circleid);
             re.circle=circleresult[0];
         }
+        console.log(re);
         return re;
     }
     async badgecheck(badge_id){

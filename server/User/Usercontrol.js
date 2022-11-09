@@ -45,11 +45,11 @@ class control {
         console.log(`로그인을 먼저해주세요`);
         return res.redirect(`user/login`);
       } 
-      else {
-        const User =Check.retrieveUserpage(req.session.user.email);
-        return res.send(User);
-      }
+      const User =await Check.retrieveUserpage(req.session.user.email);
+      console.log(User);
+      return res.send(User);
     },
+
     edituser: async (req, res)=> {
       const User = await Update.editUser(req.body,req.session.user.email);
       return res.send(User);
