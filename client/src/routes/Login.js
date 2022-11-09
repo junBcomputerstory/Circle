@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/esm/Button';
 import SignUpGithub from '../component/SignUpGithub';
 import SignUpGoogle from '../component/SignUpGoogle';
 import SignUpKakao from '../component/SignUpKakao';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 const InputIcon = styled.div`
@@ -51,7 +51,15 @@ function Login(props) {
     });
   };
 
+  const isSuccessed = success => {
+    if (success) {
+      document.location.href = '/main';
+    }
+  };
+
   const sendLogin = () => {
+    console.log('보내지는 ID : ' + userInfo.userId);
+    console.log('보내지는 PW : ' + userInfo.userPw);
     axios
       .post(
         '/user/login',
@@ -61,7 +69,11 @@ function Login(props) {
         },
         { withCredentials: true },
       )
-      .then(response => console.log(response.data.isSuccess))
+      .then(response => {
+        console.log(response.data);
+        console.log(response);
+        isSuccessed(response.data.isSuccess);
+      })
       .catch(error => console.log(error));
   };
 
@@ -92,6 +104,7 @@ function Login(props) {
                     <IoMdMail size="25" />
                   </InputIcon>
                   <input style={InputStyle} name="userId" placeholder="아이디(이메일)" onChange={onChange} value={userId} />
+                  {}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
                   <InputIcon>
