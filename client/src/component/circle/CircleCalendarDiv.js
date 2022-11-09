@@ -17,20 +17,20 @@ function CircleCalendarDiv(props) {
               일정 작성하기
             </Button>
           </Col>
-          <Col>
+          {/* <Col>
             나의 출석 캘린더
             <Button style={{ marginLeft: 10 }} variant="secondary">
               출석하기
             </Button>
-          </Col>
+          </Col> */}
         </Row>
         <Row>
           <Col>
             <CircleCalendarSchedule />
           </Col>
-          <Col>
+          {/* <Col>
             <CircleCalendarAttendent />
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </div>

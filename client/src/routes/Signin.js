@@ -61,6 +61,12 @@ function Signin(props) {
     border-right: none;
   `;
 
+  const confirmSignin = response => {
+    if (response) {
+      document.location.href = 'SigninFinish';
+    }
+  };
+
   const Signin = () => {
     if (userInfo.password != userInfo.confirmPW) {
       alert('비밀번호를 확인해주세요.');
@@ -77,7 +83,7 @@ function Signin(props) {
         },
         { withCredentials: true },
       )
-      .then(response => console.log(response.data))
+      .then(response => confirmSignin(response.data.isSuccess))
       .catch(error => console.log(error));
   };
 

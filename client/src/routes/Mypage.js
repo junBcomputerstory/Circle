@@ -63,7 +63,7 @@ function Mypage(props) {
             alt="profile_image"
           />
           <Nickname>
-            석홍준님
+            test1님
             <Button style={{ marginLeft: '20px' }} variant="secondary" size="sm">
               <HiOutlinePencil /> 수정하기
             </Button>
@@ -71,14 +71,14 @@ function Mypage(props) {
         </InfoBox>
         <Box style={{ width: '550px', margin: '20px auto' }} className="lvbox">
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>Lv 1</text>
-          <ProgressBar style={{ width: '150' }} animated variant="warning" now={20} />
+          <ProgressBar style={{ width: '150' }} animated variant="warning" now={1} />
         </Box>
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 관심사</text>
           <MypageInterestBox>
             <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />
+            <img src={Interests.study} style={{ margin: '5px 5px' }} width={100} height={100} />
             <img src={Interests.trip} style={{ margin: '5px 5px' }} width={100} height={100} />
-            <img src={Interests.pet} style={{ margin: '5px 5px' }} width={100} height={100} />
           </MypageInterestBox>
         </Box>
         <Box>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactiveButton from 'reactive-button';
+import { Link } from 'react-router-dom';
 
 const MainDiv = styled.div`
   width: 100%;
@@ -37,9 +38,13 @@ function MainImageBox(props) {
           <br /> 지금 써클즈에서 만나보세요.
         </MainText>
         <BtnDiv style={{ display: 'flex', justifyContent: 'center', height: 50 }}>
-          <ReactiveButton style={BtnStyle} rounded idleText="써클 만들기" width={150} height={50} />
+          <Link to="Makecircle">
+            <ReactiveButton style={BtnStyle} rounded idleText="써클 만들기" width={150} height={50} />
+          </Link>
           <ReactiveButton style={{ display: 'none' }} rounded idleText="써클 만들기" width={100} height={50} />
-          <ReactiveButton style={BtnStyle} rounded idleText="써클 찾기" width={150} height={50} />
+          <Link to="Searchcircle">
+            <ReactiveButton style={BtnStyle} rounded idleText="써클 찾기" width={150} height={50} />
+          </Link>
         </BtnDiv>
       </MainDiv>
     </div>
