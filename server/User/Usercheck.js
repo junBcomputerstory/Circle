@@ -55,8 +55,6 @@ class Usercheck{
         const connection=await pool.getConnection(async(conn)=>conn);
         const usernickname=await userDao.getnickname(connection,ID);
         console.log(usernickname[0]);
-
-
         return usernickname[0];
     }
 }

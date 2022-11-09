@@ -17,13 +17,15 @@ class control {
       const userInfo = req.body;
       const UserLogin = await Update.Postlogin(userInfo);
       if (UserLogin.isSuccess == true) {
+        console.log("로그인성공");
         const usernickname= await Check.nicknamecheck(userInfo.email);
+        console.log(usernickname[0].nickname);
         req.session.user = {
             email: userInfo.email,
-            nickname: usernickname.nickname,
+            nickname: usernickname[0].nickname,
         };
       }
-      return res.send(UserLogin,{nickname: usernickname.nickname});
+      return res.send(UserLogin,{nickname: usernickname[0].nickname});
     },
     signin: async (req, res) => {
       const userInfo = [req.body.email, req.body.password, req.body.nickname];
