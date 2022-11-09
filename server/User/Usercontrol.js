@@ -23,7 +23,7 @@ class control {
             nickname: usernickname.nickname,
         };
       }
-      return res.send(UserLogin)
+      return res.send(UserLogin,usernickname)
     },
     signin: async (req, res) => {
       const userInfo = [req.body.email, req.body.password, req.body.nickname];
