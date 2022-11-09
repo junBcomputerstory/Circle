@@ -54,10 +54,11 @@ function Login(props) {
     });
   };
 
-  const isSuccessed = success => {
-    if (success) {
-      console.log(sessionStorage);
-      // document.location.href = '/main';
+  const isSuccessed = response => {
+    if (response.data.isSuccess) {
+      console.log('good');
+      sessionStorage.setItem('nickname', response.data.nickname);
+      document.location.href = '/main';
     }
   };
 
@@ -85,10 +86,11 @@ function Login(props) {
         if (response.data.code === 3004) {
           setWrongPW(true);
         }
-        isSuccessed(response.data.isSuccess);
+        isSuccessed(response);
       })
       .catch(error => console.log(error));
   };
+  console.log(sessionStorage.length);
 
   return (
     <div style={{ flexDirection: 'row' }}>

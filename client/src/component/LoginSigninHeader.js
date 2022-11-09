@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -10,8 +10,14 @@ const Text = styled.text`
 
 function LoginSigninHeader(props) {
   const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    if (sessionStorage.length != 0) {
+      setIsLogin(true);
+    }
+  }, []);
+
   return isLogin ? (
-    <Text>이승현님, 환영합니다!</Text>
+    <Text>{sessionStorage.getItem('nickname')}님, 환영합니다!</Text>
   ) : (
     <div>
       <Link style={{ textDecoration: 'none' }} to="/Login">
