@@ -22,9 +22,10 @@ class Circlecheck{
         return circlerow;
     }
     async userCircle(id){
-        const vec=parseInt(id.split(','));
+        for(let i=0;i<id.length;i++)
+            id[i]*=1;
         const connection= await pool.getConnection(async(conn)=>conn);
-        const circlerow=CircleDao.userCircle(connection,vec);
+        const circlerow=CircleDao.userCircle(connection,id);
 
         return circlerow;
     }

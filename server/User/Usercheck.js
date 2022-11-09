@@ -21,18 +21,30 @@ class Usercheck{
     async retrieveUserpage(ID){
         const connection= await pool.getConnection(async(conn)=>conn);
         const Userpageresult= await userDao.selectUserpage(connection,ID);
-        const badgeresult= this.badgecheck(connection,Userpageresult.badge_id);
         const attendresult=this.attendcheck(connection,ID);
-        const circleresult=Circlecheck.findcircle()
+        let re={  "nickname":Userpageresult[0][0].nickname,
+                  "image":Userpageresult[0][0].image_url,
+                };
+        if(Userpageresult[0][0].badge_id.length!=0){
+            const badgeresult= this.badgecheck(connection,Userpageresult[0][0].badge_id);
+            re.badge=badgeresult[0];          
+        }
+        if(Userpageresult[0][0].circle.length!=0){
+            let circleid=Userpageresult[0][0].circle.split(',');
+            const circleresult=Circlecheck.userCircle(circleid);
+            re.circle=circleresult[0];
+        }
         connection.release();
-        const re=[Userpageresult.nickname,Userpageresult.circle,Userpageresult.image_url,badgeresult,attendresult];
-
-        return
+        
+        return re;
     }
     async badgecheck(badge_id){
-        const badge=parseInt(row.split(','));
+        const badge=badge_id.split(',');
+        for(let i=0;i<badge.length;i++)
+            badge[i]*=1;
         const connection=await pool.getConnection(async(conn)=>conn);
         const re=await userDao.selectbadge(connection,badge);
+        connection.release();
 
         return re;
     }
@@ -44,11 +56,14 @@ class Usercheck{
         let day = today.getDate();   
         month = month >= 10 ? month : '0' + month;
         day = day >= 10 ? day : '0' + day;
+        const attendarray=attendday[0][0].date.split(',');
         const date=today.getFullYear()+'-'+month+'-'+day;
-        const attendstring=attendday.date+","+date;
-        Update.updateattend(user_id,attendstring);
-
-        return attendstring;
+        if(!attendarray.includes(date)){
+            attendarray.add(date);
+            attendstring=attendday[0][0].date+","+date;
+            //Update.updateattend(user_id,attendstring);
+        }
+        return attendarray;
     }
     
     async nicknamecheck(ID){

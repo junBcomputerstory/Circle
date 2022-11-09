@@ -34,12 +34,12 @@ class CircleDao{
         return re;
     }
     async userCircle(connection,id){
-        const searchquery= `SELECT name,circlepic
+        const searchquery= `SELECT name,circlepic,id
                             FROM Circle
                             WHERE id IN(?);`;
         const re=await connection.query(
             searchquery,
-            id
+            [id]
         );
         return re;
     }
