@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Header from '../component/Header';
 import styled from 'styled-components';
@@ -46,12 +46,17 @@ const BorderBox = styled.div`
   padding-right: 10px;
   border-radius: 10px;
 `;
-
 function Mypage(props) {
-  axios.get('/user/mypage').then(response => console.log(response));
+  const [userNickname, setUserNickname] = useState('');
+  const [userInterest, setUserInterest] = useState([]);
   if (sessionStorage.length === 0) {
     document.location.href = 'login';
   }
+  useEffect(() => {
+    axios.get('/user/mypage').then(response => {
+      setUserNickname(response.data.nickname);
+    }, []);
+  });
   return (
     <div>
       <Header bgcolor="#f5f8fc" />
@@ -65,7 +70,7 @@ function Mypage(props) {
             alt="profile_image"
           />
           <Nickname>
-            test1님
+            {userNickname}님
             <Button style={{ marginLeft: '20px' }} variant="secondary" size="sm">
               <HiOutlinePencil /> 수정하기
             </Button>
