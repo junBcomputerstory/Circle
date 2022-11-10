@@ -56,7 +56,6 @@ function Login(props) {
 
   const isSuccessed = response => {
     if (response.data.isSuccess) {
-      console.log('good');
       sessionStorage.setItem('nickname', response.data.nickname);
       document.location.href = '/';
     }
@@ -77,7 +76,6 @@ function Login(props) {
         { withCredentials: true },
       )
       .then(response => {
-        console.log(response.data);
         console.log(response);
 
         if (response.data.code === 2008) {

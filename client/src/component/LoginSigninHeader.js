@@ -21,6 +21,7 @@ function LoginSigninHeader(props) {
     setIsLogin(false);
     sessionStorage.clear();
     console.log(sessionStorage);
+    document.location.href = '/';
   };
 
   return isLogin ? (

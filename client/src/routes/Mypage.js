@@ -9,6 +9,7 @@ import MypageCarousel from '../component/MypageCarousel';
 import Footer from '../component/Footer';
 import { Interests } from '../component/Interests';
 import axios from 'axios';
+import { map } from 'jquery';
 
 const InfoBox = styled.div`
   display: flex;
@@ -47,6 +48,34 @@ const BorderBox = styled.div`
   border-radius: 10px;
 `;
 function Mypage(props) {
+  const printInterest = interest => {
+    switch (interest) {
+      case '1':
+        return <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '2':
+        return <img src={Interests.study} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '3':
+        return <img src={Interests.trip} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '4':
+        return <img src={Interests.cooking} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '5':
+        return <img src={Interests.coding} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '6':
+        return <img src={Interests.volunteer} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '7':
+        return <img src={Interests.pet} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '8':
+        return <img src={Interests.car} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '9':
+        return <img src={Interests.game} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '10':
+        return <img src={Interests.fashion} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '11':
+        return <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />;
+      case '12':
+        return <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />;
+    }
+  };
   const [userNickname, setUserNickname] = useState('');
   const [userInterest, setUserInterest] = useState([]);
   if (sessionStorage.length === 0) {
@@ -54,8 +83,10 @@ function Mypage(props) {
   }
   useEffect(() => {
     axios.get('/user/mypage').then(response => {
+      console.log(response.data);
       setUserNickname(response.data.nickname);
-    }, []);
+      setUserInterest(response.data.interest);
+    });
   });
   return (
     <div>
@@ -82,11 +113,7 @@ function Mypage(props) {
         </Box>
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 관심사</text>
-          <MypageInterestBox>
-            <img src={Interests.workout} style={{ margin: '5px 5px' }} width={100} height={100} />
-            <img src={Interests.study} style={{ margin: '5px 5px' }} width={100} height={100} />
-            <img src={Interests.trip} style={{ margin: '5px 5px' }} width={100} height={100} />
-          </MypageInterestBox>
+          <MypageInterestBox>{userInterest.map(interest => printInterest(interest))}</MypageInterestBox>
         </Box>
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 서클</text>
