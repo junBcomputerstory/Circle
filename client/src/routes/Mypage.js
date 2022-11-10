@@ -49,7 +49,9 @@ const BorderBox = styled.div`
 
 function Mypage(props) {
   axios.get('/user/mypage').then(response => console.log(response));
-
+  if (sessionStorage.length === 0) {
+    document.location.href = 'login';
+  }
   return (
     <div>
       <Header bgcolor="#f5f8fc" />
