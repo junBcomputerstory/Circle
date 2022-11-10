@@ -3,7 +3,7 @@ class userDao{
   //아이디를통한 유저정보 조회
   async selectUserpage(connection,ID){
     console.log(ID);
-      const selectUserIDQuery=`SELECT user_id,nickname,circle,image_url,badge_id 
+      const selectUserIDQuery=`SELECT user_id,nickname,circle,image_url,badge_id,interest_id
                                FROM User
                                WHERE email=?;`;
       const infoRows=await connection.query(selectUserIDQuery,ID);

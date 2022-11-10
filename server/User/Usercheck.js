@@ -22,10 +22,12 @@ class Usercheck{
         const connection= await pool.getConnection(async(conn)=>conn);
         const Userpageresult= await userDao.selectUserpage(connection,ID);
         const user_id=Userpageresult[0][0].user_id;
+        const interest=Userpageresult[0][0].interest_id.split(',');
         connection.release();
         //const attendresult=this.attendcheck(connection,user_id);
         let re={  "nickname":Userpageresult[0][0].nickname,
                   "image":Userpageresult[0][0].image_url,
+                  "interest":interest,
                 };
         if(Userpageresult[0][0].badge_id!=null){
             let badge_id=Userpageresult[0][0].badge_id.split(',');
