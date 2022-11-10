@@ -9,7 +9,6 @@ import MypageCarousel from '../component/MypageCarousel';
 import Footer from '../component/Footer';
 import { Interests } from '../component/Interests';
 import axios from 'axios';
-import { map } from 'jquery';
 
 const InfoBox = styled.div`
   display: flex;
@@ -82,12 +81,15 @@ function Mypage(props) {
     document.location.href = 'login';
   }
   useEffect(() => {
-    axios.get('/user/mypage').then(response => {
-      console.log(response.data);
-      setUserNickname(response.data.nickname);
-      setUserInterest(response.data.interest);
-    });
-  });
+    axios
+      .get('/user/mypage')
+      .then(response => {
+        console.log(response.data);
+        setUserNickname(response.data.nickname);
+        setUserInterest(response.data.interest);
+      })
+      .catch(error => console.log(error));
+  }, []);
   return (
     <div>
       <Header bgcolor="#f5f8fc" />

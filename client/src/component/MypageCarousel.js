@@ -30,7 +30,7 @@ function MypageCarousel(props) {
       console.log(response);
       setUserCircle(response.data.circle);
     });
-  });
+  }, []);
 
   // function LeftArrow() {
   //   const { isFirstItemVisible, scrollPrev } = useContext(VisibilityContext);
