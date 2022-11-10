@@ -196,6 +196,9 @@ function MakeCircle(props) {
     interest == id ? setInterest(0) : pushInterest(id);
     console.log(interest);
   };
+  if (sessionStorage.length === 0) {
+    document.location.href = 'login';
+  }
 
   return (
     <div style={{ textAlign: 'center' }}>
