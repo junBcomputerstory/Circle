@@ -21,12 +21,12 @@ const imageupload=multer({
         s3: s3,
         bucket: 'mycircles',
         key: (req, file, callback)=>{
-            const uploaddir=req.query.directory ??''
+            const uploaddir=req.query.id
             const extention=path.extname(file.originalname)
             if(!allowed.includes(extention)){
                 return callback(new Error('wrong format image'));
             }
-            callback(null, `${uploaddir}/${Date.now()}_${file.originalname}`)
+            callback(null, `Circle/${uploaddir}_circle_image`)
         },
         acl: 'public-read-write'
     }),

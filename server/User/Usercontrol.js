@@ -26,9 +26,9 @@ class control {
             email: userInfo.email,
             nickname: usernickname[0].nickname,
         };
+        res.cookie('sessionid',userInfo.email,)
         UserLogin.nickname=usernickname[0].nickname;
       }
-
       return res.send(UserLogin);
     },
 
@@ -54,6 +54,6 @@ class control {
       const User = await Update.editUser(req.body,req.session.user.email);
       return res.send(User);
     },
-  };
+    };
 }
 export default new control();
