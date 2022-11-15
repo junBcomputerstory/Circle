@@ -9,20 +9,23 @@ import Mypage from './routes/Mypage';
 import MakeCircle from './routes/MakeCircle';
 import SearchCircle from './routes/SearchCircle';
 import SigninFinish from './routes/SigninFinish';
+import { CookiesProvider } from 'react-cookie';
 
 const rootElement = document.getElementById('root');
 render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="Signin" element={<Signin />} />
-      <Route path="Login" element={<Login />} />
-      <Route path="Circles" element={<CirclePage />} />
-      <Route path="Mypage" element={<Mypage />} />
-      <Route path="Makecircle" element={<MakeCircle />} />
-      <Route path="Searchcircle" element={<SearchCircle />} />
-      <Route path="SigninFinish" element={<SigninFinish />} />
-    </Routes>
-  </BrowserRouter>,
+  <CookiesProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="Signin" element={<Signin />} />
+        <Route path="Login" element={<Login />} />
+        <Route path="Circles" element={<CirclePage />} />
+        <Route path="Mypage" element={<Mypage />} />
+        <Route path="Makecircle" element={<MakeCircle />} />
+        <Route path="Searchcircle" element={<SearchCircle />} />
+        <Route path="SigninFinish" element={<SigninFinish />} />
+      </Routes>
+    </BrowserRouter>
+  </CookiesProvider>,
   rootElement,
 );

@@ -186,14 +186,20 @@ function MakeCircle(props) {
       area_id: circleLocation,
       interest_id: interest,
       name: circleName,
+      circlepic: fileImage,
+      restrict: circleLimit,
+      sex: genderLimit,
+      intro: circleInfo,
+      prime: 0,
     });
-    console.log(fileImage);
-    console.log(circleName);
-    console.log(circleLimit);
-    console.log(circleLocation);
-    console.log(circleInfo);
-    console.log(circleLimitPeople);
-    console.log(interest);
+    console.log('제한인원:' + circleLimitPeople);
+    console.log('파일 이미지:' + fileImage);
+    console.log('서클 이름:' + circleName);
+    console.log('제한사항:' + circleLimit);
+    console.log('활동지역:' + circleLocation);
+    console.log('서클정보' + circleInfo);
+    console.log('흥미:' + interest);
+    console.log('성별제한:' + genderLimit);
   };
   const pushInterest = id => {
     setInterest(id);
@@ -267,9 +273,9 @@ function MakeCircle(props) {
               <option value="default" disabled={true}>
                 성별 제한
               </option>
-              <option value="B">남자만 가입 가능</option>
-              <option value="G">여자만 가입 가능</option>
-              <option value="BG">성별 제한 없음</option>
+              <option value="1">남자만 가입 가능</option>
+              <option value="2">여자만 가입 가능</option>
+              <option value="3">성별 제한 없음</option>
             </select>
             <textarea className="textinput" placeholder="제한조건을 적어주세요" onChange={e => setCircleLimit(e.target.value)} />
             <TitleText>활동 장소를 설정해주세요</TitleText>
@@ -292,10 +298,13 @@ function MakeCircle(props) {
                 지역을 선택해주세요.
               </option>
               {LocationOptions.map(value => (
-                <option key={value.id} value={value.name}>
+                <option key={value.id} value={value.id}>
                   {value.name}
                 </option>
               ))}
+              <option key="12" value="12">
+                상관없음
+              </option>
             </select>
             <TitleText>써클을 소개해주세요</TitleText>
             <textarea className="textinput" placeholder="써클 소개를 적어주세요" onChange={e => setCircleInfo(e.target.value)} />

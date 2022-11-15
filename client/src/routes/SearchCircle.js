@@ -47,6 +47,10 @@ const InterestOptions = [
     id: 12,
     name: '패션',
   },
+  {
+    id: 13,
+    name: '상관없음',
+  },
 ];
 
 const LocationOptions = [
@@ -93,6 +97,10 @@ const LocationOptions = [
   {
     id: 11,
     name: '제주도',
+  },
+  {
+    id: 12,
+    name: '상관없음',
   },
 ]; // 초기값 null 설정!!
 
@@ -141,10 +149,10 @@ function SearchCircle(props) {
   };
 
   const onSubmit = () => {
-    console.log(selectedInterest);
-    console.log(selectedLocation);
-    console.log(selectedLimit);
-    console.log(searchText);
+    console.log('흥미:' + selectedInterest);
+    console.log('지역:' + selectedLocation);
+    console.log('성별제한:' + selectedLimit);
+    console.log('검색어:' + searchText);
   };
 
   return (
@@ -161,7 +169,7 @@ function SearchCircle(props) {
             카테고리
           </option>
           {InterestOptions.map(value => (
-            <option key={value.id} value={value.name}>
+            <option key={value.id} value={value.id}>
               {value.name}
             </option>
           ))}
@@ -176,7 +184,7 @@ function SearchCircle(props) {
             지역
           </option>
           {LocationOptions.map(value => (
-            <option key={value.id} value={value.name}>
+            <option key={value.id} value={value.id}>
               {value.name}
             </option>
           ))}
@@ -190,13 +198,13 @@ function SearchCircle(props) {
           <option style={{ color: 'gray' }} value="default" disabled={true}>
             성별제한
           </option>
-          <option key="1" value="B">
+          <option key="1" value="1">
             남자
           </option>
-          <option key="2" value="G">
+          <option key="2" value="2">
             여자
           </option>
-          <option key="3" value="BG">
+          <option key="3" value="3">
             없음
           </option>
         </select>
@@ -214,6 +222,46 @@ function SearchCircle(props) {
         <text style={{ fontFamily: 'IBM-Medium' }}>검색 결과(1)</text>
       </div>
       <SearchList>
+        <Card style={{ width: '18rem', marginBottom: 50 }}>
+          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
+          <Card.Body>
+            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
+              취업준비자를 위한 1일1코딩 풀이
+            </Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: '18rem', marginBottom: 50 }}>
+          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
+          <Card.Body>
+            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
+              취업준비자를 위한 1일1코딩 풀이
+            </Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: '18rem', marginBottom: 50 }}>
+          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
+          <Card.Body>
+            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
+              취업준비자를 위한 1일1코딩 풀이
+            </Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: '18rem', marginBottom: 50 }}>
+          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
+          <Card.Body>
+            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
+              취업준비자를 위한 1일1코딩 풀이
+            </Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
+            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
+          </Card.Body>
+        </Card>
         <Card style={{ width: '18rem', marginBottom: 50 }}>
           <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
           <Card.Body>
