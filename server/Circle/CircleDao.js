@@ -10,7 +10,13 @@ class CircleDao{
         return searchrow;
     }
     async inserCircle(connection,info){
-        const insertquery=``;
+        const insertquery=`INSERT INTO Circle(name,area_id,interest_id,sex,restrict,area_id,max_num,prime,cur_num)
+                            VALUES (?,?,?,?,?,?,?,?,?);`;
+        
+        await connection.query(
+            insertquery,
+            info
+        );
         
     }
     async findname(connection,name){
@@ -23,7 +29,7 @@ class CircleDao{
         );
         return re;
     }
-    async findname(connection,id){
+    async findid(connection,id){
         const searchquery=` SELECT *
                             FROM Circle
                             WHERE ciecle_id=?;`;

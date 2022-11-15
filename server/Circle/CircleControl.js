@@ -18,14 +18,20 @@ class Control{
             const CircleInfo=req.body;
             const re=CircleUpdate.insertcircle(CircleInfo);
 
+            return res.send(re);
         },
 
         page: async(req,res)=>{
-            const Circleid=req.body.circle_id;
+            const Circleid=req.param.circle_id;
             const circlerow=CircleCheck.idcheck(Circleid);
 
             return circlerow;
         },
+
+        addpicture: async(req,res)=>{
+            const Circleid=req.param.circle_id;
+
+        }
     } 
 }
 export default new Control();

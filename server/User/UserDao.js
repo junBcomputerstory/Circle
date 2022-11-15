@@ -131,6 +131,30 @@ async selectUserPassword(connection,ID,PW) {
         console.log(e);
       }
     }
+
+    async getimage(connection,ID){
+      try{
+        const getquery=`SELECT image_url
+                        FROM User
+                        WHERE user_id=?;`;
+        const re=connection.query(
+          getquery,
+          ID
+        );
+        return re;
+      }
+      catch(e){
+        console.log(e);
+      }
+    }
+    
+    async insertimage(connection,ID,image){
+      const vec=[image,ID];
+      const insertquery=`UPDATE User
+                         SET image_url=?
+                         WHERE user_id =?;`;
+      await connection.query(insertquery,vec);
+    }
   }
 export default new userDao;
 

@@ -77,5 +77,27 @@ class Update{
     async updateattend(user_id,attenddays){
         
     }
+
+    async profileupload(ID){
+        try{
+            return ;
+        }
+        catch(e){
+            console.log(e);
+            return errResponse(baseResponse.DB_ERROR);
+        }
+    }
+
+    async profileupdate(ID,image){
+        try{
+            const connection=await pool.getConnection(async (conn)=>conn);
+            await userDao.insertimage(connection,ID,image);
+            return response(baseResponse.SUCCESS);
+        }
+        catch(e){
+            console.log(e);
+            return errResponse(baseResponse.DB_ERROR);
+        }
+    }
 }
 export default new Update;
