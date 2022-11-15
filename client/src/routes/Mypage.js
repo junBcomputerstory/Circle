@@ -9,6 +9,7 @@ import MypageCarousel from '../component/MypageCarousel';
 import Footer from '../component/Footer';
 import { Interests } from '../component/Interests';
 import axios from 'axios';
+import { unstable_createChainedFunction } from '@mui/utils';
 
 const InfoBox = styled.div`
   display: flex;
@@ -32,13 +33,6 @@ const MypageInterestBox = styled.div`
   border: 2px solid gray;
   padding: 10px;
   border-radius: 10px;
-`;
-const CircleList = styled.div`
-  display: flex;
-  flex-direction: row;
-  border: 2px solid gray;
-  border-radius: 10px;
-  overflow: hidden;
 `;
 
 const BorderBox = styled.div`
@@ -77,6 +71,8 @@ function Mypage(props) {
   };
   const [userNickname, setUserNickname] = useState('');
   const [userInterest, setUserInterest] = useState([]);
+  const [userBadge, setUserBadge] = useState([]);
+  const [userImage, setUserImage] = useState('');
   if (sessionStorage.length === 0) {
     document.location.href = 'login';
   }
@@ -87,6 +83,8 @@ function Mypage(props) {
         console.log(response.data);
         setUserNickname(response.data.nickname);
         setUserInterest(response.data.interest);
+        setUserBadge(response.data.badge);
+        setUserImage(response.data.image);
       })
       .catch(error => console.log(error));
   }, []);
@@ -95,13 +93,7 @@ function Mypage(props) {
       <Header bgcolor="#f5f8fc" />
       <Container style={{ marginTop: '5%' }}>
         <InfoBox>
-          <img
-            style={{ borderRadius: '50%' }}
-            src="https://dankookcircle.s3.ap-northeast-2.amazonaws.com/badminton.jpeg"
-            width="130"
-            height="130"
-            alt="profile_image"
-          />
+          <img style={{ borderRadius: '50%' }} src={userImage} width="130" height="130" alt="profile_image" />
           <Nickname>
             {userNickname}님
             <Button style={{ marginLeft: '20px' }} variant="secondary" size="sm">
@@ -126,9 +118,9 @@ function Mypage(props) {
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 뱃지</text>
           <MypageInterestBox>
-            <img style={{ margin: '0 5px' }} src="/img/attendence_king.png" width="100" height="100" alt="attendence_king" />
-            <img style={{ margin: '0 5px' }} src="/img/activity_king.png" width="100" height="100" alt="activity_king" />
-            <img style={{ margin: '0 5px' }} src="/img/october_attendence.png" width="100" height="100" alt="october_attendence" />
+            {userBadge.map(data => (
+              <img style={{ margin: '0 5px' }} src={data.url} width="100" height="100" alt={data.url} />
+            ))}
           </MypageInterestBox>
         </Box>
         <Footer />

@@ -56,7 +56,7 @@ function MypageCarousel(props) {
     <ScrollMenu>
       {userCircle.map(circle => (
         <ImageTextBox itemID={circle.id}>
-          <img style={{ borderRadius: '10px', margin: '10px auto' }} src="../img/coding.jpeg" width="100" height="100" />
+          <img style={{ borderRadius: '10px', margin: '10px auto' }} src={circle.circlepic} width="100" height="100" />
           <TextBox>
             <text style={{ fontFamily: 'IBM-Medium' }}>{circle.name}</text>
           </TextBox>

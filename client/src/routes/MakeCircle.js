@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/esm/Button';
 import { Interests } from '../component/Interests';
+import axios from 'axios';
 
 const TitleText = styled.text`
   font-family: 'IBM-Regular';
@@ -179,7 +180,13 @@ function MakeCircle(props) {
     setFileImage(URL.createObjectURL(e.target.files[0]));
   };
   const text = '설정하려면 체크해주세요';
-  const showInfo = () => {
+  const submit = () => {
+    axios.post('/makecircle', {
+      max_num: circleLimitPeople,
+      area_id: circleLocation,
+      interest_id: interest,
+      name: circleName,
+    });
     console.log(fileImage);
     console.log(circleName);
     console.log(circleLimit);
@@ -320,7 +327,7 @@ function MakeCircle(props) {
           <Alert style={{ width: 730, margin: '0 auto' }} key="primary" variant="primary">
             프라임 써클이란 ? 달마다 일정 가격을 지불하면 써클즈와 제휴된 업체에서 할인을 받을 수 있는 서비스입니다.
           </Alert>
-          <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={showInfo}>
+          <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={submit}>
             써클 만들기
           </Button>
         </div>

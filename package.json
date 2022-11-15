@@ -31,6 +31,7 @@
     "multer-s3": "^3.0.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.20",
+    "react-cookie": "^4.1.1",
     "react-horizontal-scrolling-menu": "^3.2.3",
     "react-modal": "^3.16.1",
     "react-select": "^5.5.6",

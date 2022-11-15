@@ -77,7 +77,6 @@ function Login(props) {
       )
       .then(response => {
         console.log(response);
-
         if (response.data.code === 2008) {
           setWrongID(true);
         }
