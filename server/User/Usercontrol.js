@@ -2,7 +2,7 @@ import express from 'express';
 import Update from './Userupdate.js';
 import Check from './Usercheck.js';
 import {errResponse,response} from '../config/response.js';
-import * as baseResponse from '../config/baseResponse.js'
+import * as baseResponse from '../config/baseResponse.js';
 
 class control {
   constructor(){
@@ -54,6 +54,17 @@ class control {
       const User = await Update.editUser(req.body,req.session.user.email);
       return res.send(User);
     },
+    
+    logout: async(req,res)=>{
+      
+    },
+    Profileupdate: async(req,res)=>{
+      console.log(req.file);
+      const user_id=parseInt(req.params.user_id);
+      const image=req.file.location;
+      const profile=await Update.profileupdate(user_id,image);
+      res.send(profile);
+    }
     };
 }
 export default new control();

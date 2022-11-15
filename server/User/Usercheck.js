@@ -76,6 +76,13 @@ class Usercheck{
         console.log(usernickname[0]);
         return usernickname[0];
     }
+
+    async profileimage(ID){
+        const connection=await pool.getConnection(async(conn)=>conn);
+        const image=await userDao.getimage(connection,ID);
+
+        return image[0];
+    }
 }
 
 export default new Usercheck;
