@@ -183,7 +183,7 @@ function MakeCircle(props) {
   };
   const text = '설정하려면 체크해주세요';
   const submit = () => {
-    axios.post('/makecircle', {
+    axios.post('/circle/make', {
       max_num: circleLimitPeople,
       area_id: circleLocation,
       interest_id: interest,
