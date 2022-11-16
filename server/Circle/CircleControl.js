@@ -6,13 +6,13 @@ import Circlecheck from './Circlecheck.js';
 class Control{
     process={
         find: async(req,res)=>{
-            const CircleInfo=req.body;
-            console.log(req.params);
+            const CircleInfo=req.query;
             const circles=await CircleCheck.findcircle(CircleInfo);
-            if(circles<1){
-                return errResponse(baseResponse.CIRCLE_NOTFOUND);
+            if(circles.length<1){
+                res.send(circles);
             }
-            return res.send(circles);
+            console.log(circles);
+            res.send(circles);
         },
 
         make: async(req,res,next)=>{
@@ -31,6 +31,11 @@ class Control{
         addpicture: async(req,res)=>{
             const Circleid=req.param.circle_id;
 
+        },
+
+        circleimage: async(req,res)=>{
+            const id=CircleCheck.getnewcircleid;
+            const image=req.file.location;
         }
     } 
 }

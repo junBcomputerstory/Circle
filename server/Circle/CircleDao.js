@@ -1,8 +1,9 @@
 class CircleDao{
     async checkCircle(connection,info){
-        const searchquery=`SELECT * 
+        const searchquery=`
+                           SELECT * 
                            FROM Circle
-                           WHERE IF( ? IS NOT NULL,name=?,name=name) AND IF (? IS NOT NULL,interest_id=?,interest_id=interest_id) AND IF(? IS NOT NULL,area_id=?,area_id=area_id) AND IF(? IS NOT NULL,sex=?,sex=sex);`;
+                           WHERE IF( ? !="",name=?,name=name) AND IF (? != 999,interest_id=?,interest_id=interest_id) AND IF(? != 999,area_id=?,area_id=area_id) AND IF(? !=999,sex=?,sex=sex);`;
         const searchrow=await connection.query(
             searchquery,
             info
@@ -47,6 +48,18 @@ class CircleDao{
             searchquery,
             [id]
         );
+        return re;
+    }
+
+    async newid(connection){
+        const searchquery=`SELECT id
+                           FROM Circle
+                           ORDER BY id DESC
+                           LIMIT 1;`;
+        const re=await connection.query(
+            searchquery
+        );
+
         return re;
     }
 
