@@ -148,10 +148,12 @@ function SearchCircle(props) {
   const onSubmit = () => {
     axios
       .get('/circle/find', {
-        interest_id: selectedInterest,
-        area_id: selectedLocation,
-        sex: selectedLimit,
-        name: searchText,
+        params: {
+          interest_id: selectedInterest,
+          area_id: selectedLocation,
+          sex: selectedLimit,
+          name: searchText,
+        },
       })
       .then(response => console.log(response))
       .catch(error => console.log(error));
