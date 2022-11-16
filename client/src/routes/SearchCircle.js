@@ -123,7 +123,7 @@ function SearchCircle(props) {
   const [selectedLocation, setSelectedLocation] = useState(999);
   const [selectedInterest, setSelectedInterest] = useState(999);
   const [selectedLimit, setSelectedLimit] = useState(999);
-  const [searchText, setSearchText] = useState('999');
+  const [searchText, setSearchText] = useState('');
   const [resultData, setResultData] = useState([]);
 
   const onChangeHandlerInterest = e => {
