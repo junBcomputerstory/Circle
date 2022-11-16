@@ -120,24 +120,25 @@ const SearchList = styled.div`
 `;
 
 function SearchCircle(props) {
-  const [selectedLocation, setSelectedLocation] = useState(undefined);
-  const [selectedInterest, setSelectedInterest] = useState(undefined);
-  const [selectedLimit, setSelectedLimit] = useState(undefined);
-  const [searchText, setSearchText] = useState(undefined);
+  const [selectedLocation, setSelectedLocation] = useState(999);
+  const [selectedInterest, setSelectedInterest] = useState(999);
+  const [selectedLimit, setSelectedLimit] = useState(999);
+  const [searchText, setSearchText] = useState('999');
   const [resultData, setResultData] = useState([]);
 
   const onChangeHandlerInterest = e => {
-    setSelectedInterest(e.target.value);
+    setSelectedInterest(parseInt(e.target.value));
     console.log(selectedInterest);
   };
 
   const onChangeHandlerLocation = e => {
-    setSelectedLocation(e.target.value);
+    parseI;
+    setSelectedLocation(parseInt(e.target.value));
     console.log(selectedLocation);
   };
 
   const onChangeHandlerLimit = e => {
-    setSelectedLimit(e.target.value);
+    setSelectedLimit(parseInt(e.target.value));
     console.log(selectedLimit);
   };
 
@@ -176,7 +177,7 @@ function SearchCircle(props) {
           name="category"
           onChange={onChangeHandlerInterest}
         >
-          <option key="13" value={undefined}>
+          <option key="13" value="999">
             전체(흥미)
           </option>
           {InterestOptions.map(value => (
@@ -191,7 +192,7 @@ function SearchCircle(props) {
           name="location"
           onChange={onChangeHandlerLocation}
         >
-          <option key="12" value={undefined}>
+          <option key="12" value="999">
             전체(지역)
           </option>
           {LocationOptions.map(value => (
@@ -206,7 +207,7 @@ function SearchCircle(props) {
           name="gender"
           onChange={onChangeHandlerLimit}
         >
-          <option key="4" value={undefined}>
+          <option key="4" value="999">
             상관없음(성별)
           </option>
           <option key="1" value="1">
