@@ -254,7 +254,12 @@ function MakeCircle(props) {
             <input className="textinput" type="text" placeholder="써클 이름을 적어주세요" onChange={e => setCircleName(e.target.value)} />
             <div>
               <TitleText>제한인원을 설정해주세요</TitleText>
-              <input className="textinput" type="number" placeholder="제한 인원(명)" onChange={e => setCircleLimitPeople(e.target.value)} />
+              <input
+                className="textinput"
+                type="number"
+                placeholder="제한 인원(명)"
+                onChange={e => setCircleLimitPeople(parseInt(e.target.value))}
+              />
             </div>
             <TitleText>제한조건을 설정해주세요</TitleText>
             <br />
@@ -270,7 +275,7 @@ function MakeCircle(props) {
               }}
               defaultValue={circleLocation}
               name="genderLimit"
-              onChange={e => setGenderLimit(e.target.value)}
+              onChange={e => setGenderLimit(parseInt(e.target.value))}
             >
               <option value="default" disabled={true}>
                 성별 제한
@@ -294,7 +299,7 @@ function MakeCircle(props) {
               }}
               defaultValue={circleLocation}
               name="location"
-              onChange={e => setCircleLocation(e.target.value)}
+              onChange={e => setCircleLocation(parseInt(e.target.value))}
             >
               <option value="default" disabled={true}>
                 지역을 선택해주세요.
