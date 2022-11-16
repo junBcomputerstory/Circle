@@ -62,7 +62,7 @@ class Update{
 //회원 정보변경
     async editUser(userinfo,email){
         try{
-            const ver=[userinfo.nickname,userinfo.image,email];
+            const ver=[userinfo.nickname,email];
             const connection= await pool.getConnection(async (conn)=>conn);
             await userDao.updateUserInfo(connection,ver);
             connection.release();

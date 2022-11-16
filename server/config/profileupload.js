@@ -19,7 +19,7 @@ AWS.config.getCredentials(function(err) {
 const s3=new AWS.S3();
 
 const allowed=['.png','.jpg','.jpeg','.bmp'];
-export const imageupload=multer({
+export const userimageupload=multer({
     storage: multerS3({
         s3: s3,
         bucket: 'mycircles',
@@ -37,7 +37,7 @@ export const imageupload=multer({
     }),
 })
 
-export const imagedelete=async(req,file,next)=>{
+export const userimagedelete=async(req,file,next)=>{
     const id=req.params.user_id;
     const check=await Check.profileimage(id);
     const index=check[0].image_url.indexOf('User/userimage');
@@ -53,5 +53,22 @@ export const imagedelete=async(req,file,next)=>{
     }
     next();
 }
+export const circleimageupload=multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'mycircles',
+        contentType: multerS3.AUTO_CONTENT_TYPE ,
+        acl: 'public-read-write',
+        key: (req, file, callback)=>{
+            const uploaddir=req.id;
+            const extention=path.extname(file.originalname);
+            if(!allowed.includes(extention)){
+                return callback(new Error('wrong format image'));
+            }
+            
+            callback(null, `Circle/circleimage/${uploaddir}_circle_image${extention}`)
+        },
+    }),
+})
 
 
