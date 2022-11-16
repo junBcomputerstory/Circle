@@ -172,7 +172,7 @@ function MakeCircle(props) {
   const [imageFile, setImageFile] = useState(null);
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
-  const [circleLimitPeople, setCircleLimitPeople] = useState('');
+  const [circleLimitPeople, setCircleLimitPeople] = useState(0);
   const [circleLocation, setCircleLocation] = useState('default');
   const [circleInfo, setCircleInfo] = useState('');
   const [interest, setInterest] = useState(0);
