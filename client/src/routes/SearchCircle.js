@@ -120,11 +120,37 @@ const SearchList = styled.div`
 `;
 
 function SearchCircle(props) {
+  const printInterest = response_data => {
+    let arr = [];
+    response_data.forEach(value => {
+      for (let i = 0; i < InterestOptions.length; i++) {
+        if (value.interest_id === InterestOptions[i].id) {
+          arr.push(InterestOptions[i].name);
+        }
+      }
+    });
+    setCircleInterest(arr);
+  };
+
+  const printLocation = response_data => {
+    let arr = [];
+    response_data.forEach(value => {
+      for (let i = 0; i < LocationOptions.length; i++) {
+        if (value.area_id === LocationOptions[i].id) {
+          arr.push(LocationOptions[i].name);
+        }
+      }
+    });
+    setCircleLoc(arr);
+  };
+
   const [selectedLocation, setSelectedLocation] = useState(999);
   const [selectedInterest, setSelectedInterest] = useState(999);
   const [selectedLimit, setSelectedLimit] = useState(999);
   const [searchText, setSearchText] = useState('');
   const [resultData, setResultData] = useState([]);
+  const [circleLoc, setCircleLoc] = useState([]);
+  const [circleInterest, setCircleInterest] = useState([]);
 
   const onChangeHandlerInterest = e => {
     setSelectedInterest(parseInt(e.target.value));
@@ -132,7 +158,6 @@ function SearchCircle(props) {
   };
 
   const onChangeHandlerLocation = e => {
-    parseI;
     setSelectedLocation(parseInt(e.target.value));
     console.log(selectedLocation);
   };
@@ -146,26 +171,24 @@ function SearchCircle(props) {
     setSearchText(e.target.value);
   };
 
-  const onSubmit = () => {
-    console.log('흥미:' + selectedInterest);
-    console.log('지역:' + selectedLocation);
-    console.log('성별제한:' + selectedLimit);
-    console.log('검색어:' + searchText);
-
-    axios
-      .get(
+  async function onSubmit() {
+    try {
+      const response = await axios.get(
         '/circle/find',
         { params: { interest_id: selectedInterest, area_id: selectedLocation, sex: selectedLimit, name: searchText } },
         {
           WithCredentials: true,
         },
-      )
-      .then(response => {
-        setResultData(response.data);
-        console.log(response.data);
-      })
-      .catch(error => console.log(error));
-  };
+      );
+      console.log(response);
+      setResultData(response.data);
+      printLocation(response.data);
+      printInterest(response.data);
+      printIn;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div>
@@ -234,16 +257,16 @@ function SearchCircle(props) {
         <text style={{ fontFamily: 'IBM-Medium' }}>검색 결과({resultData.length})</text>
       </div>
       <SearchList>
-        {resultData.map(value => (
+        {resultData.map((value, index) => (
           <Card key={value.id} style={{ width: '18rem', marginBottom: 50, marginRight: 10 }}>
             <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src={value.circlepic} />
             <Card.Body>
               <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>{value.name}</Card.Text>
-              <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>흥미 : {value.interest_id}</Card.Text>
+              <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>흥미 : {circleInterest[index]}</Card.Text>
               <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>
                 인원 : {value.cur_num}/{value.max_num}
               </Card.Text>
-              <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : {value.area_id}</Card.Text>
+              <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : {circleLoc[index]}</Card.Text>
             </Card.Body>
           </Card>
         ))}

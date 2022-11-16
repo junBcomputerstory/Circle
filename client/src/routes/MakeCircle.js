@@ -169,6 +169,7 @@ function MakeCircle(props) {
   ];
 
   const [fileImage, setFileImage] = useState('');
+  const [imageFile, setImageFile] = useState(null);
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
   const [circleLimitPeople, setCircleLimitPeople] = useState('');
@@ -177,6 +178,7 @@ function MakeCircle(props) {
   const [interest, setInterest] = useState(0);
   const [genderLimit, setGenderLimit] = useState('default');
   const saveFileImage = e => {
+    setImageFile(e.target.files[0]);
     setFileImage(URL.createObjectURL(e.target.files[0]));
   };
   const text = '설정하려면 체크해주세요';
@@ -186,14 +188,14 @@ function MakeCircle(props) {
       area_id: circleLocation,
       interest_id: interest,
       name: circleName,
-      circlepic: fileImage,
+      image: fileImage,
       restrict: circleLimit,
       sex: genderLimit,
       intro: circleInfo,
       prime: 0,
     });
     console.log('제한인원:' + circleLimitPeople);
-    console.log('파일 이미지:' + fileImage);
+    console.log('파일 이미지:' + imageFile);
     console.log('서클 이름:' + circleName);
     console.log('제한사항:' + circleLimit);
     console.log('활동지역:' + circleLocation);

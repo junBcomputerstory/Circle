@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Header from '../component/Header';
 import styled from 'styled-components';
-import Button from 'react-bootstrap/Button';
+import { Button } from '@mui/material';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { HiOutlinePencil } from 'react-icons/hi';
 import MypageCarousel from '../component/MypageCarousel';
@@ -99,10 +99,11 @@ function Mypage(props) {
   const [userInterest, setUserInterest] = useState([]);
   const [userBadge, setUserBadge] = useState([]);
   const [userImage, setUserImage] = useState('');
+  const [userID, setUserID] = useState(0);
   if (sessionStorage.length === 0) {
     document.location.href = 'login';
   }
-  const [reviseNickname, setReviseNickname] = useState('');
+  const [reviseNickname, setReviseNickname] = useState(userNickname);
   const [reviseUserImage, setReviseUserImage] = useState(null);
   const handleFileChange = e => {
     setReviseUserImage(e.target.files[0]);
@@ -111,18 +112,44 @@ function Mypage(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  async function getData() {
+    try {
+      const response = await axios.get('/user/mypage');
+      console.log(response);
+      setUserNickname(response.data.nickname);
+      setUserInterest(response.data.interest);
+      setUserBadge(response.data.badge);
+      setUserImage(response.data.image);
+      setUserID(response.data.user_id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
-    axios
-      .get('/user/mypage')
-      .then(response => {
-        console.log(response.data);
-        setUserNickname(response.data.nickname);
-        setUserInterest(response.data.interest);
-        setUserBadge(response.data.badge);
-        setUserImage(response.data.image);
-      })
-      .catch(error => console.log(error));
+    getData();
+    // axios
+    //   .get('/user/mypage')
+    //   .then(response => {
+    //     console.log(response.data);
+    //     setUserNickname(response.data.nickname);
+    //     setUserInterest(response.data.interest);
+    //     setUserBadge(response.data.badge);
+    //     setUserImage(response.data.image);
+    //     setUserID(response.data.user_id);
+    //     console.log('userr: ' + response.data.user_id);
+    //     console.log('userID : ' + userID);
+    //   })
+    //   .catch(error => console.log(error));
   }, []);
+
+  const sendReviseData = () => {
+    axios
+      .post(`/mypage/profile/${userID}`, { nickname: reviseNickname, image: reviseUserImage })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+    setOpen(false);
+  };
   return (
     <div>
       <Header bgcolor="#f5f8fc" />
@@ -131,8 +158,19 @@ function Mypage(props) {
           <img style={{ borderRadius: '50%' }} src={userImage} width="130" height="130" alt="profile_image" />
           <Nickname>
             {userNickname}님
-            <Button style={{ marginLeft: '20px' }} variant="secondary" size="sm" onClick={handleOpen}>
-              <HiOutlinePencil /> 수정하기
+            <div style={{ display: 'inline-block' }}>
+              <Button
+                style={{ marginLeft: '20px' }}
+                variant="outlined"
+                size="sm"
+                onClick={() => {
+                  handleOpen();
+                  console.log(userID);
+                }}
+              >
+                <HiOutlinePencil /> 수정하기
+              </Button>
+
               <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
                 <div style={style}>
                   <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30, textAlign: 'center' }}>수정할 정보를 입력해주세요.</text>
@@ -146,21 +184,16 @@ function Mypage(props) {
                   />
                   <input style={inputStyle} type="file" name="imageFile" onChange={e => handleFileChange(e)} />
                   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <Button
-                      style={{ width: 170 }}
-                      onClick={() => {
-                        console.log(reviseUserImage);
-                      }}
-                    >
+                    <Button variant="contained" style={{ width: 170 }} onClick={sendReviseData}>
                       수정하기
                     </Button>
-                    <Button style={{ width: 170 }} onClick={handleClose}>
+                    <Button variant="contained" style={{ width: 170 }} onClick={handleClose}>
                       닫기
                     </Button>
                   </div>
                 </div>
               </Modal>
-            </Button>
+            </div>
           </Nickname>
         </InfoBox>
         <Box style={{ width: '550px', margin: '20px auto' }} className="lvbox">
