@@ -121,9 +121,9 @@ const SearchList = styled.div`
 
 function SearchCircle(props) {
   const [selectedLocation, setSelectedLocation] = useState(undefined);
-  const [selectedInterest, setSelectedInterest] = useState(null);
-  const [selectedLimit, setSelectedLimit] = useState(null);
-  const [searchText, setSearchText] = useState(null);
+  const [selectedInterest, setSelectedInterest] = useState(undefined);
+  const [selectedLimit, setSelectedLimit] = useState(undefined);
+  const [searchText, setSearchText] = useState(undefined);
   const [resultData, setResultData] = useState([]);
 
   const onChangeHandlerInterest = e => {
@@ -176,7 +176,7 @@ function SearchCircle(props) {
           name="category"
           onChange={onChangeHandlerInterest}
         >
-          <option key="13" value="null">
+          <option key="13" value={undefined}>
             전체(흥미)
           </option>
           {InterestOptions.map(value => (
@@ -206,7 +206,7 @@ function SearchCircle(props) {
           name="gender"
           onChange={onChangeHandlerLimit}
         >
-          <option key="4" value="null">
+          <option key="4" value={undefined}>
             상관없음(성별)
           </option>
           <option key="1" value="1">
