@@ -117,14 +117,14 @@ const SearchList = styled.div`
   margin: 20px auto;
   flex-direction: 'row';
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 function SearchCircle(props) {
-  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState('undefined');
   const [selectedInterest, setSelectedInterest] = useState(null);
   const [selectedLimit, setSelectedLimit] = useState(null);
   const [searchText, setSearchText] = useState(null);
+  const [resultData, setResultData] = useState([]);
 
   const onChangeHandlerInterest = e => {
     setSelectedInterest(e.target.value);
@@ -146,21 +146,24 @@ function SearchCircle(props) {
   };
 
   const onSubmit = () => {
-    axios
-      .get('/circle/find', {
-        params: {
-          interest_id: selectedInterest,
-          area_id: selectedLocation,
-          sex: selectedLimit,
-          name: searchText,
-        },
-      })
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
     console.log('흥미:' + selectedInterest);
     console.log('지역:' + selectedLocation);
     console.log('성별제한:' + selectedLimit);
     console.log('검색어:' + searchText);
+
+    axios
+      .get(
+        '/circle/find',
+        { params: { interest_id: selectedInterest, area_id: selectedLocation, sex: selectedLimit, name: searchText } },
+        {
+          WithCredentials: true,
+        },
+      )
+      .then(response => {
+        setResultData(response.data);
+        console.log(response.data);
+      })
+      .catch(error => console.log(error));
   };
 
   return (
@@ -188,7 +191,7 @@ function SearchCircle(props) {
           name="location"
           onChange={onChangeHandlerLocation}
         >
-          <option key="12" value="null">
+          <option key="12" value="undefined">
             전체(지역)
           </option>
           {LocationOptions.map(value => (
@@ -227,59 +230,22 @@ function SearchCircle(props) {
         </div>
       </SearchCategoryDiv>
       <div style={{ marginLeft: 120, fontSize: 28 }}>
-        <text style={{ fontFamily: 'IBM-Medium' }}>검색 결과(1)</text>
+        <text style={{ fontFamily: 'IBM-Medium' }}>검색 결과({resultData.length})</text>
       </div>
       <SearchList>
-        <Card style={{ width: '18rem', marginBottom: 50 }}>
-          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
-          <Card.Body>
-            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
-              취업준비자를 위한 1일1코딩 풀이
-            </Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
-          </Card.Body>
-        </Card>
-        <Card style={{ width: '18rem', marginBottom: 50 }}>
-          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
-          <Card.Body>
-            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
-              취업준비자를 위한 1일1코딩 풀이
-            </Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
-          </Card.Body>
-        </Card>
-        <Card style={{ width: '18rem', marginBottom: 50 }}>
-          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
-          <Card.Body>
-            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
-              취업준비자를 위한 1일1코딩 풀이
-            </Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
-          </Card.Body>
-        </Card>
-        <Card style={{ width: '18rem', marginBottom: 50 }}>
-          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
-          <Card.Body>
-            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
-              취업준비자를 위한 1일1코딩 풀이
-            </Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
-          </Card.Body>
-        </Card>
-        <Card style={{ width: '18rem', marginBottom: 50 }}>
-          <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src="img/coding.jpeg" />
-          <Card.Body>
-            <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>
-              취업준비자를 위한 1일1코딩 풀이
-            </Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>인원 : 128/300</Card.Text>
-            <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : 경기도</Card.Text>
-          </Card.Body>
-        </Card>
+        {resultData.map(value => (
+          <Card key={value.id} style={{ width: '18rem', marginBottom: 50, marginRight: 10 }}>
+            <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src={value.circlepic} />
+            <Card.Body>
+              <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>{value.name}</Card.Text>
+              <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>흥미 : {value.interest_id}</Card.Text>
+              <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>
+                인원 : {value.cur_num}/{value.max_num}
+              </Card.Text>
+              <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : {value.area_id}</Card.Text>
+            </Card.Body>
+          </Card>
+        ))}
       </SearchList>
     </div>
   );
