@@ -24,11 +24,11 @@ function CircleTitle(props) {
       <CTitle style={{ height: '2em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <div stlye={{ alignItems: 'center' }}>
           <FaUsers style={{ marginRight: 5, marginBottom: 3 }} size="20" color="#3639ff" />
-          써클 인원 : {props.info.recentPeople}/{props.info.maxPeople}명
+          써클 인원 : 0/{props.info.maxPeople}명
         </div>
         <div stlye={{ alignItems: 'center' }}>
           <FaMapMarkerAlt style={{ marginRight: 5, marginBottom: 3 }} size="20" color="#ffcd36" />
-          지역 : {props.info.title}
+          지역 : {props.info.location}
         </div>
         <div stlye={{ alignItems: 'center' }}>
           <FaExclamationTriangle style={{ marginRight: 5, marginBottom: 3 }} size="20" color="red" />
