@@ -10,8 +10,8 @@ class CircleDao{
         );
         return searchrow;
     }
-    async inserCircle(connection,info){
-        const insertquery=`INSERT INTO Circle(name,area_id,interest_id,sex,restrict,area_id,max_num,prime,cur_num)
+    async insertCircle(connection,info){
+        const insertquery=`INSERT INTO Circle(name,area_id,interest_id,sex,restrict,max_num,prime,cur_num,circlepic)
                             VALUES (?,?,?,?,?,?,?,?,?);`;
         
         await connection.query(

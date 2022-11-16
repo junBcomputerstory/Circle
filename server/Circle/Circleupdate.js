@@ -5,15 +5,15 @@ import { response,errResponse } from '../config/response.js';
 import * as baseResponse from'../config/baseResponse.js';
 
 class CircleUpdate{
-    async insertcircle(circleInfo){
+    async insertcircle(circleInfo,image){
         const connection=await pool.getConnection(async (conn)=>conn);
         try{
             const crow=await CircleCheck.namecheck(circleInfo.name);
             if(crow>1){
                 return errResponse(baseResponse.CIRCLE_NAME_ERROR);
             }
-            const vec=[req.name,req.interest_id,req.sex,req.restirct,req.area_id,req.max_num,req.prime,1];
-            await CircleDao.inserCircle(connection,vec);
+            const vec=[circleInfo.name,circleInfo.area_id,circleInfo.interest_id,circleInfo.sex,circleInfo.restrict,circleInfo.max_num,circleInfo.prime,1,image];
+            await CircleDao.insertCircle(connection,vec);
             connection.release();
             return response(baseResponse.SUCCESS);
         }

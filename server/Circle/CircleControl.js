@@ -8,17 +8,15 @@ class Control{
         find: async(req,res)=>{
             const CircleInfo=req.query;
             const circles=await CircleCheck.findcircle(CircleInfo);
-            if(circles.length<1){
-                res.send(circles);
-            }
             console.log(circles);
-            res.send(circles);
+            return res.send(circles);
         },
 
         make: async(req,res,next)=>{
             const CircleInfo=req.body;
-            await CircleUpdate.insertcircle(CircleInfo);
-            next();
+            const image=req.file.location;
+            re=await CircleUpdate.insertcircle(CircleInfo,image);
+            return res.send(re);
         },
 
         page: async(req,res)=>{
