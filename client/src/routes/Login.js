@@ -11,6 +11,8 @@ import SignUpGoogle from '../component/SignUpGoogle';
 import SignUpKakao from '../component/SignUpKakao';
 import { Link, Navigate, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { Cookies } from 'react-cookie';
+import { HttpRequest, HttpResponse } from 'aws-sdk';
 
 const InputIcon = styled.div`
   width: 40px;

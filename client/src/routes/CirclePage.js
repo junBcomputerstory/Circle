@@ -15,7 +15,7 @@ const CirclesInfo = {
   title: 'IT 취업을 위한 알고리즘 스터디',
   maxPeople: 100,
   recentPeople: 51,
-  location: '경기도 성남시 분당구 서현동',
+  location: '경기도',
   limitInfo: '제한조건 없습니다.',
   notice: '1일 1문제를 생활화합시다 !!',
 };

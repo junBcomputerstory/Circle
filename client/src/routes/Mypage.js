@@ -145,7 +145,7 @@ function Mypage(props) {
 
   const sendReviseData = () => {
     axios
-      .post(`/mypage/profile/${userID}`, { nickname: reviseNickname, image: reviseUserImage })
+      .post('/mypage/profile/7', { nickname: reviseNickname, image: reviseUserImage })
       .then(response => console.log(response))
       .catch(error => console.log(error));
     setOpen(false);
