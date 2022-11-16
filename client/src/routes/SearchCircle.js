@@ -95,6 +95,10 @@ const LocationOptions = [
     id: 11,
     name: '제주도',
   },
+  {
+    id: 12,
+    name: '온라인',
+  },
 ]; // 초기값 null 설정!!
 
 const SearchCategoryDiv = styled.div`
@@ -119,8 +123,8 @@ const SearchList = styled.div`
 function SearchCircle(props) {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedInterest, setSelectedInterest] = useState(null);
-  const [selectedLimit, setSelectedLimit] = useState('default');
-  const [searchText, setSearchText] = useState('');
+  const [selectedLimit, setSelectedLimit] = useState(null);
+  const [searchText, setSearchText] = useState(null);
 
   const onChangeHandlerInterest = e => {
     setSelectedInterest(e.target.value);
@@ -143,7 +147,7 @@ function SearchCircle(props) {
 
   const onSubmit = () => {
     axios
-      .post('/circle/find', {
+      .get('/circle/find', {
         interest_id: selectedInterest,
         area_id: selectedLocation,
         sex: selectedLimit,
@@ -197,8 +201,8 @@ function SearchCircle(props) {
           name="gender"
           onChange={onChangeHandlerLimit}
         >
-          <option style={{ color: 'gray' }} value="default" disabled={true}>
-            성별제한
+          <option key="4" value="null">
+            상관없음(성별)
           </option>
           <option key="1" value="1">
             남자
@@ -207,7 +211,7 @@ function SearchCircle(props) {
             여자
           </option>
           <option key="3" value="3">
-            없음
+            혼성
           </option>
         </select>
         <div style={{ display: 'inline-block' }}>
