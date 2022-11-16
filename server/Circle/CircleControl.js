@@ -7,11 +7,12 @@ class Control{
     process={
         find: async(req,res)=>{
             const CircleInfo=req.body;
-            const circles=CircleCheck.findcircle(CircleInfo);
+            console.log(req.params);
+            const circles=await CircleCheck.findcircle(CircleInfo);
             if(circles<1){
                 return errResponse(baseResponse.CIRCLE_NOTFOUND);
             }
-            return res.send(circles[0]);
+            return res.send(circles);
         },
 
         make: async(req,res,next)=>{

@@ -3,10 +3,9 @@ import CircleDao from './CircleDao.js';
 
 class Circlecheck{
     async findcircle(circleinfo){
-        const vec=[circleinfo.name,circleinfo.interest_id,circleinfo.area_id];
+        const vec=[circleinfo.name,circleinfo.name,circleinfo.interest_id,circleinfo.interest_id,circleinfo.area_id,circleinfo.area_id,circleinfo.sex,circleinfo.sex];
         const connection= await pool.getConnection(async(conn)=>conn);
-        const circlerow=CircleDao.checkCircle(connection,vec);
-
+        const circlerow=await CircleDao.checkCircle(connection,vec);
         return circlerow[0];
     }
     async namecheck(name){
