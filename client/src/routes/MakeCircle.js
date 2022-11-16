@@ -173,10 +173,10 @@ function MakeCircle(props) {
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
   const [circleLimitPeople, setCircleLimitPeople] = useState(0);
-  const [circleLocation, setCircleLocation] = useState('default');
+  const [circleLocation, setCircleLocation] = useState(0);
   const [circleInfo, setCircleInfo] = useState('');
   const [interest, setInterest] = useState(0);
-  const [genderLimit, setGenderLimit] = useState('default');
+  const [genderLimit, setGenderLimit] = useState(0);
   const saveFileImage = e => {
     setImageFile(e.target.files[0]);
     setFileImage(URL.createObjectURL(e.target.files[0]));
