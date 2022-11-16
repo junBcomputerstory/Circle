@@ -48,10 +48,6 @@ const InterestOptions = [
     id: 12,
     name: '패션',
   },
-  {
-    id: 13,
-    name: '상관없음',
-  },
 ];
 
 const LocationOptions = [
@@ -99,10 +95,6 @@ const LocationOptions = [
     id: 11,
     name: '제주도',
   },
-  {
-    id: 12,
-    name: '상관없음',
-  },
 ]; // 초기값 null 설정!!
 
 const SearchCategoryDiv = styled.div`
@@ -125,8 +117,8 @@ const SearchList = styled.div`
 `;
 
 function SearchCircle(props) {
-  const [selectedLocation, setSelectedLocation] = useState('default');
-  const [selectedInterest, setSelectedInterest] = useState('default');
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedInterest, setSelectedInterest] = useState(null);
   const [selectedLimit, setSelectedLimit] = useState('default');
   const [searchText, setSearchText] = useState('');
 
@@ -175,11 +167,11 @@ function SearchCircle(props) {
           name="category"
           onChange={onChangeHandlerInterest}
         >
-          <option style={{ color: 'gray' }} value="default" disabled={true}>
-            카테고리
+          <option key="13" value="null">
+            전체(흥미)
           </option>
           {InterestOptions.map(value => (
-            <option key={value.id} value={value.id}>
+            <option key={value.name} value={value.id}>
               {value.name}
             </option>
           ))}
@@ -190,11 +182,11 @@ function SearchCircle(props) {
           name="location"
           onChange={onChangeHandlerLocation}
         >
-          <option style={{ color: 'gray' }} value="default" disabled={true}>
-            지역
+          <option key="12" value="null">
+            전체(지역)
           </option>
           {LocationOptions.map(value => (
-            <option key={value.id} value={value.id}>
+            <option key={value.name} value={value.id}>
               {value.name}
             </option>
           ))}
