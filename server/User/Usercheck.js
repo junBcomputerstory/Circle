@@ -28,6 +28,7 @@ class Usercheck{
         let re={  "nickname":Userpageresult[0][0].nickname,
                   "image":Userpageresult[0][0].image_url,
                   "interest":interest,
+                  "user_id":user_id,
                 };
         if(Userpageresult[0][0].badge_id!=null){
             let badge_id=Userpageresult[0][0].badge_id.split(',');
@@ -39,7 +40,6 @@ class Usercheck{
             const circleresult=await Circlecheck.userCircle(circleid);
             re.circle=circleresult[0];
         }
-        console.log(re);
         return re;
     }
     async badgecheck(badge_id){
@@ -73,7 +73,6 @@ class Usercheck{
     async nicknamecheck(ID){
         const connection=await pool.getConnection(async(conn)=>conn);
         const usernickname=await userDao.getnickname(connection,ID);
-        console.log(usernickname[0]);
         return usernickname[0];
     }
 

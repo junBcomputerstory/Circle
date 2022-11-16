@@ -2,7 +2,6 @@
 class userDao{
   //아이디를통한 유저정보 조회
   async selectUserpage(connection,ID){
-    console.log(ID);
       const selectUserIDQuery=`SELECT user_id,nickname,circle,image_url,badge_id,interest_id
                                FROM User
                                WHERE email=?;`;
@@ -48,7 +47,7 @@ async selectUserPassword(connection,ID,PW) {
     try{
       const updateUserInfoQuery=`
           UPDATE User
-          SET IF(? IS NOT NULL,nickname=?,nickname=nickname) and IF(? IS NOT NULL,image_url=?,image_url=image_url)
+          SET IF(? IS NOT NULL,nickname=?,nickname=nickname)
           WHERE email=?; 
       `;
       await connection.query(

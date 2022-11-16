@@ -11,14 +11,13 @@ class Control{
             if(circles<1){
                 return errResponse(baseResponse.CIRCLE_NOTFOUND);
             }
-            return res.send(circles);
+            return res.send(circles[0]);
         },
 
-        make: async(req,res)=>{
+        make: async(req,res,next)=>{
             const CircleInfo=req.body;
-            const re=CircleUpdate.insertcircle(CircleInfo);
-
-            return res.send(re);
+            await CircleUpdate.insertcircle(CircleInfo);
+            next();
         },
 
         page: async(req,res)=>{

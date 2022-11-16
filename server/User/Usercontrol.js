@@ -26,7 +26,7 @@ class control {
             email: userInfo.email,
             nickname: usernickname[0].nickname,
         };
-        res.cookie('sessionid',userInfo.email,)
+        res.cookie('sessionid',userInfo.email,);
         UserLogin.nickname=usernickname[0].nickname;
       }
       return res.send(UserLogin);
@@ -46,13 +46,12 @@ class control {
         return res.redirect(`user/login`);
       } 
       const User =await Check.retrieveUserpage(req.session.user.email);
-      console.log(User);
       return res.send(User);
     },
 
-    edituser: async (req, res)=> {
+    edituser: async (req, res,next)=> {
       const User = await Update.editUser(req.body,req.session.user.email);
-      return res.send(User);
+      next();
     },
     
     logout: async(req,res)=>{
