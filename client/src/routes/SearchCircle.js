@@ -120,7 +120,7 @@ const SearchList = styled.div`
 `;
 
 function SearchCircle(props) {
-  const [selectedLocation, setSelectedLocation] = useState('undefined');
+  const [selectedLocation, setSelectedLocation] = useState(undefined);
   const [selectedInterest, setSelectedInterest] = useState(null);
   const [selectedLimit, setSelectedLimit] = useState(null);
   const [searchText, setSearchText] = useState(null);
@@ -191,7 +191,7 @@ function SearchCircle(props) {
           name="location"
           onChange={onChangeHandlerLocation}
         >
-          <option key="12" value="undefined">
+          <option key="12" value={undefined}>
             전체(지역)
           </option>
           {LocationOptions.map(value => (
