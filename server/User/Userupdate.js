@@ -60,9 +60,9 @@ class Update{
         }
     };
 //회원 정보변경
-    async editUser(userinfo,email){
+    async editUser(nickname,id){
         try{
-            const ver=[userinfo.nickname,email];
+            const ver=[nickname,id];
             const connection= await pool.getConnection(async (conn)=>conn);
             await userDao.updateUserInfo(connection,ver);
             connection.release();

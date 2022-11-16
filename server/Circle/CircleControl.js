@@ -8,32 +8,32 @@ class Control{
         find: async(req,res)=>{
             const CircleInfo=req.query;
             const circles=await CircleCheck.findcircle(CircleInfo);
-            console.log(circles);
             return res.send(circles);
         },
 
         make: async(req,res,next)=>{
             const CircleInfo=req.body;
-            const image=req.file.location;
-            re=await CircleUpdate.insertcircle(CircleInfo,image);
-            return res.send(re);
+            const re=await CircleUpdate.insertcircle(CircleInfo);
+            const circle=await CircleCheck.getnewcircleid();
+            req.body.circle_id=circle[0].id;
+
+            return next();
         },
 
         page: async(req,res)=>{
             const Circleid=req.param.circle_id;
-            const circlerow=CircleCheck.idcheck(Circleid);
+            const circlerow=Circlecheck.idcheck(Circleid);
 
-            return circlerow;
+            return res.send(circlerow);
         },
 
         addpicture: async(req,res)=>{
-            const Circleid=req.param.circle_id;
-
-        },
-
-        circleimage: async(req,res)=>{
-            const id=CircleCheck.getnewcircleid;
+            const Circleid=req.body.circle_id;
+            console.log(Circleid);
             const image=req.file.location;
+            const re=await CircleUpdate.insertpicture(Circleid,image);
+
+            res.send(re);
         }
     } 
 }

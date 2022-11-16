@@ -49,20 +49,23 @@ class control {
       return res.send(User);
     },
 
-    edituser: async (req, res,next)=> {
-      const User = await Update.editUser(req.body,req.session.user.email);
-      next();
-    },
     
     logout: async(req,res)=>{
       
     },
-    Profileupdate: async(req,res)=>{
+    mypageupdate: async(req,res,next)=>{
       console.log(req.file);
       const user_id=parseInt(req.params.user_id);
       const image=req.file.location;
       const profile=await Update.profileupdate(user_id,image);
-      res.send(profile);
+      console.log(req.body.nickname);
+      if(req.body.nickname){
+        const re=await Update.editUser(req.body.nickname,user_id);
+        res.send(re);
+      }
+      else{
+        res.send(profile);
+      }
     }
     };
 }

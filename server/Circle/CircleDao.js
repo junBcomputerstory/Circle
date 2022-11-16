@@ -11,9 +11,8 @@ class CircleDao{
         return searchrow;
     }
     async insertCircle(connection,info){
-        const insertquery=`INSERT INTO Circle(name,area_id,interest_id,sex,restrict,max_num,prime,cur_num,circlepic)
-                            VALUES (?,?,?,?,?,?,?,?,?);`;
-        
+        const insertquery=`INSERT INTO Circle(name,area_id,interest_id,sex,caution,max_num,prime,cur_num,intro)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
         await connection.query(
             insertquery,
             info
@@ -61,6 +60,17 @@ class CircleDao{
         );
 
         return re;
+    }
+
+    async updateimage(connection,vec){
+        const updatequery=`UPDATE Circle
+                           SET circlepic=?
+                           WHERE id=?;  `;
+
+        await connection.query(
+            updatequery,
+            vec
+        );
     }
 
 }

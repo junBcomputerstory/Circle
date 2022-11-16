@@ -47,8 +47,8 @@ async selectUserPassword(connection,ID,PW) {
     try{
       const updateUserInfoQuery=`
           UPDATE User
-          SET IF(? IS NOT NULL,nickname=?,nickname=nickname)
-          WHERE email=?; 
+          SET nickname=?
+          WHERE user_id=?; 
       `;
       await connection.query(
         updateUserInfoQuery,

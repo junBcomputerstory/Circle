@@ -4,20 +4,22 @@ import CircleDao from './CircleDao.js';
 class Circlecheck{
     async findcircle(circleinfo){
         const vec=[circleinfo.name,circleinfo.name,circleinfo.interest_id,circleinfo.interest_id,circleinfo.area_id,circleinfo.area_id,circleinfo.sex,circleinfo.sex];
-        console.log(vec);
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=await CircleDao.checkCircle(connection,vec);
+        connection.release();
         return circlerow[0];
     }
     async namecheck(name){
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=CircleDao.findname(connection,name);
+        connection.release();
 
         return circlerow[0];
     }
     async idcheck(id){
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=CircleDao.findid(connection,id);
+        connection.release();
 
         return circlerow[0];
     }
@@ -26,12 +28,14 @@ class Circlecheck{
             id[i]*=1;
         const connection= await pool.getConnection(async(conn)=>conn);
         const circlerow=CircleDao.userCircle(connection,id);
-
+        connection.release();
         return circlerow;
     }
     async getnewcircleid(){
         const connection= await pool.getConnection(async(conn)=>conn);
-        const id=CircleDao.newid(connection);
+        const id=await CircleDao.newid(connection);
+        connection.release();
+        return id[0];
     }
 }
 
