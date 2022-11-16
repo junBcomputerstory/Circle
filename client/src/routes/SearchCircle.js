@@ -3,6 +3,7 @@ import Header from '../component/Header';
 import styled from 'styled-components';
 import { GoSearch } from 'react-icons/go';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 
 const InterestOptions = [
   {
@@ -149,6 +150,15 @@ function SearchCircle(props) {
   };
 
   const onSubmit = () => {
+    axios
+      .post('/circle/find', {
+        interest_id: selectedInterest,
+        area_id: selectedLocation,
+        sex: selectedLimit,
+        name: searchText,
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
     console.log('흥미:' + selectedInterest);
     console.log('지역:' + selectedLocation);
     console.log('성별제한:' + selectedLimit);

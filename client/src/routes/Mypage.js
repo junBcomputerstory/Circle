@@ -9,7 +9,33 @@ import MypageCarousel from '../component/MypageCarousel';
 import Footer from '../component/Footer';
 import { Interests } from '../component/Interests';
 import axios from 'axios';
-import { unstable_createChainedFunction } from '@mui/utils';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  backgroundColor: 'white',
+  borderRadius: 10,
+  boxShadow: 24,
+  p: 4,
+  textAlign: 'center',
+  padding: 20,
+};
+
+const inputStyle = {
+  display: 'block',
+  width: 400,
+  padding: '0.5rem 0.8rem 0.5rem 0.8rem',
+  margin: '0.9vw auto',
+  border: 0,
+  borderRadius: 5,
+  fontSize: 20,
+  backgroundColor: '#ccebff',
+};
 
 const InfoBox = styled.div`
   display: flex;
@@ -76,6 +102,15 @@ function Mypage(props) {
   if (sessionStorage.length === 0) {
     document.location.href = 'login';
   }
+  const [reviseNickname, setReviseNickname] = useState('');
+  const [reviseUserImage, setReviseUserImage] = useState(null);
+  const handleFileChange = e => {
+    setReviseUserImage(e.target.files[0]);
+  };
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     axios
       .get('/user/mypage')
@@ -96,8 +131,35 @@ function Mypage(props) {
           <img style={{ borderRadius: '50%' }} src={userImage} width="130" height="130" alt="profile_image" />
           <Nickname>
             {userNickname}님
-            <Button style={{ marginLeft: '20px' }} variant="secondary" size="sm">
+            <Button style={{ marginLeft: '20px' }} variant="secondary" size="sm" onClick={handleOpen}>
               <HiOutlinePencil /> 수정하기
+              <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                <div style={style}>
+                  <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30, textAlign: 'center' }}>수정할 정보를 입력해주세요.</text>
+                  <input
+                    style={inputStyle}
+                    type="text"
+                    placeholder="닉네임"
+                    name="nickname"
+                    value={reviseNickname}
+                    onChange={e => setReviseNickname(e.target.value)}
+                  />
+                  <input style={inputStyle} type="file" name="imageFile" onChange={e => handleFileChange(e)} />
+                  <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                    <Button
+                      style={{ width: 170 }}
+                      onClick={() => {
+                        console.log(reviseUserImage);
+                      }}
+                    >
+                      수정하기
+                    </Button>
+                    <Button style={{ width: 170 }} onClick={handleClose}>
+                      닫기
+                    </Button>
+                  </div>
+                </div>
+              </Modal>
             </Button>
           </Nickname>
         </InfoBox>
