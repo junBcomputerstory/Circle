@@ -44,7 +44,7 @@ export const userimagedelete=async(req,file,next)=>{
         })
         console.log("삭제완료");
     }
-    next();
+    next(req);
 }
 export const circleimageupload=multer({
     storage: multerS3({

@@ -16,8 +16,7 @@ class Control{
             const re=await CircleUpdate.insertcircle(CircleInfo);
             const circle=await CircleCheck.getnewcircleid();
             req.body.circle_id=circle[0].id;
-
-            return next();
+            next();
         },
 
         page: async(req,res)=>{
