@@ -20,6 +20,8 @@ export const userimageupload=multer({
         acl: 'public-read-write',
         key: (req, file, callback)=>{
             const uploaddir=req.params.user_id;
+            console.log("사진넣는중");
+            console.log(req.body);
             const extention=path.extname(file.originalname);
             if(!allowed.includes(extention)){
                 return callback(new Error('wrong format image'));
@@ -28,23 +30,27 @@ export const userimageupload=multer({
             callback(null, `User/userimage/${uploaddir}_profile_image${extention}`)
         },
     }),
-})
+});
 
-export const userimagedelete=async(req,file,next)=>{
-    console.log(req.params);
+export const userimagedelete=async(req,res,next)=>{
     const id=req.params.user_id;
     const check=await Check.profileimage(id);
     const index=check[0].image_url.indexOf('User/userimage');
     const way=check[0].image_url.substring(index);
+    console.log(way);
     if(check[0].image_url){
         console.log("데이터 존재");
         s3.deleteObject({
-            bucket: 'mycircles',
-            key: way,  
-        })
-        console.log("삭제완료");
+            Bucket: 'mycircles',
+            Key: way,  
+        },(err,data)=>{
+            if(err)
+                console.log(err);
+            else
+                console.log("삭제성공");
+        });
     }
-    next(req);
+    next();
 }
 export const circleimageupload=multer({
     storage: multerS3({
@@ -53,7 +59,8 @@ export const circleimageupload=multer({
         contentType: multerS3.AUTO_CONTENT_TYPE ,
         acl: 'public-read-write',
         key: (req, file, callback)=>{
-            const uploaddir=req.body.circle_id;
+            const uploaddir=req.body.name;
+            console.log(req.body);
             const extention=path.extname(file.originalname);
             if(!allowed.includes(extention)){
                 return callback(new Error('wrong format image'));

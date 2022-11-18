@@ -13,10 +13,11 @@ class Control{
 
         make: async(req,res,next)=>{
             const CircleInfo=req.body;
+            console.log(req.body);
             const re=await CircleUpdate.insertcircle(CircleInfo);
             const circle=await CircleCheck.getnewcircleid();
             req.body.circle_id=circle[0].id;
-            next();
+            return next();
         },
 
         page: async(req,res)=>{

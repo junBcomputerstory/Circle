@@ -53,19 +53,15 @@ class control {
     logout: async(req,res)=>{
       
     },
-    mypageupdate: async(req,res,next)=>{
-      console.log(req.file);
+    mypageupdate: async(req,res)=>{
+      console.log("디비업로드");
       const user_id=parseInt(req.params.user_id);
       const image=req.file.location;
       const profile=await Update.profileupdate(user_id,image);
-      console.log(req.body.nickname);
       if(req.body.nickname){
-        const re=await Update.editUser(req.body.nickname,user_id);
-        res.send(re);
+      const re=await Update.editUser(req.body.nickname,user_id);
       }
-      else{
-        res.send(profile);
-      }
+      res.send(profile);
     }
     };
 }
