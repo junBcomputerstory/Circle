@@ -173,7 +173,7 @@ function MakeCircle(props) {
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
   const [circleLimitPeople, setCircleLimitPeople] = useState(0);
-  const [circleLocation, setCircleLocation] = useState(0);
+  const [circleLocation, setCircleLocation] = useState(1);
   const [circleInfo, setCircleInfo] = useState('');
   const [interest, setInterest] = useState(0);
   const [genderLimit, setGenderLimit] = useState(0);
@@ -194,8 +194,10 @@ function MakeCircle(props) {
     formData.append('sex', genderLimit);
     formData.append('intro', circleInfo);
     formData.append('prime', prime);
-    formData.append('image', fileImage);
-
+    formData.append('image', imageFile);
+    for (let value of formData.values()) {
+      console.log(value);
+    }
     axios
       .post('/circle/make', formData, {
         withCredentials: true,
@@ -328,7 +330,7 @@ function MakeCircle(props) {
                       <text style={{ fontSize: 100, margin: 'auto 0', lineHeight: '180px' }}>+</text>
                     )}
                   </div>
-                  <input type="file" accept="image/jpg, image/jpeg, image/png" style={{ display: 'none' }} onChange={saveFileImage} />
+                  <input type="file" name="image" style={{ display: 'none' }} onChange={saveFileImage} />
                 </label>
               </ImageSelectButton>
             </div>
