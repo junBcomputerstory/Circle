@@ -17,11 +17,9 @@ function CircleCalendar_schedule(props) {
         onChange={onChange}
         value={value}
       />
-      <div style={{ marginLeft: '9em' }} className="text-gray-500 mt-4">
-        {moment(value).format('YYYY년 MM월 DD일')}
-      </div>
-      <div style={{ marginLeft: '9em' }} className="text-gray-500 mt-2">
-        25:00 ZOOM 스터디 모임
+      <div style={{ textAlign: 'center' }}>
+        <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div>
+        <div className="text-gray-500 mt-2">25:00 ZOOM 스터디 모임</div>
       </div>
     </div>
   );

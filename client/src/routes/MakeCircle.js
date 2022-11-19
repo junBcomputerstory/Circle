@@ -182,7 +182,8 @@ function MakeCircle(props) {
     setFileImage(URL.createObjectURL(e.target.files[0]));
   };
   const text = '설정하려면 체크해주세요';
-  const submit = () => {
+  const submit = event => {
+    event.preventDefault();
     axios.post('/circle/make', {
       max_num: circleLimitPeople,
       area_id: circleLocation,
@@ -219,134 +220,136 @@ function MakeCircle(props) {
     <div style={{ textAlign: 'center' }}>
       <Header bgcolor="#f5f8fc" />
       <Container fluid style={{ backgroundColor: '#b5d1ff' }}>
-        <div className="form-box">
-          <div className="field1">
-            <text style={{ fontFamily: 'IBM-Bold', fontSize: 45, margin: '0 auto' }}>새로운 써클을 만들어보세요 !</text>
-            <br />
-            <TitleText>만들고자 하는 써클의 분야를 선택해주세요</TitleText>
-            <InterestDiv>
-              {arr.map(value =>
-                interest == value.id ? (
-                  <div style={{ display: 'inline-block', margin: '5px 5px' }} key={value.id} onClick={() => _onclick(value.id)}>
-                    <img
-                      style={{ border: '4px solid black', borderRadius: '50%' }}
-                      key={value.id}
-                      src={value.src}
-                      id={value.id}
-                      name={value.name}
-                      width={100}
-                      height={100}
-                    />
-                    <br />
-                    <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
-                  </div>
-                ) : (
-                  <div style={{ display: 'inline-block', margin: '5px 5px' }} key={value.id} onClick={() => _onclick(value.id)}>
-                    <img key={value.id} src={value.src} id={value.id} name={value.name} width={100} height={100} />
-                    <br />
-                    <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
-                  </div>
-                ),
-              )}
-            </InterestDiv>
-            <TitleText>써클 이름을 정해주세요</TitleText>
-            <br />
-            <input className="textinput" type="text" placeholder="써클 이름을 적어주세요" onChange={e => setCircleName(e.target.value)} />
-            <div>
-              <TitleText>제한인원을 설정해주세요</TitleText>
-              <input
-                className="textinput"
-                type="number"
-                placeholder="제한 인원(명)"
-                onChange={e => setCircleLimitPeople(parseInt(e.target.value))}
-              />
-            </div>
-            <TitleText>제한조건을 설정해주세요</TitleText>
-            <br />
-            <select
-              style={{
-                display: 'block',
-                width: 200,
-                padding: '0.5rem 0.8rem 0.5rem 0.8rem',
-                margin: '0.9vw auto',
-                border: 0,
-                borderRadius: 5,
-                fontSize: 20,
-              }}
-              defaultValue={circleLocation}
-              name="genderLimit"
-              onChange={e => setGenderLimit(parseInt(e.target.value))}
-            >
-              <option value="default" disabled={true}>
-                성별 제한
-              </option>
-              <option value="1">남자만 가입 가능</option>
-              <option value="2">여자만 가입 가능</option>
-              <option value="3">성별 제한 없음</option>
-            </select>
-            <textarea className="textinput" placeholder="제한조건을 적어주세요" onChange={e => setCircleLimit(e.target.value)} />
-            <TitleText>활동 장소를 설정해주세요</TitleText>
-            <br />
-            <select
-              style={{
-                display: 'block',
-                width: 700,
-                padding: '0.5rem 0.8rem 0.5rem 0.8rem',
-                margin: '0.9vw auto',
-                border: 0,
-                borderRadius: 5,
-                fontSize: 20,
-              }}
-              defaultValue={circleLocation}
-              name="location"
-              onChange={e => setCircleLocation(parseInt(e.target.value))}
-            >
-              <option value="default" disabled={true}>
-                지역을 선택해주세요.
-              </option>
-              {LocationOptions.map(value => (
-                <option key={value.id} value={value.id}>
-                  {value.name}
-                </option>
-              ))}
-              <option key="12" value="12">
-                상관없음
-              </option>
-            </select>
-            <TitleText>써클을 소개해주세요</TitleText>
-            <textarea className="textinput" placeholder="써클 소개를 적어주세요" onChange={e => setCircleInfo(e.target.value)} />
-            <TitleText>써클 대표 사진을 설정해주세요</TitleText>
-            <br />
-            <br />
-            <ImageSelectButton>
-              <label>
-                <div style={{ margin: 'auto', textAlign: 'center' }}>
-                  {fileImage ? (
-                    <img alt="sample" src={fileImage} style={{ borderRadius: 10, marginTop: 10, width: '180px', height: '180px' }} />
+        <form onSubmit={submit}>
+          <div className="form-box">
+            <div className="field1">
+              <text style={{ fontFamily: 'IBM-Bold', fontSize: 45, margin: '0 auto' }}>새로운 써클을 만들어보세요 !</text>
+              <br />
+              <TitleText>만들고자 하는 써클의 분야를 선택해주세요</TitleText>
+              <InterestDiv>
+                {arr.map(value =>
+                  interest == value.id ? (
+                    <div style={{ display: 'inline-block', margin: '5px 5px' }} key={value.id} onClick={() => _onclick(value.id)}>
+                      <img
+                        style={{ border: '4px solid black', borderRadius: '50%' }}
+                        key={value.id}
+                        src={value.src}
+                        id={value.id}
+                        name={value.name}
+                        width={100}
+                        height={100}
+                      />
+                      <br />
+                      <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
+                    </div>
                   ) : (
-                    <text style={{ fontSize: 100, margin: 'auto 0', lineHeight: '180px' }}>+</text>
-                  )}
-                </div>
-                <input type="file" accept="image/jpg, image/jpeg, image/png" style={{ display: 'none' }} onChange={saveFileImage} />
-              </label>
-            </ImageSelectButton>
+                    <div style={{ display: 'inline-block', margin: '5px 5px' }} key={value.id} onClick={() => _onclick(value.id)}>
+                      <img key={value.id} src={value.src} id={value.id} name={value.name} width={100} height={100} />
+                      <br />
+                      <text style={{ fontFamily: 'IBM-Regular' }}>{value.name}</text>
+                    </div>
+                  ),
+                )}
+              </InterestDiv>
+              <TitleText>써클 이름을 정해주세요</TitleText>
+              <br />
+              <input className="textinput" type="text" placeholder="써클 이름을 적어주세요" onChange={e => setCircleName(e.target.value)} />
+              <div>
+                <TitleText>제한인원을 설정해주세요</TitleText>
+                <input
+                  className="textinput"
+                  type="number"
+                  placeholder="제한 인원(명)"
+                  onChange={e => setCircleLimitPeople(parseInt(e.target.value))}
+                />
+              </div>
+              <TitleText>제한조건을 설정해주세요</TitleText>
+              <br />
+              <select
+                style={{
+                  display: 'block',
+                  width: 200,
+                  padding: '0.5rem 0.8rem 0.5rem 0.8rem',
+                  margin: '0.9vw auto',
+                  border: 0,
+                  borderRadius: 5,
+                  fontSize: 20,
+                }}
+                defaultValue={circleLocation}
+                name="genderLimit"
+                onChange={e => setGenderLimit(parseInt(e.target.value))}
+              >
+                <option value="default" disabled={true}>
+                  성별 제한
+                </option>
+                <option value="1">남자만 가입 가능</option>
+                <option value="2">여자만 가입 가능</option>
+                <option value="3">성별 제한 없음</option>
+              </select>
+              <textarea className="textinput" placeholder="제한조건을 적어주세요" onChange={e => setCircleLimit(e.target.value)} />
+              <TitleText>활동 장소를 설정해주세요</TitleText>
+              <br />
+              <select
+                style={{
+                  display: 'block',
+                  width: 700,
+                  padding: '0.5rem 0.8rem 0.5rem 0.8rem',
+                  margin: '0.9vw auto',
+                  border: 0,
+                  borderRadius: 5,
+                  fontSize: 20,
+                }}
+                defaultValue={circleLocation}
+                name="location"
+                onChange={e => setCircleLocation(parseInt(e.target.value))}
+              >
+                <option value="default" disabled={true}>
+                  지역을 선택해주세요.
+                </option>
+                {LocationOptions.map(value => (
+                  <option key={value.id} value={value.id}>
+                    {value.name}
+                  </option>
+                ))}
+                <option key="12" value="12">
+                  상관없음
+                </option>
+              </select>
+              <TitleText>써클을 소개해주세요</TitleText>
+              <textarea className="textinput" placeholder="써클 소개를 적어주세요" onChange={e => setCircleInfo(e.target.value)} />
+              <TitleText>써클 대표 사진을 설정해주세요</TitleText>
+              <br />
+              <br />
+              <ImageSelectButton>
+                <label>
+                  <div style={{ margin: 'auto', textAlign: 'center' }}>
+                    {fileImage ? (
+                      <img alt="sample" src={fileImage} style={{ borderRadius: 10, marginTop: 10, width: '180px', height: '180px' }} />
+                    ) : (
+                      <text style={{ fontSize: 100, margin: 'auto 0', lineHeight: '180px' }}>+</text>
+                    )}
+                  </div>
+                  <input type="file" accept="image/jpg, image/jpeg, image/png" style={{ display: 'none' }} onChange={saveFileImage} />
+                </label>
+              </ImageSelectButton>
+            </div>
+            <br />
+            <TitleText>프라임 써클을 설정해주세요</TitleText>
+            <br />
+            <div style={{ justifyContent: 'center', margin: '0 auto' }}>
+              <StyledLabel htmlFor={text}>
+                <StyledInput type="checkbox" id={text} name={text} />
+                <StyledP>{text}</StyledP>
+              </StyledLabel>
+            </div>
+            <Alert style={{ width: 730, margin: '0 auto' }} key="primary" variant="primary">
+              프라임 써클이란 ? 달마다 일정 가격을 지불하면 써클즈와 제휴된 업체에서 할인을 받을 수 있는 서비스입니다.
+            </Alert>
+            <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={submit} type="submit">
+              써클 만들기
+            </Button>
           </div>
-          <br />
-          <TitleText>프라임 써클을 설정해주세요</TitleText>
-          <br />
-          <div style={{ justifyContent: 'center', margin: '0 auto' }}>
-            <StyledLabel htmlFor={text}>
-              <StyledInput type="checkbox" id={text} name={text} />
-              <StyledP>{text}</StyledP>
-            </StyledLabel>
-          </div>
-          <Alert style={{ width: 730, margin: '0 auto' }} key="primary" variant="primary">
-            프라임 써클이란 ? 달마다 일정 가격을 지불하면 써클즈와 제휴된 업체에서 할인을 받을 수 있는 서비스입니다.
-          </Alert>
-          <Button size="lg" style={{ marginTop: 20, width: 700 }} variant="dark" onClick={submit}>
-            써클 만들기
-          </Button>
-        </div>
+        </form>
       </Container>
     </div>
   );

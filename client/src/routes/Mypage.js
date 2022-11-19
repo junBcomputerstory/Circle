@@ -143,7 +143,8 @@ function Mypage(props) {
     //   .catch(error => console.log(error));
   }, []);
 
-  const sendReviseData = () => {
+  const sendReviseData = event => {
+    event.preventDefault();
     axios
       .post('/mypage/profile/7', { nickname: reviseNickname, image: reviseUserImage })
       .then(response => console.log(response))
@@ -172,26 +173,28 @@ function Mypage(props) {
               </Button>
 
               <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-                <div style={style}>
-                  <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30, textAlign: 'center' }}>수정할 정보를 입력해주세요.</text>
-                  <input
-                    style={inputStyle}
-                    type="text"
-                    placeholder="닉네임"
-                    name="nickname"
-                    value={reviseNickname}
-                    onChange={e => setReviseNickname(e.target.value)}
-                  />
-                  <input style={inputStyle} type="file" name="imageFile" onChange={e => handleFileChange(e)} />
-                  <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                    <Button variant="contained" style={{ width: 170 }} onClick={sendReviseData}>
-                      수정하기
-                    </Button>
-                    <Button variant="contained" style={{ width: 170 }} onClick={handleClose}>
-                      닫기
-                    </Button>
+                <form onSubmit={sendReviseData}>
+                  <div style={style}>
+                    <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30, textAlign: 'center' }}>수정할 정보를 입력해주세요.</text>
+                    <input
+                      style={inputStyle}
+                      type="text"
+                      placeholder="닉네임"
+                      name="nickname"
+                      value={reviseNickname}
+                      onChange={e => setReviseNickname(e.target.value)}
+                    />
+                    <input style={inputStyle} type="file" name="imageFile" onChange={e => handleFileChange(e)} />
+                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                      <Button variant="contained" style={{ width: 170 }} type="submit">
+                        수정하기
+                      </Button>
+                      <Button variant="contained" style={{ width: 170 }} onClick={handleClose}>
+                        닫기
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                </form>
               </Modal>
             </div>
           </Nickname>
