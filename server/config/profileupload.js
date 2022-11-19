@@ -35,10 +35,9 @@ export const userimageupload=multer({
 export const userimagedelete=async(req,res,next)=>{
     const id=req.params.user_id;
     const check=await Check.profileimage(id);
-    const index=check[0].image_url.indexOf('User/userimage');
-    const way=check[0].image_url.substring(index);
-    console.log(way);
     if(check[0].image_url){
+        const index=check[0].image_url.indexOf('User/userimage');
+        const way=check[0].image_url.substring(index);
         console.log("데이터 존재");
         s3.deleteObject({
             Bucket: 'mycircles',

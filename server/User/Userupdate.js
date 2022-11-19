@@ -12,7 +12,7 @@ class Update{
         try{
             
             const IDrow= await Usercheck.IDcheck(userInfo[0]);
-            if(IDrow.length<1)
+            if(IDrow.length>1)
                 return errResponse(baseResponse.SIGNUP_REDUNDANT_ID);
             const hashedPW=crypto
                 .createHash("sha512")
