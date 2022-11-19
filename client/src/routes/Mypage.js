@@ -145,8 +145,20 @@ function Mypage(props) {
 
   const sendReviseData = event => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append('image', reviseUserImage);
+    formData.append(
+      'nickname',
+      new Blob([JSON.stringify(reviseNickname)], {
+        type: 'application/json',
+      }),
+    );
     axios
-      .post('/mypage/profile/7', { nickname: reviseNickname, image: reviseUserImage })
+      .post('/mypage/profile/7', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
       .then(response => console.log(response))
       .catch(error => console.log(error));
     setOpen(false);
