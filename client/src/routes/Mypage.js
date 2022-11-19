@@ -166,7 +166,12 @@ function Mypage(props) {
       <Header bgcolor="#f5f8fc" />
       <Container style={{ marginTop: '5%' }}>
         <InfoBox>
-          <img style={{ borderRadius: '50%' }} src={userImage} width="130" height="130" alt="profile_image" />
+          {userImage === null ? (
+            <img style={{ borderRadius: '50%' }} src="../img/logo.png" width="130" height="130" alt="profile_image" />
+          ) : (
+            <img style={{ borderRadius: '50%' }} src={userImage} width="130" height="130" alt="profile_image" />
+          )}
+
           <Nickname>
             {userNickname}님
             <div style={{ display: 'inline-block' }}>
@@ -226,9 +231,8 @@ function Mypage(props) {
         <Box>
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 뱃지</text>
           <MypageInterestBox>
-            {userBadge.map(data => (
-              <img style={{ margin: '0 5px' }} src={data.url} width="100" height="100" alt={data.url} />
-            ))}
+            {userBadge !== undefined &&
+              userBadge.map(data => <img style={{ margin: '0 5px' }} src={data.url} width="100" height="100" alt={data.url} />)}
           </MypageInterestBox>
         </Box>
         <Footer />
