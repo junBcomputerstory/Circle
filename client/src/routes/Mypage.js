@@ -146,13 +146,14 @@ function Mypage(props) {
   const sendReviseData = event => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append('image', reviseUserImage);
     formData.append(
       'nickname',
       new Blob([JSON.stringify(reviseNickname)], {
         type: 'application/json',
       }),
     );
+    formData.append('image', reviseUserImage);
+
     axios
       .post('/mypage/profile/7', formData, {
         headers: {
