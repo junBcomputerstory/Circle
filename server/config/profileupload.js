@@ -60,6 +60,7 @@ export const circleimageupload=multer({
         acl: 'public-read-write',
         key: (req, file, callback)=>{
             const uploaddir=req.body.name;
+            console.log("ㅅㅏ진넣ㅡㄴ중");
             console.log(req.body);
             const extention=path.extname(file.originalname);
             if(!allowed.includes(extention)){
