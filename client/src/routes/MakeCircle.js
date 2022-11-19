@@ -177,6 +177,7 @@ function MakeCircle(props) {
   const [circleInfo, setCircleInfo] = useState('');
   const [interest, setInterest] = useState(0);
   const [genderLimit, setGenderLimit] = useState(0);
+  const [prime, setPrime] = useState(0);
   const saveFileImage = e => {
     setImageFile(e.target.files[0]);
     setFileImage(URL.createObjectURL(e.target.files[0]));
@@ -184,25 +185,23 @@ function MakeCircle(props) {
   const text = '설정하려면 체크해주세요';
   const submit = event => {
     event.preventDefault();
-    axios.post('/circle/make', {
-      max_num: circleLimitPeople,
-      area_id: circleLocation,
-      interest_id: interest,
-      name: circleName,
-      image: fileImage,
-      restrict: circleLimit,
-      sex: genderLimit,
-      intro: circleInfo,
-      prime: 0,
-    });
-    console.log('제한인원:' + circleLimitPeople);
-    console.log('파일 이미지:' + imageFile);
-    console.log('서클 이름:' + circleName);
-    console.log('제한사항:' + circleLimit);
-    console.log('활동지역:' + circleLocation);
-    console.log('서클정보' + circleInfo);
-    console.log('흥미:' + interest);
-    console.log('성별제한:' + genderLimit);
+    let formData = new FormData();
+    formData.append('max_num', JSON.stringify(circleLimitPeople));
+    formData.append('area_id', JSON.stringify(circleLocation));
+    formData.append('interest_id', JSON.stringify(interest));
+    formData.append('name', JSON.stringify(circleName));
+    formData.append('restrict', JSON.stringify(circleLimit));
+    formData.append('sex', JSON.stringify(genderLimit));
+    formData.append('intro', JSON.stringify(circleInfo));
+    formData.append('prime', JSON.stringify(prime));
+    formData.append('image', fileImage);
+
+    axios
+      .post('/circle/make', formData, {
+        withCredentials: true,
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   };
   const pushInterest = id => {
     setInterest(id);
@@ -220,7 +219,7 @@ function MakeCircle(props) {
     <div style={{ textAlign: 'center' }}>
       <Header bgcolor="#f5f8fc" />
       <Container fluid style={{ backgroundColor: '#b5d1ff' }}>
-        <form onSubmit={submit}>
+        <form encType="multipart/form-data" onSubmit={submit}>
           <div className="form-box">
             <div className="field1">
               <text style={{ fontFamily: 'IBM-Bold', fontSize: 45, margin: '0 auto' }}>새로운 써클을 만들어보세요 !</text>
