@@ -103,11 +103,6 @@ function Mypage(props) {
   if (sessionStorage.length === 0) {
     document.location.href = 'login';
   }
-  const [reviseNickname, setReviseNickname] = useState(userNickname);
-  const [reviseUserImage, setReviseUserImage] = useState(null);
-  const handleFileChange = e => {
-    setReviseUserImage(e.target.files[0]);
-  };
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -143,25 +138,27 @@ function Mypage(props) {
     //   .catch(error => console.log(error));
   }, []);
 
+  const [reviseNickname, setReviseNickname] = useState(userNickname);
+  const [reviseUserImage, setReviseUserImage] = useState(null);
+  const handleFileChange = e => {
+    setReviseUserImage(e.target.files[0]);
+  };
+
+  const temp = axios.create({
+    baseURL: 'http://localhost:4000',
+  });
+
   const sendReviseData = event => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append(
-      'nickname',
-      new Blob([JSON.stringify(reviseNickname)], {
-        type: 'application/json',
-      }),
-    );
+    let formData = new FormData();
+    formData.append('nickname', JSON.stringify(reviseNickname));
     formData.append('image', reviseUserImage);
-
-    axios
-      .post('/mypage/profile/7', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+    temp
+      .post(`/user/mypage/profile/${userID}`, formData, {
+        withCredentials: true,
       })
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
     setOpen(false);
   };
   return (
@@ -186,7 +183,7 @@ function Mypage(props) {
               </Button>
 
               <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-                <form onSubmit={sendReviseData}>
+                <form encType="multipart/form-data" onSubmit={sendReviseData}>
                   <div style={style}>
                     <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30, textAlign: 'center' }}>수정할 정보를 입력해주세요.</text>
                     <input
@@ -197,7 +194,7 @@ function Mypage(props) {
                       value={reviseNickname}
                       onChange={e => setReviseNickname(e.target.value)}
                     />
-                    <input style={inputStyle} type="file" name="imageFile" onChange={e => handleFileChange(e)} />
+                    <input style={inputStyle} type="file" name="image" onChange={handleFileChange} />
                     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                       <Button variant="contained" style={{ width: 170 }} type="submit">
                         수정하기
