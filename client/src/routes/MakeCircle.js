@@ -168,7 +168,7 @@ function MakeCircle(props) {
     },
   ];
 
-  const [fileImage, setFileImage] = useState('');
+  const [fileImage, setFileImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [circleName, setCircleName] = useState('');
   const [circleLimit, setCircleLimit] = useState('');
@@ -186,14 +186,14 @@ function MakeCircle(props) {
   const submit = event => {
     event.preventDefault();
     let formData = new FormData();
-    formData.append('max_num', JSON.stringify(circleLimitPeople));
-    formData.append('area_id', JSON.stringify(circleLocation));
-    formData.append('interest_id', JSON.stringify(interest));
-    formData.append('name', JSON.stringify(circleName));
-    formData.append('restrict', JSON.stringify(circleLimit));
-    formData.append('sex', JSON.stringify(genderLimit));
-    formData.append('intro', JSON.stringify(circleInfo));
-    formData.append('prime', JSON.stringify(prime));
+    formData.append('max_num', circleLimitPeople);
+    formData.append('area_id', circleLocation);
+    formData.append('interest_id', interest);
+    formData.append('name', circleName);
+    formData.append('restrict', circleLimit);
+    formData.append('sex', genderLimit);
+    formData.append('intro', circleInfo);
+    formData.append('prime', prime);
     formData.append('image', fileImage);
 
     axios
