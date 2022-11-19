@@ -11,8 +11,8 @@ class CircleDao{
         return searchrow;
     }
     async insertCircle(connection,info){
-        const insertquery=`INSERT INTO Circle(name,area_id,interest_id,sex,caution,max_num,prime,cur_num,intro)
-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`;
+        const insertquery=`INSERT INTO Circle(name,area_id,interest_id,sex,caution,max_num,prime,cur_num,intro,circlepic,leader_email)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
         await connection.query(
             insertquery,
             info
@@ -71,6 +71,32 @@ class CircleDao{
             updatequery,
             vec
         );
+    }
+
+    async getpicture(connection,ID){
+        const getquery=`SELECT pic_url
+                        FROM Circle_gallery
+                        WHERE circle_id=?;`;
+        
+        const pictures=await connection.query(
+            getquery,
+            ID
+        );
+        
+        return pictures;
+    }
+
+    async gettodo(connection,ID){
+        const getquery=`SELECT date,schedule
+                        FROM Schedule_calender
+                        WHERE circle_id=?;`;
+        
+        const result=await connection.query(
+            getquery,
+            ID
+        )
+
+        return result;
     }
 
 }

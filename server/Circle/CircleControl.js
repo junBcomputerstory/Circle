@@ -11,29 +11,49 @@ class Control{
             return res.send(circles);
         },
 
-        make: async(req,res,next)=>{
+        make: async(req,res)=>{
             const CircleInfo=req.body;
-            console.log(req.body);
-            const re=await CircleUpdate.insertcircle(CircleInfo);
-            const circle=await CircleCheck.getnewcircleid();
-            req.body.circle_id=circle[0].id;
-            return next();
-        },
-
-        page: async(req,res)=>{
-            const Circleid=req.param.circle_id;
-            const circlerow=Circlecheck.idcheck(Circleid);
-
-            return res.send(circlerow);
-        },
-
-        addpicture: async(req,res)=>{
-            const Circleid=req.body.circle_id;
-            console.log(Circleid);
             const image=req.file.location;
-            const re=await CircleUpdate.insertpicture(Circleid,image);
+            const user_id=req.session.user.email;
+            console.log(req.body);
+            const re=await CircleUpdate.insertcircle(CircleInfo,image,user_id);
+            return res.send(re);
+        },
 
+        page: async(req,res,next)=>{
+            const Circleid=req.param.circle_id;
+            const circlerow=await Circlecheck.idcheck(Circleid);
+            req.circleinfo=circlerow;
+            const pictures=await CircleCheck.getgallery(Circleid);
+            req.circlegallery=pictures;
+            next();
+        },
+
+        showgallery: async(req,res)=>{
+            const circleid=req.params.circle_id;
+            console.log(circleid);
+            const re=await CircleCheck.getgallery(circleid);
+
+            return res.send(re);
+        },
+
+        addgallery: async(req,res)=>{
+            const Circleid=req.params.circle_id;
+            console.log(Circleid);
+            const re=await CircleUpdate.insertpicture(Circleid,image);
             res.send(re);
+        },
+
+        calender: async(req,res)=>{
+            const circleid=req.params.circle_id;
+            console.log(circleid);
+            const list=await CircleCheck.getcalender(circleid);
+            let result=new Object();
+            result.schedule=list;
+            result.circleinfo=req.circleinfo;
+            result.picture=req.circlegallery;
+
+            res.send(result);
         }
     } 
 }

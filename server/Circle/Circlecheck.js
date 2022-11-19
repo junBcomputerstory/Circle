@@ -37,6 +37,22 @@ class Circlecheck{
         connection.release();
         return id[0];
     }
+
+    async getgallery(id){
+        const connection= await pool.getConnection(async(conn)=>conn);
+        const picrow=await CircleDao.getpicture(connection,id);
+        connection.release();
+
+        return picrow[0];
+    }
+
+    async getcalender(id){
+        const connection=await pool.getConnection(async(conn)=>conn);
+        const todolist=await CircleDao.gettodo(connection,id);
+        connection.release();
+
+        return todolist[0];
+    }
 }
 
 export default new Circlecheck();
