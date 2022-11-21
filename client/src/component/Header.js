@@ -54,7 +54,7 @@ function Header(props) {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <LoginSigninHeader />
+        <LoginSigninHeader nickname={props.nickname} />
       </Container>
     </Navbar>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaUsers, FaExclamationTriangle, FaMapMarkerAlt } from 'react-icons/fa';
 import Alert from 'react-bootstrap/Alert';
@@ -39,18 +39,82 @@ const inputStyle = {
   backgroundColor: '#ccebff',
 };
 
-function CircleTitle(props) {
+const LocationOptions = [
+  {
+    id: 1,
+    name: '서울',
+  },
+  {
+    id: 2,
+    name: '부산',
+  },
+  {
+    id: 3,
+    name: '대구',
+  },
+  {
+    id: 4,
+    name: '인천',
+  },
+  {
+    id: 5,
+    name: '광주',
+  },
+  {
+    id: 6,
+    name: '대전',
+  },
+  {
+    id: 7,
+    name: '울산',
+  },
+  {
+    id: 8,
+    name: '세종',
+  },
+  {
+    id: 9,
+    name: '경기도',
+  },
+  {
+    id: 10,
+    name: '강원도',
+  },
+  {
+    id: 11,
+    name: '제주도',
+  },
+  {
+    id: 12,
+    name: '온라인',
+  },
+]; // 초기값 null 설정!!
+
+function CircleTitle({ info }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [joinMessage, setJoinMessage] = useState('');
   const [joinSex, setJoinSex] = useState(1);
   const [joinAge, setJoinAge] = useState(0);
+  const [areaName, setAreaName] = useState('');
+
+  const printArea = area_id => {
+    LocationOptions.forEach(value => {
+      if (value.id === area_id) {
+        setAreaName(value.name);
+      }
+    });
+  };
+
+  // useEffect(() => {
+  //   printArea(info.area_id);
+  // }, []);
   return (
     <>
       <CTitle style={{ display: 'flex', justifyContent: 'space-evenly ', lineHeight: '4em' }}>
         <Button></Button>
-        <text style={{ fontFamily: 'IBM-Bold', fontSize: 30 }}>{props.info.title}</text>
+        <text style={{ fontFamily: 'IBM-Bold', fontSize: 30 }}>{info.name}</text>
         <Button variant="contained" color="secondary" style={{ marginBottom: 3 }} onClick={handleOpen}>
           가입하기
         </Button>
@@ -95,15 +159,15 @@ function CircleTitle(props) {
       <CTitle style={{ height: '2em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <div stlye={{ alignItems: 'center' }}>
           <FaUsers style={{ marginRight: 5, marginBottom: 3 }} size="20" color="#3639ff" />
-          써클 인원 : 0/{props.info.maxPeople}명
+          써클 인원 : {info.cur_num}/{info.max_num}명
         </div>
         <div stlye={{ alignItems: 'center' }}>
           <FaMapMarkerAlt style={{ marginRight: 5, marginBottom: 3 }} size="20" color="#ffcd36" />
-          지역 : {props.info.location}
+          지역 : {areaName}
         </div>
         <div stlye={{ alignItems: 'center' }}>
           <FaExclamationTriangle style={{ marginRight: 5, marginBottom: 3 }} size="20" color="red" />
-          제한 조건 : {props.info.limitInfo}
+          제한 조건 : 없쇼
         </div>
       </CTitle>
       <Alert
@@ -112,7 +176,7 @@ function CircleTitle(props) {
         variant="warning"
       >
         <AiOutlineNotification style={{ marginRight: 5, marginBottom: 3 }} size="25" />
-        {props.info.notice}
+        {info.intro}
       </Alert>
     </>
   );

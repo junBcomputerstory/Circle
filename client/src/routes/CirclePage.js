@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, Component, useEffect } from 'react';
 import styled from 'styled-components';
-import Header from '../component/Header_Fixed';
-import CircleTitle from '../component/circle/CircleTitle';
-import CircleCalendarDiv from '../component/circle/CircleCalendarDiv';
-import BoardList from '../component/circle/BoardList';
-import Gallery from '../component/circle/Gallery';
-import CodeBoardList from '../component/circle/CodeBoardList';
+import { Route, Routes } from 'react-router-dom';
+import CircleDetailPage from './CircleDetailPage';
+import axios from 'axios';
 
 const Box = styled.div`
   justify-content: center;
@@ -26,21 +23,31 @@ const Footer = styled.div`
 `;
 
 function CirclePage(props) {
-  console.log(CirclesInfo.title);
+  const [circles, setCircles] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        '/circle/find',
+        {
+          params: { interest_id: 999, area_id: 999, sex: 999, name: '' },
+        },
+        {
+          WithCredentials: true,
+        },
+      )
+      .then(res => {
+        setCircles(res.data);
+        console.log(circles);
+      });
+  }, []);
+
   return (
-    <>
-      {/* <div style={{ backgroundColor: 'orange' }}> */}
-      <Header />
-      <Box>
-        <CircleTitle info={CirclesInfo} />
-      </Box>
-      <CircleCalendarDiv />
-      <BoardList />
-      <Gallery />
-      <CodeBoardList />
-      <Footer />
-      {/* </div> */}
-    </>
+    <Routes>
+      {/* {circles.map(value => (
+        <Route key={value.id} path= element={<CircleDetailPage />} />
+      ))} */}
+      <Route path="1" element={<CircleDetailPage info={circles[0]} />} />
+    </Routes>
   );
 }
 

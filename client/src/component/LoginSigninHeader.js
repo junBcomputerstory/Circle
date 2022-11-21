@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
 
 const Text = styled.text`
   font-family: 'IBM-Light';
@@ -10,11 +11,23 @@ const Text = styled.text`
 `;
 
 function LoginSigninHeader(props) {
+  const [nickname, setNickname] = useState('');
   const [isLogin, setIsLogin] = useState(false);
+  async function getNickname() {
+    try {
+      const response = await axios.get('/user/mypage');
+      setNickname(response.data.nickname);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (sessionStorage.length != 0) {
       setIsLogin(true);
     }
+    getNickname();
+    console.log('nickname:' + nickname);
   }, []);
 
   const Logout = () => {
@@ -26,7 +39,7 @@ function LoginSigninHeader(props) {
 
   return isLogin ? (
     <>
-      <Text>{sessionStorage.getItem('nickname')}님, 환영합니다!</Text>
+      <Text>{nickname ? nickname : sessionStorage.getItem('nickname')}님, 환영합니다!</Text>
       <button style={{ border: 'none', borderRadius: 10, backgroundColor: '#F8F5FC' }} onClick={Logout}>
         <text style={{ fontFamily: 'iBM-Light' }}>로그아웃</text>
       </button>

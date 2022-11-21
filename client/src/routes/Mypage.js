@@ -109,7 +109,7 @@ function Mypage(props) {
 
   async function getData() {
     try {
-      const response = await axios.get('/user/mypage');
+      const response = await axios.get('/user/mypage', {});
       console.log(response);
       setUserNickname(response.data.nickname);
       setUserInterest(response.data.interest);
@@ -151,7 +151,7 @@ function Mypage(props) {
   const sendReviseData = event => {
     event.preventDefault();
     let formData = new FormData();
-    formData.append('nickname', JSON.stringify(reviseNickname));
+    formData.append('nickname', reviseNickname);
     formData.append('image', reviseUserImage);
     temp
       .post(`/user/mypage/profile/${userID}`, formData, {
@@ -163,7 +163,7 @@ function Mypage(props) {
   };
   return (
     <div>
-      <Header bgcolor="#f5f8fc" />
+      <Header nickname={userNickname} bgcolor="#f5f8fc" />
       <Container style={{ marginTop: '5%' }}>
         <InfoBox>
           {userImage === null ? (
