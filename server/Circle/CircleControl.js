@@ -1,7 +1,5 @@
 import CircleUpdate from './Circleupdate.js';
 import CircleCheck from './Circlecheck.js';
-import * as baseResponse from'../config/baseResponse.js';
-import {errResponse,response} from '../config/response.js';
 import Circlecheck from './Circlecheck.js';
 import Userupdate from '../User/Userupdate.js'
 class Control{
@@ -22,13 +20,18 @@ class Control{
             return res.send(result);
         },
 
-        page: async(req,res,next)=>{
+        page: async(req,res)=>{
             const Circleid=req.param.circle_id;
+            let result=new Object();
             const circlerow=await Circlecheck.idcheck(Circleid);
-            req.circleinfo=circlerow;
             const pictures=await CircleCheck.getgallery(Circleid);
-            req.circlegallery=pictures;
-            next();
+            const todo=await CircleCheck.getcalender(Circleid);
+            
+            result.circleinfo=circlerow;
+            result.circlepicture=pictures;
+            result.calender=todo;
+
+            res.send(result);
         },
 
         showgallery: async(req,res)=>{
@@ -46,16 +49,16 @@ class Control{
             res.send(re);
         },
 
-        calender: async(req,res)=>{
+        board: async(req,res)=>{
             const circleid=req.params.circle_id;
             console.log(circleid);
-            const list=await CircleCheck.getcalender(circleid);
-            let result=new Object();
-            result.schedule=list;
-            result.circleinfo=req.circleinfo;
-            result.picture=req.circlegallery;
+        },
 
-            res.send(result);
+        join: async(req,res)=>{
+            const circle_id=req.parms.circle_id;
+            const user_id=req.session.email;
+            const re=await Userupdate.updatecircle(user_id,circle_id);
+
         }
     } 
 }

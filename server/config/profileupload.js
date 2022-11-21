@@ -68,6 +68,26 @@ export const circleimageupload=multer({
             callback(null, `Circle/circleimage/${uploaddir}_circle_image${extention}`)
         },
     }),
-})
+});
+
+export const galleryupload=multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'mycircles',
+        contentType: multerS3.AUTO_CONTENT_TYPE ,
+        acl: 'public-read-write',
+        key: (req, file, callback)=>{
+            const uploaddir=req.params.circle_id;
+            const uploadnum=req.body.num;
+            console.log("ㅅㅏ진넣ㅡㄴ중");
+            console.log(req.body);
+            const extention=path.extname(file.originalname);
+            if(!allowed.includes(extention)){
+                return callback(new Error('wrong format image'));
+            }
+            callback(null, `Circle/circlegallery/${uploaddir}_gallery_image_${uploadnum}${extention}`);
+        },
+    }),
+});
 
 

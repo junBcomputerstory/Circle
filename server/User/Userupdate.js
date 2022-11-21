@@ -110,7 +110,6 @@ class Update{
             console.log(e);
             return errResponse(baseResponse.DB_ERROR);
         }
-
     }
 }
 export default new Update;
