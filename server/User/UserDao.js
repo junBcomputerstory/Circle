@@ -154,6 +154,22 @@ async selectUserPassword(connection,ID,PW) {
                          WHERE user_id =?;`;
       await connection.query(insertquery,vec);
     }
+
+    async circleupdate(connection,email,circle_id){
+      try{
+        const vec=[circle_id,circle_id,email];
+        const updatequery=`UPDATE User
+                           SET circle=IF(circle IS NULL, ?, CONCAT(circle,',',?))
+                           WHERE email=?;`;
+        await connection.query(
+          updatequery,
+          vec
+        );
+      }
+      catch(e){
+        console.log(e);
+      }
+    }
   }
 export default new userDao;
 

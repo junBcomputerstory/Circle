@@ -51,15 +51,32 @@ class control {
 
     
     logout: async(req,res)=>{
-      
+      const session=req.session;
+      try{
+        if(session.user){
+          await req.session.destroy(function(err){
+            if(err)
+              console.log(err);
+          });
+        }
+      }
+      catch(e){
+        console.log(e);
+      }
+      finally{
+        res.redirect('/');
+      }
     },
+    
     mypageupdate: async(req,res)=>{
       console.log("디비업로드");
+      console.log(req.body);
       const user_id=parseInt(req.params.user_id);
       const image=req.file.location;
       const profile=await Update.profileupdate(user_id,image);
       if(req.body.nickname){
-      const re=await Update.editUser(req.body.nickname,user_id);
+      const nickname=JSON.parse(req.body.nickname);
+      const re=await Update.editUser(nickname,user_id);
       }
       res.send(profile);
     }

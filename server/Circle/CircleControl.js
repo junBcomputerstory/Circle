@@ -3,6 +3,7 @@ import CircleCheck from './Circlecheck.js';
 import * as baseResponse from'../config/baseResponse.js';
 import {errResponse,response} from '../config/response.js';
 import Circlecheck from './Circlecheck.js';
+import Userupdate from '../User/Userupdate.js'
 class Control{
     process={
         find: async(req,res)=>{
@@ -15,9 +16,10 @@ class Control{
             const CircleInfo=req.body;
             const image=req.file.location;
             const user_id=req.session.user.email;
-            console.log(req.body);
             const re=await CircleUpdate.insertcircle(CircleInfo,image,user_id);
-            return res.send(re);
+            const circle_id=await Circlecheck.getnewcircleid();
+            const result=await Userupdate.updatecircle(user_id,circle_id[0].id);
+            return res.send(result);
         },
 
         page: async(req,res,next)=>{

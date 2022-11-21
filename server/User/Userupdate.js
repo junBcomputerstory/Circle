@@ -99,5 +99,18 @@ class Update{
             return errResponse(baseResponse.DB_ERROR);
         }
     }
+
+    async updatecircle(email,circle_id){
+        try{
+            const connection=await pool.getConnection(async (conn)=>conn);
+            await userDao.circleupdate(connection,email,circle_id);
+            return response(baseResponse.SUCCESS);
+        }
+        catch(e){
+            console.log(e);
+            return errResponse(baseResponse.DB_ERROR);
+        }
+
+    }
 }
 export default new Update;
