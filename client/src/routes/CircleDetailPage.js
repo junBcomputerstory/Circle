@@ -37,7 +37,6 @@ function CircleDetailPage(props) {
       .get(`/circle/${params.id}`)
       .then(response => {
         console.log(response.data.circleInfo);
-        setCircleInfo(response.data.circleInfo);
       })
       .catch(error => console.log(error));
   }, []);
@@ -46,7 +45,7 @@ function CircleDetailPage(props) {
       {/* <div style={{ backgroundColor: 'orange' }}> */}
       <Header />
       <Box>
-        <CircleTitle info={circleInfo} />
+        <CircleTitle />
       </Box>
       <CircleCalendarDiv />
       <BoardList />
