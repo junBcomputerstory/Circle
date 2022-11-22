@@ -32,7 +32,7 @@ class CircleDao{
     async findid(connection,id){
         const searchquery=` SELECT *
                             FROM Circle
-                            WHERE ciecle_id=?;`;
+                            WHERE id=?;`;
         const re=await connection.query(
             searchquery,
             id
@@ -88,7 +88,7 @@ class CircleDao{
 
     async gettodo(connection,ID){
         const getquery=`SELECT date,schedule
-                        FROM Schedule_calender
+                        FROM Schedule_calendar
                         WHERE circle_id=?;`;
         
         const result=await connection.query(

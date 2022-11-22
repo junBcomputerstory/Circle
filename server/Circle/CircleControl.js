@@ -22,7 +22,8 @@ class Control{
         },
 
         page: async(req,res)=>{
-            const Circleid=req.param.circle_id;
+            const Circleid=parseInt(req.params.circle_id);
+            console.log(Circleid);
             let result=new Object();
             const circlerow=await Circlecheck.idcheck(Circleid);
             const pictures=await CircleCheck.getgallery(Circleid);
