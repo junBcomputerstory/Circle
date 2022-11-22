@@ -2,6 +2,7 @@ import CircleUpdate from './Circleupdate.js';
 import CircleCheck from './Circlecheck.js';
 import Circlecheck from './Circlecheck.js';
 import Userupdate from '../User/Userupdate.js'
+import Usercheck from '../User/Usercheck.js';
 class Control{
     process={
         find: async(req,res)=>{
@@ -49,9 +50,15 @@ class Control{
             res.send(re);
         },
 
-        board: async(req,res)=>{
+        boardlist: async(req,res)=>{
             const circleid=req.params.circle_id;
             console.log(circleid);
+            const re=await Circlecheck.checkboard(circleid);
+            let user=new Object();
+            for(let i=0;i<re.length;i++){
+                user[i].user_id=re[i].user_id;
+            }
+            const username=await Usercheck.getnickname(user);
         },
 
         join: async(req,res)=>{

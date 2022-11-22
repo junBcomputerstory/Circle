@@ -170,6 +170,18 @@ async selectUserPassword(connection,ID,PW) {
         console.log(e);
       }
     }
+
+    async getboard(connection,ID){
+      const getquery=`SELECT *
+                      FROM Circle_board
+                      WHERE circle_id=?;`;
+      const re=await connection.query(
+        getquery,
+        ID
+      );
+      
+      return re;
+    }
   }
 export default new userDao;
 

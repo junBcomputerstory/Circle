@@ -1,4 +1,5 @@
 import {pool} from '../config/mysql.js';
+import UserDao from '../User/UserDao.js';
 import CircleDao from './CircleDao.js';
 
 class Circlecheck{
@@ -52,6 +53,14 @@ class Circlecheck{
         connection.release();
 
         return todolist[0];
+    }
+
+    async checkboard(id){
+        const connection=await pool.getConnection(async(conn)=>conn);
+        const board=await UserDao.getboard(connection,id);
+        connection.release();
+
+        return board[0];
     }
 }
 
