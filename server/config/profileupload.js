@@ -80,11 +80,12 @@ export const galleryupload=multer({
             const uploaddir=req.params.circle_id;
             console.log("ㅅㅏ진넣ㅡㄴ중");
             console.log(req.body);
+            const num=req.body.picturelength;
             const extention=path.extname(file.originalname);
             if(!allowed.includes(extention)){
                 return callback(new Error('wrong format image'));
             }
-            callback(null, `Circle/circlegallery/${uploaddir}_gallery_image_${extention}`);
+            callback(null, `Circle/circlegallery/${uploaddir}_gallery_image_${num}${extention}`);
         },
     }),
 });
