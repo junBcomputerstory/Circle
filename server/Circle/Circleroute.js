@@ -1,6 +1,6 @@
 import express from'express';
 import Control from './CircleControl.js';
-import { circleimageupload } from '../config/profileupload.js';
+import { circleimageupload, galleryupload  } from '../config/profileupload.js';
 import multer from 'multer';
 
 class Circleroute{
@@ -14,7 +14,7 @@ class Circleroute{
         this.router.post('/make',circleimageupload.single('image'),Control.process.make);
         this.router.get('/:circle_id',Control.process.page);
         this.router.get('/:circle_id/gallery',Control.process.showgallery);
-        this.router.post('/:circle_id/gallery',Control.process.addgallery);
+        this.router.post('/:circle_id/gallery',galleryupload.single('image'),Control.process.addgallery);
         this.router.post('/:circle_id/join',Control.process.join);
         this.router.get('/:circle_id/board',Control.process.boardlist);
         //this.router.post('/:circle_id/board',Control.process.writeboard);

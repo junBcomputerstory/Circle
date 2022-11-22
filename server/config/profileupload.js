@@ -78,14 +78,13 @@ export const galleryupload=multer({
         acl: 'public-read-write',
         key: (req, file, callback)=>{
             const uploaddir=req.params.circle_id;
-            const uploadnum=req.body.num;
             console.log("ㅅㅏ진넣ㅡㄴ중");
             console.log(req.body);
             const extention=path.extname(file.originalname);
             if(!allowed.includes(extention)){
                 return callback(new Error('wrong format image'));
             }
-            callback(null, `Circle/circlegallery/${uploaddir}_gallery_image_${uploadnum}${extention}`);
+            callback(null, `Circle/circlegallery/${uploaddir}_gallery_image_${extention}`);
         },
     }),
 });
