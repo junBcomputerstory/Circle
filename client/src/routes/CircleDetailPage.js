@@ -34,10 +34,10 @@ function CircleDetailPage(props) {
 
   useEffect(() => {
     axios.get(`/circle/${params.id}`).then(response => {
-      console.log(response.data);
+      console.log(response);
       setCircleInfo(response.data);
     });
-  });
+  }, []);
   return (
     <>
       {/* <div style={{ backgroundColor: 'orange' }}> */}
