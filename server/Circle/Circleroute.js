@@ -13,7 +13,6 @@ class Circleroute{
         this.router.get('/find',Control.process.find);
         this.router.post('/make',circleimageupload.single('image'),Control.process.make);
         this.router.get('/:circle_id',Control.process.page);
-        this.router.get('/:circle_id/gallery',Control.process.showgallery);
         this.router.post('/:circle_id/gallery',galleryupload.single('image'),Control.process.addgallery);
         this.router.post('/:circle_id/join',Control.process.join);
         this.router.get('/:circle_id/board',Control.process.boardlist);
