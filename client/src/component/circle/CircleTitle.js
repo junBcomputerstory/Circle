@@ -107,9 +107,6 @@ function CircleTitle({ info }) {
     });
   };
 
-  // useEffect(() => {
-  //   printArea(info.area_id);
-  // }, []);
   return (
     <>
       <CTitle style={{ display: 'flex', justifyContent: 'space-evenly ', lineHeight: '4em' }}>

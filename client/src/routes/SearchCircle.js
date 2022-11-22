@@ -5,6 +5,7 @@ import { GoSearch } from 'react-icons/go';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const InterestOptions = [
   {
@@ -185,7 +186,6 @@ function SearchCircle(props) {
       setResultData(response.data);
       printLocation(response.data);
       printInterest(response.data);
-      printIn;
     } catch (error) {
       console.error(error);
     }
@@ -269,9 +269,18 @@ function SearchCircle(props) {
               </Card.Text>
               <Card.Text style={{ fontFamily: 'IBM-Light', margin: '0 15px' }}>지역 : {circleLoc[index]}</Card.Text>
             </Card.Body>
-            <Button style={{ marginRight: 10, marginLeft: 10 }} variant="contained">
-              이동하기
-            </Button>
+            <Link
+              to={{
+                pathname: `/circle/${value.id}`,
+                state: {
+                  id: { value },
+                },
+              }}
+            >
+              <Button style={{ marginRight: 10, marginLeft: 10 }} variant="contained">
+                이동하기
+              </Button>
+            </Link>
           </Card>
         ))}
       </SearchList>

@@ -17,7 +17,7 @@ render(
       <Route path="/" element={<App />} />
       <Route path="Signin" element={<Signin />} />
       <Route path="Login" element={<Login />} />
-      <Route path="circles/*" element={<CirclePage />} />
+      <Route path="circle/*" element={<CirclePage />} />
       <Route path="Mypage" element={<Mypage />} />
       <Route path="Makecircle" element={<MakeCircle />} />
       <Route path="Searchcircle" element={<SearchCircle />} />

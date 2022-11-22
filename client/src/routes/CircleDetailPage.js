@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Header from '../component/Header_Fixed';
 import CircleTitle from '../component/circle/CircleTitle';
@@ -6,6 +6,8 @@ import CircleCalendarDiv from '../component/circle/CircleCalendarDiv';
 import BoardList from '../component/circle/BoardList';
 import Gallery from '../component/circle/Gallery';
 import CodeBoardList from '../component/circle/CodeBoardList';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const Box = styled.div`
   justify-content: center;
@@ -25,14 +27,23 @@ const Footer = styled.div`
   height: 200px;
 `;
 
-function CircleDetailPage({ info }) {
-  console.log('info:' + info);
+function CircleDetailPage(props) {
+  const [circleInfo, setCircleInfo] = useState([]);
+  const params = useParams();
+  console.log(params.id);
+
+  useEffect(() => {
+    axios.get(`/circle/${params.id}`).then(response => {
+      console.log(response.data);
+      setCircleInfo(response.data);
+    });
+  });
   return (
     <>
       {/* <div style={{ backgroundColor: 'orange' }}> */}
       <Header />
       <Box>
-        <CircleTitle info={CirclesInfo} />
+        <CircleTitle info={circleInfo} />
       </Box>
       <CircleCalendarDiv />
       <BoardList />

@@ -43,10 +43,7 @@ function CirclePage(props) {
 
   return (
     <Routes>
-      {/* {circles.map(value => (
-        <Route key={value.id} path= element={<CircleDetailPage />} />
-      ))} */}
-      <Route path="1" element={<CircleDetailPage info={circles[0]} />} />
+      <Route path="/:id" element={<CircleDetailPage info={circles[0]} />} />
     </Routes>
   );
 }
