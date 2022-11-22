@@ -28,9 +28,9 @@ class Control{
             const circlerow=await Circlecheck.idcheck(Circleid);
             const pictures=await CircleCheck.getgallery(Circleid);
             const todo=await CircleCheck.getcalender(Circleid);
-            result.circleinfo=circlerow;
-            result.circlepicture=pictures;
-            result.calender=todo;
+            result.circleinfo=JSON.stringify(circlerow);
+            result.circlepicture=JSON.stringify(pictures);
+            result.calender=JSON.stringify(todo);
 
             res.send(result);
         },
