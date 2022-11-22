@@ -9,6 +9,57 @@ import CodeBoardList from '../component/circle/CodeBoardList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+const LocationOptions = [
+  {
+    id: 1,
+    name: '서울',
+  },
+  {
+    id: 2,
+    name: '부산',
+  },
+  {
+    id: 3,
+    name: '대구',
+  },
+  {
+    id: 4,
+    name: '인천',
+  },
+  {
+    id: 5,
+    name: '광주',
+  },
+  {
+    id: 6,
+    name: '대전',
+  },
+  {
+    id: 7,
+    name: '울산',
+  },
+  {
+    id: 8,
+    name: '세종',
+  },
+  {
+    id: 9,
+    name: '경기도',
+  },
+  {
+    id: 10,
+    name: '강원도',
+  },
+  {
+    id: 11,
+    name: '제주도',
+  },
+  {
+    id: 12,
+    name: '온라인',
+  },
+];
+
 const Box = styled.div`
   justify-content: center;
 `;
@@ -29,27 +80,41 @@ const Footer = styled.div`
 
 function CircleDetailPage(props) {
   const [circleInfo, setCircleInfo] = useState({});
+  const [areaName, setAreaName] = useState('');
+  const [galleryInfo, setGalleryInfo] = useState([]);
+
   const params = useParams();
   console.log('param:' + params.id);
+
+  const printArea = area_id => {
+    LocationOptions.forEach(value => {
+      if (value.id === area_id) {
+        setAreaName(value.name);
+      }
+    });
+  };
 
   useEffect(() => {
     axios
       .get(`/circle/${params.id}`)
       .then(response => {
-        console.log(response.data.circleInfo);
+        console.log(response.data.circlepicture);
+        setCircleInfo(response.data.circleinfo[0]);
+        printArea(response.data.circleinfo[0].area_id);
+        console.log('areaname:' + areaName);
+        setGalleryInfo(response.data.circlepicture);
       })
       .catch(error => console.log(error));
   }, []);
   return (
     <>
-      {/* <div style={{ backgroundColor: 'orange' }}> */}
       <Header />
       <Box>
-        <CircleTitle />
+        <CircleTitle info={circleInfo} location={areaName} />
       </Box>
       <CircleCalendarDiv />
       <BoardList />
-      <Gallery />
+      <Gallery id={circleInfo.id} gallery={galleryInfo} />
       <CodeBoardList />
       <Footer />
       {/* </div> */}

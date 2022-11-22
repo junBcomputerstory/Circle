@@ -277,7 +277,7 @@ function SearchCircle(props) {
                 },
               }}
             >
-              <Button style={{ marginRight: 10, marginLeft: 10 }} variant="contained">
+              <Button style={{ width: '18rm', marginRight: 10, marginLeft: 10 }} variant="contained">
                 이동하기
               </Button>
             </Link>
