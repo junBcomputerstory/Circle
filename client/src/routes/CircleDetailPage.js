@@ -28,15 +28,18 @@ const Footer = styled.div`
 `;
 
 function CircleDetailPage(props) {
-  const [circleInfo, setCircleInfo] = useState([]);
+  const [circleInfo, setCircleInfo] = useState({});
   const params = useParams();
-  console.log(params.id);
+  console.log('param:' + params.id);
 
   useEffect(() => {
-    axios.get(`/circle/${params.id}`).then(response => {
-      console.log(response);
-      setCircleInfo(response.data);
-    });
+    axios
+      .get(`/circle/${params.id}`)
+      .then(response => {
+        console.log(response.data.circleInfo);
+        setCircleInfo(response.data.circleInfo);
+      })
+      .catch(error => console.log(error));
   }, []);
   return (
     <>

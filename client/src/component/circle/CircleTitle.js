@@ -111,7 +111,7 @@ function CircleTitle({ info }) {
     <>
       <CTitle style={{ display: 'flex', justifyContent: 'space-evenly ', lineHeight: '4em' }}>
         <Button></Button>
-        <text style={{ fontFamily: 'IBM-Bold', fontSize: 30 }}>{info.name}</text>
+        {/* <text style={{ fontFamily: 'IBM-Bold', fontSize: 30 }}>{info.name}</text> */}
         <Button variant="contained" color="secondary" style={{ marginBottom: 3 }} onClick={handleOpen}>
           가입하기
         </Button>
@@ -156,11 +156,11 @@ function CircleTitle({ info }) {
       <CTitle style={{ height: '2em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <div stlye={{ alignItems: 'center' }}>
           <FaUsers style={{ marginRight: 5, marginBottom: 3 }} size="20" color="#3639ff" />
-          써클 인원 : {info.cur_num}/{info.max_num}명
+          {/* 써클 인원 : {info.cur_num}/{info.max_num}명 */}
         </div>
         <div stlye={{ alignItems: 'center' }}>
           <FaMapMarkerAlt style={{ marginRight: 5, marginBottom: 3 }} size="20" color="#ffcd36" />
-          지역 : {areaName}
+          지역 :
         </div>
         <div stlye={{ alignItems: 'center' }}>
           <FaExclamationTriangle style={{ marginRight: 5, marginBottom: 3 }} size="20" color="red" />
@@ -173,7 +173,7 @@ function CircleTitle({ info }) {
         variant="warning"
       >
         <AiOutlineNotification style={{ marginRight: 5, marginBottom: 3 }} size="25" />
-        {info.intro}
+        {/* {info.intro} */}
       </Alert>
     </>
   );
