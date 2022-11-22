@@ -19,9 +19,8 @@ class Circlecheck{
     }
     async idcheck(id){
         const connection= await pool.getConnection(async(conn)=>conn);
-        const circlerow=CircleDao.findid(connection,id);
+        const circlerow=await CircleDao.findid(connection,id);
         connection.release();
-
         return circlerow[0];
     }
     async userCircle(id){
