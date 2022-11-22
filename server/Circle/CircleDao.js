@@ -63,9 +63,8 @@ class CircleDao{
     }
 
     async updateimage(connection,vec){
-        const updatequery=`UPDATE Circle
-                           SET circlepic=?
-                           WHERE id=?;  `;
+        const updatequery=`INSERT INTO Circle_gallery(pic_url,circle_id)
+                            VALUES(?,?);`;
 
         await connection.query(
             updatequery,

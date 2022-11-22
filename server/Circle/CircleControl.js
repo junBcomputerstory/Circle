@@ -45,6 +45,7 @@ class Control{
 
         addgallery: async(req,res)=>{
             const Circleid=req.params.circle_id;
+            const image=req.file.location;
             console.log(Circleid);
             const re=await CircleUpdate.insertpicture(Circleid,image);
             res.send(re);
