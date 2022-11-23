@@ -8,6 +8,7 @@ import Gallery from '../component/circle/Gallery';
 import CodeBoardList from '../component/circle/CodeBoardList';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import CircleCalendar_schedule from '../component/circle/CircleCalendar_schedule';
 
 const LocationOptions = [
   {
@@ -112,7 +113,7 @@ function CircleDetailPage(props) {
       <Box>
         <CircleTitle info={circleInfo} location={areaName} />
       </Box>
-      <CircleCalendarDiv />
+      <CircleCalendar_schedule id={circleInfo.id} />
       <BoardList id={circleInfo.id} />
       <Gallery id={circleInfo.id} gallery={galleryInfo} />
       <CodeBoardList />
