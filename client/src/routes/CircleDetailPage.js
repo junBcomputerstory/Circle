@@ -111,7 +111,7 @@ function CircleDetailPage(props) {
         console.log(response.data.board);
       })
       .catch(error => console.log(error));
-  }, [galleryInfo, calendarInfo, boardInfo]);
+  }, []);
   return (
     <>
       <Header />
