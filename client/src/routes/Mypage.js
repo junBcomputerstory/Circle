@@ -123,19 +123,6 @@ function Mypage(props) {
 
   useEffect(() => {
     getData();
-    // axios
-    //   .get('/user/mypage')
-    //   .then(response => {
-    //     console.log(response.data);
-    //     setUserNickname(response.data.nickname);
-    //     setUserInterest(response.data.interest);
-    //     setUserBadge(response.data.badge);
-    //     setUserImage(response.data.image);
-    //     setUserID(response.data.user_id);
-    //     console.log('userr: ' + response.data.user_id);
-    //     console.log('userID : ' + userID);
-    //   })
-    //   .catch(error => console.log(error));
   }, []);
 
   const [reviseNickname, setReviseNickname] = useState(userNickname);
