@@ -8,6 +8,21 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/esm/Button';
 import { Interests } from '../component/Interests';
 import axios from 'axios';
+import { Modal } from '@mui/material';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 500,
+  backgroundColor: 'white',
+  borderRadius: 10,
+  boxShadow: 24,
+  p: 4,
+  textAlign: 'center',
+  padding: 20,
+};
 
 const TitleText = styled.text`
   font-family: 'IBM-Regular';
@@ -168,6 +183,14 @@ function MakeCircle(props) {
     },
   ];
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [fileImage, setFileImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [circleName, setCircleName] = useState('');
@@ -204,6 +227,7 @@ function MakeCircle(props) {
       })
       .then(response => console.log(response))
       .catch(error => console.log(error));
+    document.location.href = '/';
   };
   const pushInterest = id => {
     setInterest(id);
