@@ -109,7 +109,7 @@ class CircleDao{
     }
 
     async updatecalender(connection,vec){
-        const insertquery=`INSERT INTO Schedule_calender(circle_id,date,schedule)
+        const insertquery=`INSERT INTO Schedule_calendar(circle_id,date,schedule)
                             VALUES(?,?,?);`;
         
         await connection.query(
