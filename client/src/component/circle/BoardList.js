@@ -36,7 +36,7 @@ const BoardDiv = styled.div`
   margin-top: 40px;
 `;
 
-function BoardList({ id }) {
+function BoardList({ id, boardinfo }) {
   const [open, setOpen] = useState(false);
   const [openBoard, setOpenBoard] = useState(false);
   const handleBoardOpen = () => setOpenBoard(true);
@@ -108,12 +108,7 @@ function BoardList({ id }) {
           </tr>
         </thead> */}
         <tbody>
-          <tr>
-            <td>1</td>
-            <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <div>
-                <span onclick={handleBoardOpen}>내일 모여서 카공하실분 ?</span>
-                {/* <Modal
+          {/* <Modal
                   open={openBoard}
                   onClose={handleBoardClose}
                   aria-labelledby="modal-modal-title"
@@ -125,24 +120,17 @@ function BoardList({ id }) {
                   <hr />
                   <text style={{ fontFamily: 'IBM-Regular', fontSize: 24 }}>댓글</text>
                 </Modal> */}
-              </div>
-              <span style={{ textAlign: 'right', fontSize: 12 }}>이승현 | 10-23</span>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span>코딩할 때 저만 이런가요 ㅠㅠ</span>
-              <span style={{ textAlign: 'right', fontSize: 12 }}>석홍준 | 10-25</span>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span>아 코딩 힘들다~</span>
-              <span style={{ textAlign: 'right', fontSize: 12 }}>김동주 | 10-26</span>
-            </td>
-          </tr>
+          {boardinfo.map(value => (
+            <tr>
+              <td>{value.text_id}</td>
+              <td style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>{value.title}</span>
+                <span style={{ textAlign: 'right', fontSize: 12 }}>
+                  {value.writer} | {value.writedate}
+                </span>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </Table>
     </BoardDiv>

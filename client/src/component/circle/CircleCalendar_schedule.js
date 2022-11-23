@@ -31,13 +31,14 @@ const inputStyle = {
   backgroundColor: '#ccebff',
 };
 
-function CircleCalendar_schedule({ id }) {
+function CircleCalendar_schedule({ id, calendar }) {
   const [value, onChange] = useState(new Date());
   const [content, setContent] = useState('');
   const [open, setOpen] = useState(false);
   const [schedule, setSchedule] = useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [calendarContent, setCalendarContent] = useState([]);
   const sendSchedule = e => {
     e.preventDefault();
     axios
@@ -47,6 +48,13 @@ function CircleCalendar_schedule({ id }) {
       })
       .then(response => console.log(response))
       .catch(error => console.log(error));
+    handleClose();
+  };
+
+  const checkDate = content => {
+    if (content.date === value.toLocaleDateString()) {
+      return <div className="text-gray-500 mt-2">{content.schedule}</div>;
+    }
   };
   return (
     <div style={{ marginTop: 30 }}>
@@ -60,6 +68,8 @@ function CircleCalendar_schedule({ id }) {
             <form onSubmit={sendSchedule}>
               <div style={style}>
                 <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30, textAlign: 'center' }}>일정 추가하기</text>
+                <br />
+                <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 24 }}>{value.toLocaleDateString()}</text>
                 <input
                   style={inputStyle}
                   type="text"
@@ -91,7 +101,7 @@ function CircleCalendar_schedule({ id }) {
         />
         <div style={{ textAlign: 'center' }}>
           <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div>
-          <div className="text-gray-500 mt-2">25:00 ZOOM 스터디 모임</div>
+          {calendar.map(value => checkDate(value))}
         </div>
       </Container>
     </div>

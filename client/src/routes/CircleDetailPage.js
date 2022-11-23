@@ -83,6 +83,8 @@ function CircleDetailPage(props) {
   const [circleInfo, setCircleInfo] = useState({});
   const [areaName, setAreaName] = useState('');
   const [galleryInfo, setGalleryInfo] = useState([]);
+  const [calendarInfo, setCalendarInfo] = useState([]);
+  const [boardInfo, setBoardInfo] = useState([]);
 
   const params = useParams();
   console.log('param:' + params.id);
@@ -104,6 +106,8 @@ function CircleDetailPage(props) {
         printArea(response.data.circleinfo[0].area_id);
         console.log(response.data);
         setGalleryInfo(response.data.circlepicture);
+        setCalendarInfo(response.data.calender);
+        setBoardInfo(response.data.board);
       })
       .catch(error => console.log(error));
   }, []);
@@ -113,8 +117,8 @@ function CircleDetailPage(props) {
       <Box>
         <CircleTitle info={circleInfo} location={areaName} />
       </Box>
-      <CircleCalendar_schedule id={circleInfo.id} />
-      <BoardList id={circleInfo.id} />
+      <CircleCalendar_schedule id={circleInfo.id} calendar={calendarInfo} />
+      <BoardList id={circleInfo.id} boardinfo={boardInfo} />
       <Gallery id={circleInfo.id} gallery={galleryInfo} />
       <CodeBoardList />
       <Footer />
