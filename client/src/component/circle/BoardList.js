@@ -38,6 +38,9 @@ const BoardDiv = styled.div`
 
 function BoardList({ id }) {
   const [open, setOpen] = useState(false);
+  const [openBoard, setOpenBoard] = useState(false);
+  const handleBoardOpen = () => setOpenBoard(true);
+  const handleBoardClose = () => setOpenBoard(false);
   const [sendImage, setSendImage] = useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -47,7 +50,7 @@ function BoardList({ id }) {
   const sendBoardInfo = e => {
     e.preventDefault();
     axios
-      .post(`circle/${id}/board`, {
+      .post(`/circle/${id}/board`, {
         title: title,
         content: mainText,
       })
@@ -108,7 +111,21 @@ function BoardList({ id }) {
           <tr>
             <td>1</td>
             <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span>내일 모여서 카공하실분 ?</span>
+              <div>
+                <span onclick={handleBoardOpen}>내일 모여서 카공하실분 ?</span>
+                {/* <Modal
+                  open={openBoard}
+                  onClose={handleBoardClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30 }}>내일 모여서 카공하실분?</text>
+                  <hr />
+                  <text style={{ fontFamily: 'IBM-Regular', fontSize: 24 }}>본문내용</text>
+                  <hr />
+                  <text style={{ fontFamily: 'IBM-Regular', fontSize: 24 }}>댓글</text>
+                </Modal> */}
+              </div>
               <span style={{ textAlign: 'right', fontSize: 12 }}>이승현 | 10-23</span>
             </td>
           </tr>

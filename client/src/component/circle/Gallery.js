@@ -103,7 +103,7 @@ function Gallery({ id, gallery }) {
               <input style={inputStyle} type="file" name="image" onChange={handleImage} />
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <Button variant="contained" style={{ width: 170, backgroundColor: '#ccebff' }} type="submit">
-                  수정하기
+                  업로드하기
                 </Button>
                 <Button variant="contained" style={{ width: 170, backgroundColor: '#ccebff' }} onClick={handleClose}>
                   닫기
@@ -117,7 +117,7 @@ function Gallery({ id, gallery }) {
       <Slider {...settings}>
         {gallery.map(value => (
           <div>
-            <img src={value.pic_url} width="150" height="150" alt="G_image" />
+            <img id={value.pic_url} src={value.pic_url} width="150" height="150" alt="G_image" />
           </div>
         ))}
       </Slider>

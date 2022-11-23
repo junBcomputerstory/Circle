@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from 'styled-components';
 import axios from 'axios';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import { Link } from 'react-router-dom';
 const ImageTextBox = styled.div`
   width: 150px;
   display: flex;
@@ -57,7 +58,9 @@ function MypageCarousel(props) {
       {userCircle &&
         userCircle.map(circle => (
           <ImageTextBox itemID={circle.id}>
-            <img style={{ borderRadius: '10px', margin: '10px auto' }} src={circle.circlepic} width="100" height="100" />
+            <Link to={`/circle/${circle.id}`}>
+              <img style={{ borderRadius: '10px', margin: '10px auto' }} src={circle.circlepic} width="100" height="100" />
+            </Link>
             <TextBox>
               <text style={{ fontFamily: 'IBM-Medium' }}>{circle.name}</text>
             </TextBox>

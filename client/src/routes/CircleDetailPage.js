@@ -101,7 +101,7 @@ function CircleDetailPage(props) {
         console.log(response.data.circlepicture);
         setCircleInfo(response.data.circleinfo[0]);
         printArea(response.data.circleinfo[0].area_id);
-        console.log('areaname:' + areaName);
+        console.log(response.data);
         setGalleryInfo(response.data.circlepicture);
       })
       .catch(error => console.log(error));
