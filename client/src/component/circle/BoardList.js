@@ -77,15 +77,6 @@ function BoardList({ id, boardinfo, commentt }) {
     content.style.display === 'none' ? (content.style.display = 'table-cell') : (content.style.display = 'none');
   };
 
-  const sendComment = text_id => {
-    axios
-      .post(`/circle/${id}/board/${text_id}`, {
-        comment: comment,
-      })
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
-  };
-
   return (
     <BoardDiv>
       <div style={{ alignItems: 'center' }}>
@@ -157,7 +148,7 @@ function BoardList({ id, boardinfo, commentt }) {
                       ),
                   )}
                   <div>
-                    <form id={value.text_id} onSubmit={sendComment(value.text_id)}>
+                    <form id={value.text_id}>
                       <input
                         id={value.text_id}
                         key={value.text_id}
