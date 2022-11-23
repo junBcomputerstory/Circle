@@ -65,7 +65,7 @@ class CircleUpdate{
         }
     }
 
-    async updatecomment(text_id,comment,nickname){
+    async updatecomment(text_id,nickname,comment){
         try{
             const connection=await pool.getConnection(async(conn)=>conn);
             const vec=[text_id,comment,nickname];
