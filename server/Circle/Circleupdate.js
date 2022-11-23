@@ -77,5 +77,17 @@ class CircleUpdate{
             return response(baseResponse.DB_ERROR);
         }
     }
+
+    async updatecurnum(ID){
+        try{
+            const connection=await pool.getConnection(async(conn)=>conn);
+            await CircleDao.updatecur(connection,ID);
+            return response(baseResponse.SUCCESS);
+        }
+        catch(e){
+            console.log(e);
+            return response(baseResponse.DB_ERROR);
+        }
+    }
 }
 export default new CircleUpdate();

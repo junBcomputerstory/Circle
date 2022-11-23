@@ -153,6 +153,17 @@ class CircleDao{
         );
     }
 
+    async updatecur(connection,ID){
+        const updatequery=`UPDATE Circle
+                            SET cur_num=cur_num+1
+                            WHERE id=?;`;
+        
+        await connection.query(
+            updatequery,
+            ID
+        );
+    }
+
 }
 
 export default new CircleDao();

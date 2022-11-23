@@ -66,10 +66,10 @@ class Control{
         join: async(req,res)=>{
             const circle_id=parseInt(req.parms.circle_id);
             const user_id=req.session.email;
+            await CircleUpdate.updatecurnum(circle_id);
             const re=await Userupdate.updatecircle(user_id,circle_id);
 
-            return re;
-
+            res.send(re);
         },
 
         writeschedule: async(req,res)=>{
