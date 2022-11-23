@@ -108,7 +108,7 @@ function Mypage(props) {
 
   async function getData() {
     try {
-      const response = await axios.get('/user/mypage', {});
+      const response = await axios.get('/user/mypage');
       console.log(response);
       setUserNickname(response.data.nickname);
       setUserInterest(response.data.interest);
@@ -162,6 +162,7 @@ function Mypage(props) {
         console.log('바뀐:' + reviseNickname);
         sessionStorage.setItem('nickname', reviseNickname);
         console.log(sessionStorage.getItem('nickname'));
+        setUserImage(reviseUserImage);
       })
       .catch(err => console.log(err));
 

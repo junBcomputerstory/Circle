@@ -62,8 +62,8 @@ function Gallery({ id, gallery }) {
   });
 
   const sendImageFile = e => {
-    setGalleryLength(gallery.length);
     e.preventDefault();
+    setGalleryLength(gallery.length);
     let formData = new FormData();
     formData.append('picturelength', galleryLength + 1);
     formData.append('image', sendImage);
