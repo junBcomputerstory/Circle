@@ -59,6 +59,7 @@ function Login(props) {
   const isSuccessed = response => {
     if (response.data.isSuccess) {
       sessionStorage.setItem('sessionid', document.cookie.split('='[1]));
+      sessionStorage.setItem('nickname', response.data.nickname);
       document.location.href = '/';
     }
   };

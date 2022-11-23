@@ -85,9 +85,9 @@ function CircleDetailPage(props) {
   const [galleryInfo, setGalleryInfo] = useState([]);
   const [calendarInfo, setCalendarInfo] = useState([]);
   const [boardInfo, setBoardInfo] = useState([]);
+  const [boardCommentInfo, setBoardCommentInfo] = useState([]);
 
   const params = useParams();
-  console.log('param:' + params.id);
 
   const printArea = area_id => {
     LocationOptions.forEach(value => {
@@ -101,13 +101,14 @@ function CircleDetailPage(props) {
     axios
       .get(`/circle/${params.id}`)
       .then(response => {
-        console.log(response.data.circlepicture);
         setCircleInfo(response.data.circleinfo[0]);
         printArea(response.data.circleinfo[0].area_id);
         console.log(response.data);
         setGalleryInfo(response.data.circlepicture);
         setCalendarInfo(response.data.calender);
         setBoardInfo(response.data.board);
+        setBoardCommentInfo(response.data.comment);
+        console.log(response.data.board);
       })
       .catch(error => console.log(error));
   }, []);
@@ -118,7 +119,7 @@ function CircleDetailPage(props) {
         <CircleTitle info={circleInfo} location={areaName} />
       </Box>
       <CircleCalendar_schedule id={circleInfo.id} calendar={calendarInfo} />
-      <BoardList id={circleInfo.id} boardinfo={boardInfo} />
+      <BoardList commentt={boardCommentInfo} id={circleInfo.id} boardinfo={boardInfo} />
       <Gallery id={circleInfo.id} gallery={galleryInfo} />
       <CodeBoardList />
       <Footer />

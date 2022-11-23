@@ -57,6 +57,9 @@
     "webpack": "^5.75.0",
     "webpack-dev-server": "^4.11.1"
   },
+  "browser": {
+    "crypto": false
+  },
   "babel": {
     "presets": [
       "@babel/env"

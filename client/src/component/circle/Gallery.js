@@ -67,12 +67,6 @@ function Gallery({ id, gallery }) {
     let formData = new FormData();
     formData.append('picturelength', galleryLength + 1);
     formData.append('image', sendImage);
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-    for (let value of formData.values()) {
-      console.log(value);
-    }
     temp
       .post(`/circle/${id}/gallery`, formData, {
         withCredentials: true,
@@ -116,7 +110,7 @@ function Gallery({ id, gallery }) {
 
       <Slider {...settings}>
         {gallery.map(value => (
-          <div>
+          <div key={value.pic_url}>
             <img id={value.pic_url} src={value.pic_url} width="150" height="150" alt="G_image" />
           </div>
         ))}

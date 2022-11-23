@@ -9,7 +9,6 @@ import MypageCarousel from '../component/MypageCarousel';
 import Footer from '../component/Footer';
 import { Interests } from '../component/Interests';
 import axios from 'axios';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 const style = {
@@ -116,6 +115,7 @@ function Mypage(props) {
       setUserBadge(response.data.badge);
       setUserImage(response.data.image);
       setUserID(response.data.user_id);
+      console.log(sessionStorage.getItem('nickname'));
     } catch (error) {
       console.log(error);
     }
@@ -136,7 +136,7 @@ function Mypage(props) {
     //     console.log('userID : ' + userID);
     //   })
     //   .catch(error => console.log(error));
-  }, []);
+  }, [userNickname]);
 
   const [reviseNickname, setReviseNickname] = useState(userNickname);
   const [reviseUserImage, setReviseUserImage] = useState(null);
@@ -157,9 +157,16 @@ function Mypage(props) {
       .post(`/user/mypage/profile/${userID}`, formData, {
         withCredentials: true,
       })
-      .then(res => console.log(res))
+      .then(() => {
+        sessionStorage.removeItem('nickname');
+        console.log('바뀐:' + reviseNickname);
+        sessionStorage.setItem('nickname', reviseNickname);
+        console.log(sessionStorage.getItem('nickname'));
+      })
       .catch(err => console.log(err));
+
     setOpen(false);
+    // document.location.reload();
   };
   return (
     <div>
@@ -232,7 +239,9 @@ function Mypage(props) {
           <text style={{ fontFamily: 'IBM-Regular', fontSize: '30px' }}>나의 뱃지</text>
           <MypageInterestBox>
             {userBadge !== undefined &&
-              userBadge.map(data => <img style={{ margin: '0 5px' }} src={data.url} width="100" height="100" alt={data.url} />)}
+              userBadge.map(data => (
+                <img key={data.url} style={{ margin: '0 5px' }} src={data.url} width="100" height="100" alt={data.url} />
+              ))}
           </MypageInterestBox>
         </Box>
         <Footer />

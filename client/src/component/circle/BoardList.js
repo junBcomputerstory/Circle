@@ -36,7 +36,7 @@ const BoardDiv = styled.div`
   margin-top: 40px;
 `;
 
-function BoardList({ id, boardinfo }) {
+function BoardList({ id, boardinfo, commentt }) {
   const [open, setOpen] = useState(false);
   const [openBoard, setOpenBoard] = useState(false);
   const handleBoardOpen = () => setOpenBoard(true);
@@ -46,6 +46,18 @@ function BoardList({ id, boardinfo }) {
   const handleClose = () => setOpen(false);
   const [title, setTitle] = useState('');
   const [mainText, setMainText] = useState('');
+  const [onC, setOnC] = useState(false);
+  const [comment, setComment] = useState('');
+
+  const checkComment = (cmt, text_id) => {
+    if (cmt.board_id === text_id) {
+      return (
+        <span>
+          {cmt.nickname} : {cmt.content}
+        </span>
+      );
+    }
+  };
 
   const sendBoardInfo = e => {
     e.preventDefault();
@@ -53,6 +65,22 @@ function BoardList({ id, boardinfo }) {
       .post(`/circle/${id}/board`, {
         title: title,
         content: mainText,
+      })
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+    handleClose();
+  };
+
+  const handleFold = content_id => {
+    const content = document.getElementById(`${content_id}`);
+    console.log(content);
+    content.style.display === 'none' ? (content.style.display = 'table-cell') : (content.style.display = 'none');
+  };
+
+  const sendComment = text_id => {
+    axios
+      .post(`/circle/${id}/board/${text_id}`, {
+        comment: comment,
       })
       .then(response => console.log(response))
       .catch(error => console.log(error));
@@ -99,37 +127,54 @@ function BoardList({ id, boardinfo }) {
       </div>
 
       <Table bordered hover style={{ fontFamily: 'IBM-Regular', marginTop: 10 }}>
-        {/* <thead>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-          </tr>
-        </thead> */}
         <tbody>
-          {/* <Modal
-                  open={openBoard}
-                  onClose={handleBoardClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30 }}>내일 모여서 카공하실분?</text>
-                  <hr />
-                  <text style={{ fontFamily: 'IBM-Regular', fontSize: 24 }}>본문내용</text>
-                  <hr />
-                  <text style={{ fontFamily: 'IBM-Regular', fontSize: 24 }}>댓글</text>
-                </Modal> */}
           {boardinfo.map(value => (
-            <tr>
-              <td>{value.text_id}</td>
-              <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>{value.title}</span>
-                <span style={{ textAlign: 'right', fontSize: 12 }}>
-                  {value.writer} | {value.writedate}
-                </span>
+            <>
+              <tr key={value.text_id}>
+                <td>{value.text_id}</td>
+                <td style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ cursor: 'pointer' }} onClick={() => handleFold(value.text_id)}>
+                    {value.title}
+                  </span>
+                  <span style={{ textAlign: 'right', fontSize: 12 }}>
+                    {value.writer} | {value.writedate}
+                  </span>
+                </td>
+              </tr>
+              <td id={value.text_id} style={{ border: '0.5px solid gray', padding: 10, display: 'none' }} colspan="3">
+                <div>
+                  {value.content}
+                  <hr />
+                  {commentt.map(
+                    cmt =>
+                      cmt.board_id === value.text_id && (
+                        <>
+                          <text>
+                            {cmt.nickname} : {cmt.content}
+                          </text>
+                          <br />
+                        </>
+                      ),
+                  )}
+                  <div>
+                    <form id={value.text_id} onSubmit={sendComment(value.text_id)}>
+                      <input
+                        id={value.text_id}
+                        key={value.text_id}
+                        style={{ minWidth: '90%', minHeight: 35, marginTop: 10, fontFamily: 'IBM-Regular', fontSize: 18 }}
+                        type="text"
+                        placeholder="댓글을 남겨보세요"
+                        value={comment}
+                        onChange={e => setComment(e.target.value)}
+                      />
+                      <Button type="submit" variant="secondary" style={{ marginLeft: 10, display: 'inline-block' }}>
+                        작성하기
+                      </Button>
+                    </form>
+                  </div>
+                </div>
               </td>
-            </tr>
+            </>
           ))}
         </tbody>
       </Table>

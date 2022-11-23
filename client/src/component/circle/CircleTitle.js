@@ -5,6 +5,7 @@ import Alert from 'react-bootstrap/Alert';
 import { AiOutlineNotification } from 'react-icons/ai';
 import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
+import axios from 'axios';
 const CTitle = styled.div`
   width: 95%;
   height: 4em;
@@ -90,21 +91,24 @@ const LocationOptions = [
   },
 ]; // 초기값 null 설정!!
 
-function CircleTitle({ info, location }) {
+function CircleTitle({ id, info, location }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [joinMessage, setJoinMessage] = useState('');
   const [joinSex, setJoinSex] = useState(1);
   const [joinAge, setJoinAge] = useState(0);
-
-  console.log('loc:' + location);
+  const sendjoin = () => {
+    axios
+      .post(`/circle/${id}/join`)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
+  };
   return (
     <>
-      <CTitle style={{ display: 'flex', justifyContent: 'space-evenly ', lineHeight: '4em' }}>
-        <Button></Button>
+      <CTitle style={{ textAlign: 'center', lineHeight: '4em' }}>
         <text style={{ fontFamily: 'IBM-Bold', fontSize: 30 }}>{info.name}</text>
-        <Button variant="contained" color="secondary" style={{ marginBottom: 3 }} onClick={handleOpen}>
+        <Button variant="contained" color="secondary" style={{ position: 'absolute', right: 50, top: 110 }} onClick={handleOpen}>
           가입하기
         </Button>
         <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
@@ -125,15 +129,7 @@ function CircleTitle({ info, location }) {
               <input style={inputStyle} placeholder="나이" type="number" name="age" value="" onChange={e => setJoinAge(e.target.value)} />
             </form>
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-              <Button
-                variant="contained"
-                style={{ width: 170 }}
-                onClick={() => {
-                  console.log(joinMessage);
-                  console.log(joinSex);
-                  console.log(joinAge);
-                }}
-              >
+              <Button variant="contained" style={{ width: 170 }} onClick={sendjoin}>
                 가입신청
               </Button>
               <Button variant="contained" style={{ width: 170 }} onClick={handleClose}>

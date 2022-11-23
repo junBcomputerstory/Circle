@@ -53,7 +53,11 @@ function CircleCalendar_schedule({ id, calendar }) {
 
   const checkDate = content => {
     if (content.date === value.toLocaleDateString()) {
-      return <div className="text-gray-500 mt-2">{content.schedule}</div>;
+      return (
+        <div key={content.date} className="text-gray-500 mt-2">
+          {content.schedule}
+        </div>
+      );
     }
   };
   return (

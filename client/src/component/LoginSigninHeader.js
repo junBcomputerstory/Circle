@@ -39,7 +39,7 @@ function LoginSigninHeader(props) {
 
   return isLogin ? (
     <>
-      <Text>{nickname ? nickname : sessionStorage.getItem('nickname')}님, 환영합니다!</Text>
+      <Text>{sessionStorage.getItem('nickname')}님, 환영합니다!</Text>
       <button style={{ border: 'none', borderRadius: 10, backgroundColor: '#F8F5FC' }} onClick={Logout}>
         <text style={{ fontFamily: 'iBM-Light' }}>로그아웃</text>
       </button>

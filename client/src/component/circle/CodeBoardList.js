@@ -51,15 +51,10 @@ function CodeBoardList(props) {
   const [mainText, setMainText] = useState('');
   const [codeText, setCodeText] = useState('');
 
-  const sendBoardInfo = e => {
-    e.preventDefault();
-    axios
-      .post(`circle/${id}/board`, {
-        title: title,
-        content: mainText,
-      })
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+  const handleFold = () => {
+    const content = document.getElementById('1');
+    console.log(content);
+    content.style.display === 'none' ? (content.style.display = 'table-cell') : (content.style.display = 'none');
   };
 
   return (
@@ -71,7 +66,7 @@ function CodeBoardList(props) {
             글쓰기
           </Button>
           <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-            <form onSubmit={sendBoardInfo}>
+            <form>
               <div style={style}>
                 <text style={{ fontFamily: 'IBM-SemiBold', fontSize: 30, textAlign: 'center' }}>게시글 작성하기</text>
                 <input
@@ -128,20 +123,29 @@ function CodeBoardList(props) {
                 <span style={{ textAlign: 'right', fontSize: 12 }}>이승현 | 10-21</span>
               </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>프로그래머스 카카오 2번 시간초과떠요...</span>
-                <span style={{ textAlign: 'right', fontSize: 12 }}>석홍준 | 10-22</span>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>백준 1123번 반례좀 부탁드립니다</span>
-                <span style={{ textAlign: 'right', fontSize: 12 }}>김동주 | 10-25</span>
-              </td>
-            </tr>
+            <td id="1" style={{ border: '0.5px solid gray', padding: 10, display: 'none' }} colspan="3">
+              <div>
+                코드내용
+                <hr />
+                메인텍스트
+                <br />
+                <div>
+                  <form>
+                    <input
+                      key="1"
+                      style={{ minWidth: '90%', minHeight: 35, marginTop: 10, fontFamily: 'IBM-Regular', fontSize: 18 }}
+                      type="text"
+                      placeholder="댓글을 남겨보세요"
+                      // value={comment}
+                      // onChange={e => setComment(e.target.value)}
+                    />
+                    <Button type="submit" variant="secondary" style={{ marginLeft: 10, display: 'inline-block' }}>
+                      작성하기
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            </td>
           </tbody>
         </Table>
       </BoardDiv>

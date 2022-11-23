@@ -259,7 +259,7 @@ function SearchCircle(props) {
       </div>
       <SearchList>
         {resultData.map((value, index) => (
-          <Card key={value.id} style={{ width: '18rem', marginBottom: 50, marginRight: 10, paddingBottom: 10 }}>
+          <Card key={value.id} style={{ width: '18rem', marginBottom: 50, marginRight: 10, padding: 10 }}>
             <Card.Img style={{ margin: '30px auto', width: '15rem', height: '15rem' }} variant="top" src={value.circlepic} />
             <Card.Body>
               <Card.Text style={{ fontFamily: 'IBM-SemiBold', margin: '0 15px', marginBottom: 15 }}>{value.name}</Card.Text>
@@ -277,7 +277,7 @@ function SearchCircle(props) {
                 },
               }}
             >
-              <Button style={{ width: '18rm', marginRight: 10, marginLeft: 10 }} variant="contained">
+              <Button fullWidth="true" style={{ width: '18rm' }} variant="contained">
                 이동하기
               </Button>
             </Link>
