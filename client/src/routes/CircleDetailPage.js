@@ -116,7 +116,7 @@ function CircleDetailPage(props) {
     <>
       <Header />
       <Box>
-        <CircleTitle info={circleInfo} location={areaName} />
+        <CircleTitle id={circleInfo.id} info={circleInfo} location={areaName} />
       </Box>
       <CircleCalendar_schedule id={circleInfo.id} calendar={calendarInfo} />
       <BoardList commentt={boardCommentInfo} id={circleInfo.id} boardinfo={boardInfo} />
