@@ -41,8 +41,8 @@ const GalleryDiv = styled.div`
 
 function Gallery({ id, gallery }) {
   var settings = {
+    centerMode: false,
     dots: true,
-    infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 5,
@@ -57,14 +57,24 @@ function Gallery({ id, gallery }) {
     setSendImage(e.target.files[0]);
   };
 
+  const temp = axios.create({
+    baseURL: 'http://localhost:4000',
+  });
+
   const sendImageFile = e => {
     setGalleryLength(gallery.length);
     e.preventDefault();
     let formData = new FormData();
-    formData.append('picturelength', galleryLength);
+    formData.append('picturelength', galleryLength + 1);
     formData.append('image', sendImage);
-    axios
-      .post(`circle/${id}/gallery`, formData, {
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+    temp
+      .post(`/circle/${id}/gallery`, formData, {
         withCredentials: true,
       })
       .then(response => console.log(response))
@@ -105,16 +115,6 @@ function Gallery({ id, gallery }) {
       </div>
 
       <Slider {...settings}>
-        {gallery.map(value => (
-          <div>
-            <img src={value.pic_url} width="150" height="150" alt="G_image" />
-          </div>
-        ))}
-        {gallery.map(value => (
-          <div>
-            <img src={value.pic_url} width="150" height="150" alt="G_image" />
-          </div>
-        ))}
         {gallery.map(value => (
           <div>
             <img src={value.pic_url} width="150" height="150" alt="G_image" />

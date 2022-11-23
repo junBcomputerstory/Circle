@@ -113,7 +113,7 @@ function CircleDetailPage(props) {
         <CircleTitle info={circleInfo} location={areaName} />
       </Box>
       <CircleCalendarDiv />
-      <BoardList />
+      <BoardList id={circleInfo.id} />
       <Gallery id={circleInfo.id} gallery={galleryInfo} />
       <CodeBoardList />
       <Footer />
