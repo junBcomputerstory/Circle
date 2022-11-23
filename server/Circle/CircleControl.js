@@ -2,7 +2,7 @@ import CircleUpdate from './Circleupdate.js';
 import CircleCheck from './Circlecheck.js';
 import Circlecheck from './Circlecheck.js';
 import Userupdate from '../User/Userupdate.js'
-import Usercheck from '../User/Usercheck.js';
+import Circleupdate from './Circleupdate.js';
 class Control{
     process={
         find: async(req,res)=>{
@@ -83,11 +83,13 @@ class Control{
             res.send(re);
         },
 
-        getcomment: async(req,res)=>{
+        makecomment: async(req,res)=>{
             const text_id=parseInt(req.params.text_id);
-            const result=await Circlecheck.checkcomment(text_id);
+            const nickname=req.session.user.nickname;
+            const comment=req.body.comment;
+            const result=await Circleupdate.updatecomment(text_id,nickname,comment);
 
-            res.send(result);
+            res.send();
         }
     } 
 }

@@ -143,6 +143,16 @@ class CircleDao{
         return re;
     }
 
+    async insertcomment(connection,vec){
+        const insertquery=`INSERT INTO Board_comment(board_id,content,nickname)
+                            VALUES(?,?,?);`;
+        
+        await connection.query(
+            insertquery,
+            vec
+        );
+    }
+
 }
 
 export default new CircleDao();

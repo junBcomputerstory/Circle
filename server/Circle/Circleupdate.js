@@ -10,7 +10,7 @@ class CircleUpdate{
         try{
             const crow=await CircleCheck.namecheck(circleInfo.name);
             if(crow>1){
-                return errResponse(baseResponse.CIRCLE_NAME_ERROR);
+                return response(baseResponse.CIRCLE_NAME_ERROR);
             }
             const vec=[circleInfo.name,circleInfo.area_id,circleInfo.interest_id,circleInfo.sex,circleInfo.restrict,circleInfo.max_num,circleInfo.prime,1,circleInfo.intro,image,email];
             await CircleDao.insertCircle(connection,vec);
@@ -20,7 +20,7 @@ class CircleUpdate{
         catch(e){
             console.log(e);
             connection.release();
-            return errResponse(baseResponse.DB_ERROR);
+            return response(baseResponse.DB_ERROR);
         }
     }
 
@@ -57,6 +57,19 @@ class CircleUpdate{
             const vec=[ID,date,content];
             await CircleDao.updatecalender(connection,vec);
 
+            return response(baseResponse.SUCCESS);
+        }
+        catch(e){
+            console.log(e);
+            return response(baseResponse.DB_ERROR);
+        }
+    }
+
+    async updatecomment(text_id,comment,nickname){
+        try{
+            const connection=await pool.getConnection(async(conn)=>conn);
+            const vec=[text_id,comment,nickname];
+            await CircleDao.insertcomment(connection,vec);
             return response(baseResponse.SUCCESS);
         }
         catch(e){
