@@ -75,7 +75,7 @@ class control {
       const image=req.file.location;
       const profile=await Update.profileupdate(user_id,image);
       if(req.body.nickname){
-      const nickname=JSON.parse(req.body.nickname);
+      const nickname=req.body.nickname;
       const re=await Update.editUser(nickname,user_id);
       }
       res.send(profile);

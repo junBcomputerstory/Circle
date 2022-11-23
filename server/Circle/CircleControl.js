@@ -23,7 +23,6 @@ class Control{
 
         page: async(req,res)=>{
             const Circleid=parseInt(req.params.circle_id);
-            console.log(Circleid);
             let result=new Object();
             const circlerow=await Circlecheck.idcheck(Circleid);
             const pictures=await CircleCheck.getgallery(Circleid);
@@ -44,7 +43,7 @@ class Control{
         },
 
         addgallery: async(req,res)=>{
-            const Circleid=req.params.circle_id;
+            const Circleid=parseInt(req.params.circle_id);
             const image=req.file.location;
             console.log(Circleid);
             const re=await CircleUpdate.insertpicture(Circleid,image);
@@ -52,18 +51,18 @@ class Control{
         },
 
         boardlist: async(req,res)=>{
-            const circleid=req.params.circle_id;
+            const circleid=parseInt(req.params.circle_id);
             console.log(circleid);
             const re=await Circlecheck.checkboard(circleid);
             let user=new Object();
             for(let i=0;i<re.length;i++){
                 user[i].user_id=re[i].user_id;
             }
-            const username=await Usercheck.getnickname(user);
+            //const username=await Usercheck.getnickname(user);
         },
 
         join: async(req,res)=>{
-            const circle_id=req.parms.circle_id;
+            const circle_id=parseInt(req.parms.circle_id);
             const user_id=req.session.email;
             const re=await Userupdate.updatecircle(user_id,circle_id);
 
