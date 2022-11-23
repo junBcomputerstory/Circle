@@ -120,14 +120,21 @@ function CircleTitle({ id, info, location }) {
                 style={inputStyle}
                 placeholder="신청 메세지"
                 name="message"
-                value=""
+                value={joinMessage}
                 onChange={e => setJoinMessage(e.target.value)}
               />
               <select style={inputStyle} type="text" name="sex" onChange={e => setJoinSex(e.target.value)}>
                 <option value="1">남자</option>
                 <option value="2">여자</option>
               </select>
-              <input style={inputStyle} placeholder="나이" type="number" name="age" value="" onChange={e => setJoinAge(e.target.value)} />
+              <input
+                style={inputStyle}
+                placeholder="나이"
+                type="number"
+                name="age"
+                value={joinSex}
+                onChange={e => setJoinAge(e.target.value)}
+              />
             </form>
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
               <Button variant="contained" style={{ width: 170 }} onClick={sendjoin}>
