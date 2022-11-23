@@ -225,9 +225,10 @@ function MakeCircle(props) {
       .post('/circle/make', formData, {
         withCredentials: true,
       })
-      .then(response => console.log(response))
+      .then(response => {
+        response.data.isSuccess ? (document.location.href = '/') : console.log('none');
+      })
       .catch(error => console.log(error));
-    document.location.href = '/';
   };
   const pushInterest = id => {
     setInterest(id);
