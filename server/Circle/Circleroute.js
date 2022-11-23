@@ -17,7 +17,7 @@ class Circleroute{
         this.router.post('/:circle_id/join',Control.process.join);
         this.router.post('/:circle_id/board',Control.process.writeboard);
         this.router.post('/:circle_id/calender',Control.process.writeschedule);
-        //this.router.get('/:circleid/board/:board_id',Control.process.getboard);
+        this.router.get('/:circleid/board/:text_id',Control.process.getcomment);
 
     }
 }

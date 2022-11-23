@@ -56,10 +56,17 @@ class Circlecheck{
 
     async checkboard(id){
         const connection=await pool.getConnection(async(conn)=>conn);
-        const board=await UserDao.getboard(connection,id);
+        const board=await CircleDao.getboard(connection,id);
         connection.release();
 
         return board[0];
+    }
+
+    async checkcomment(board_id){
+        const connection=await pool.getConnection(async(conn)=>conn);
+        const comments=await CircleDao.getcomment(connection,board_id);
+
+        return comments[0];
     }
 }
 

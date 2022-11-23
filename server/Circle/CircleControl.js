@@ -61,6 +61,8 @@ class Control{
             const user_id=req.session.email;
             const re=await Userupdate.updatecircle(user_id,circle_id);
 
+            return re;
+
         },
 
         writeschedule: async(req,res)=>{
@@ -72,6 +74,13 @@ class Control{
 
             const re=await CircleUpdate.insertschedule(circle_id,date,content);
             res.send(re);
+        },
+
+        getcomment: async(req,res)=>{
+            const text_id=parseInt(req.params.text_id);
+            const result=await Circlecheck.checkcomment(text_id);
+
+            res.send(result);
         }
     } 
 }

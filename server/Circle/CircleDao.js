@@ -118,6 +118,31 @@ class CircleDao{
         );
     }
 
+    async getboard(connection,ID){
+        const getquery=`SELECT *
+                        FROM Circle_board
+                        WHERE circle_id=?;`;
+        const re=await connection.query(
+          getquery,
+          ID
+        );
+        
+        return re;
+      }
+
+    async getcomment(connection,board_id){
+        const getquery=`SELECT *
+                        FROM Board_comment
+                        WHERE board_id=?;`;
+        
+        const re=await connection.query(
+            getquery,
+            board_id
+        );
+
+        return re;
+    }
+
 }
 
 export default new CircleDao();
