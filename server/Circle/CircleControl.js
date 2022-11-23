@@ -51,7 +51,7 @@ class Control{
             const day = ('0' + today.getDate()).slice(-2);
             const dateString = year + '-' + month  + '-' + day;
             console.log(circleid);
-            const data=[req.body.circle_id,req.body.title,req.body.content,req.session.user.nickname,dateString];
+            const data=[circleid,req.body.title,req.body.content,req.session.user.nickname,dateString];
             const re=await CircleUpdate.insertboard(data);
         },
 
