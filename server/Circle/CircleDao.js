@@ -133,11 +133,11 @@ class CircleDao{
     async getcomment(connection,board_id){
         const getquery=`SELECT *
                         FROM Board_comment
-                        WHERE board_id=?;`;
+                        WHERE board_id in (?);`;
         
         const re=await connection.query(
             getquery,
-            board_id
+            [board_id]
         );
 
         return re;

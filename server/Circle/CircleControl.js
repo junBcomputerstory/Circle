@@ -28,10 +28,17 @@ class Control{
             const pictures=await CircleCheck.getgallery(Circleid);
             const todo=await CircleCheck.getcalender(Circleid);
             const board=await CircleCheck.checkboard(Circleid);
+            let text_id=new Array();
+            for(let i=0;i<board.length;i++){
+                text_id.push(board[i].text_id);
+            }
+            const comment=await Circlecheck.checkcomment(text_id);
+
             result.circleinfo=circlerow;
             result.circlepicture=pictures;
             result.calender=todo;
             result.board=board;
+            result.comment=comment;
 
             res.send(result);
         },
