@@ -132,7 +132,7 @@ function CircleTitle({ id, info, location }) {
                 placeholder="나이"
                 type="number"
                 name="age"
-                value={joinSex}
+                value={joinAge}
                 onChange={e => setJoinAge(e.target.value)}
               />
             </form>
