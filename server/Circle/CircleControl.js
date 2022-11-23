@@ -50,10 +50,10 @@ class Control{
             const month = ('0' + (today.getMonth() + 1)).slice(-2);
             const day = ('0' + today.getDate()).slice(-2);
             const dateString = year + '-' + month  + '-' + day;
-            console.log("보작ㅇ:",circleid);
-            console.log("세션:",req.session.user);
             const data=[circleid,req.body.title,req.body.content,req.session.user.nickname,dateString];
             const re=await CircleUpdate.insertboard(data);
+
+            res.send(re);
         },
 
         join: async(req,res)=>{
@@ -61,6 +61,15 @@ class Control{
             const user_id=req.session.email;
             const re=await Userupdate.updatecircle(user_id,circle_id);
 
+        },
+
+        writeschedule: async(req,res)=>{
+            const circle_id=parseInt(req.params.circle_id);
+            const date=req.body.date;
+            const content=req.body.content;
+
+            const re=await CircleUpdate.insertschedule(circle_id,date,content);
+            res.send(re);
         }
     } 
 }

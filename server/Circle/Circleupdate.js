@@ -50,5 +50,19 @@ class CircleUpdate{
             return response(baseResponse.DB_ERROR);
         }
     }
+
+    async insertschedule(ID,date,content){
+        try{
+            const connection=await pool.getConnection(async(conn)=>conn);
+            const vec=[ID,date,content];
+            await CircleDao.updatecalender(connection,vec);
+
+            return response(baseResponse.SUCCESS);
+        }
+        catch(e){
+            console.log(e);
+            return response(baseResponse.DB_ERROR);
+        }
+    }
 }
 export default new CircleUpdate();

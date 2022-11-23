@@ -108,6 +108,16 @@ class CircleDao{
         );
     }
 
+    async updatecalender(connection,vec){
+        const insertquery=`INSERT INTO Schedule_calender(circle_id,date,schedule)
+                            VALUES(?,?,?);`;
+        
+        await connection.query(
+            insertquery,
+            vec
+        );
+    }
+
 }
 
 export default new CircleDao();
