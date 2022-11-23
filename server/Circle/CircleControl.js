@@ -50,7 +50,8 @@ class Control{
             const month = ('0' + (today.getMonth() + 1)).slice(-2);
             const day = ('0' + today.getDate()).slice(-2);
             const dateString = year + '-' + month  + '-' + day;
-            console.log(circleid);
+            console.log("보작ㅇ:",circleid);
+            console.log("세션:",req.session.user);
             const data=[circleid,req.body.title,req.body.content,req.session.user.nickname,dateString];
             const re=await CircleUpdate.insertboard(data);
         },
