@@ -65,8 +65,10 @@ class Control{
 
         writeschedule: async(req,res)=>{
             const circle_id=parseInt(req.params.circle_id);
+            console.log(circle_id);
             const date=req.body.date;
             const content=req.body.content;
+            console.log(date,"+",content);
 
             const re=await CircleUpdate.insertschedule(circle_id,date,content);
             res.send(re);
