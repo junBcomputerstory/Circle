@@ -15,8 +15,7 @@ class Circleroute{
         this.router.get('/:circle_id',Control.process.page);
         this.router.post('/:circle_id/gallery',galleryupload.single('image'),Control.process.addgallery);
         this.router.post('/:circle_id/join',Control.process.join);
-        this.router.get('/:circle_id/board',Control.process.boardlist);
-        //this.router.post('/:circle_id/board',Control.process.writeboard);
+        this.router.post('/:circle_id/board',Control.process.writeboard);
         //this.router.get('/:circleid/board/:board_id',Control.process.getboard);
 
     }

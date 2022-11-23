@@ -26,9 +26,22 @@ class CircleUpdate{
 
     async insertpicture(id,image){
         try{
-            const connection=pool.getConnection(async(conn)=>conn);
+            const connection=await pool.getConnection(async (conn)=>conn);
             const vec=[image,id];
             await CircleDao.updateimage(connection,vec);
+
+            return response(baseResponse.SUCCESS);
+        }
+        catch(e){
+            console.log(e);
+            return response(baseResponse.DB_ERROR);
+        }
+    }
+
+    async insertboard(vec){
+        try{
+            const connection=await pool.getConnection(async (conn)=>conn);
+            await CircleDao.updateboard(connection,vec);
 
             return response(baseResponse.SUCCESS);
         }

@@ -98,6 +98,16 @@ class CircleDao{
         return result;
     }
 
+    async updateboard(connection,vec){
+        const insertquery=`INSERT INTO Circle_board(circle_id,title,content,writer,writedate)
+                            VALUES (?,?,?,?,?);`;
+        
+        await connection.query(
+            insertquery,
+            vec
+        );
+    }
+
 }
 
 export default new CircleDao();

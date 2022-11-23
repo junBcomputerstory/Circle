@@ -27,38 +27,32 @@ class Control{
             const circlerow=await Circlecheck.idcheck(Circleid);
             const pictures=await CircleCheck.getgallery(Circleid);
             const todo=await CircleCheck.getcalender(Circleid);
+            const board=await CircleCheck.checkboard(Circleid);
             result.circleinfo=circlerow;
             result.circlepicture=pictures;
             result.calender=todo;
+            result.board=board;
 
             res.send(result);
-        },
-
-        showgallery: async(req,res)=>{
-            const circleid=req.params.circle_id;
-            console.log(circleid);
-            const re=await CircleCheck.getgallery(circleid);
-
-            return res.send(re);
         },
 
         addgallery: async(req,res)=>{
             const Circleid=parseInt(req.params.circle_id);
             const image=req.file.location;
-            console.log(Circleid);
             const re=await CircleUpdate.insertpicture(Circleid,image);
             res.send(re);
         },
 
-        boardlist: async(req,res)=>{
+        writeboard: async(req,res)=>{
             const circleid=parseInt(req.params.circle_id);
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = ('0' + (today.getMonth() + 1)).slice(-2);
+            const day = ('0' + today.getDate()).slice(-2);
+            const dateString = year + '-' + month  + '-' + day;
             console.log(circleid);
-            const re=await Circlecheck.checkboard(circleid);
-            let user=new Object();
-            for(let i=0;i<re.length;i++){
-                user[i].user_id=re[i].user_id;
-            }
-            //const username=await Usercheck.getnickname(user);
+            const data=[req.body.circle_id,req.body.title,req.body.content,req.session.user.nickname,dateString];
+            const re=await CircleUpdate.insertboard(data);
         },
 
         join: async(req,res)=>{

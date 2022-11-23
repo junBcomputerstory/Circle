@@ -79,7 +79,6 @@ export const galleryupload=multer({
         key: (req, file, callback)=>{
             const uploaddir=req.params.circle_id;
             console.log("ㅅㅏ진넣ㅡㄴ중");
-            console.log(req.body);
             const num=req.body.picturelength;
             const extention=path.extname(file.originalname);
             if(!allowed.includes(extention)){
