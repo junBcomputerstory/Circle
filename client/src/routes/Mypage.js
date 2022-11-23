@@ -136,7 +136,7 @@ function Mypage(props) {
     //     console.log('userID : ' + userID);
     //   })
     //   .catch(error => console.log(error));
-  }, [userNickname]);
+  }, []);
 
   const [reviseNickname, setReviseNickname] = useState(userNickname);
   const [reviseUserImage, setReviseUserImage] = useState(null);

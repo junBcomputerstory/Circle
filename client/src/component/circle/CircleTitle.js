@@ -103,6 +103,7 @@ function CircleTitle({ id, info, location }) {
       .post(`/circle/${id}/join`)
       .then(response => console.log(response))
       .catch(error => console.log(error));
+    handleClose();
   };
   return (
     <>
