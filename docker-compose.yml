@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  client:
+    image: client:latest
+    restart: always
+    command: ["npm", "run", "start"]
+    ports:
+      - "3000:3000"
+  
+  app:
+    image: server:latest
+    depends_on: 
+      - client
+    ports:
+      - "4000:4000"
+    restart: always
+    command: ["npm", "run", "backend"]
