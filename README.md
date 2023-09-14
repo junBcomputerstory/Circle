@@ -12,6 +12,7 @@
 ### 📆 개발 기간 : 2022.09.20 ~ 2022.11.24
 
 ### Domain
-<img width="1000" alt="KakaoTalk_20230914_001247797" src="https://github.com/sseungki98/Circle/assets/89785414/b4e2cce8-68f1-4fec-8e81-cd28285d0a67">
+![KakaoTalk_20230914_001247797](https://github.com/sseungki98/Circle/assets/89785414/a203f0b6-cd8c-4e64-b4f5-fb5ff691b52a)
+
 
 
